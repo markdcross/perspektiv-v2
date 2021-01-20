@@ -1,0 +1,19 @@
+{
+  "name": "perspektiv-v2",
+  "version": "1.0.0",
+  "description": "Perspektiv v2.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markdcross/perspektiv-v2.git"
+  },
+  "author": "Mark Cross, Danny Fraley, Roberto Rubet, and Josh Allen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markdcross/perspektiv-v2/issues"
+  },
+  "homepage": "https://github.com/markdcross/perspektiv-v2#readme"
+}
