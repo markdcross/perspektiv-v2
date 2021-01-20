@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
-    "dev": "concurrently \"npm start\" \"npm run server\""
+    "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start"
   },
   "eslintConfig": {
     "extends": [
