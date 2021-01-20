@@ -13,4 +13,11 @@ module.exports = (app) => {
       .status(200)
       .send("You're looking for the mural with an id of " + req.params.id);
   });
+
+  // UNFINISHED POST a mural as an Artists
+  app.post('/api/murals/:id', (req, res) => {
+    res
+      .status(200)
+      .send('You just added mural ' + req.params.id + ' to the database!');
+  });
 };

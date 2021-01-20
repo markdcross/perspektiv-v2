@@ -13,4 +13,11 @@ module.exports = (app) => {
       .status(200)
       .send("You're looking for the restaurant with an id of " + req.params.id);
   });
+
+  // UNFINISHED POST a restaurant as an Business
+  app.post('/api/murals/:id', (req, res) => {
+    res
+      .status(200)
+      .send('You just added restaurant ' + req.params.id + ' to the database!');
+  });
 };
