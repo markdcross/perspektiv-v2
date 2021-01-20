@@ -3,13 +3,13 @@ const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 
-const app = express();
-
 // Load env vars
 dotenv.config();
 
 // Connect Database
 connectDB();
+
+const app = express();
 
 // Init Middleware
 app.use(express.json({ extended: false }));
@@ -34,3 +34,10 @@ app.listen(PORT, () =>
     `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
   )
 );
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err, promise) => {
+  console.log(`Error: ${err.message}`);
+  // Close server and exit process
+  server.close(() => process.exit(1));
+});
