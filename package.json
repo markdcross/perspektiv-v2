@@ -4,7 +4,14 @@
   "description": "Perspektiv v2.0",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "server": "nodemon server",
+    "dev": "concurrently \"npm start\" \"npm run server\""
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
   "repository": {
     "type": "git",
@@ -15,5 +22,15 @@
   "bugs": {
     "url": "https://github.com/markdcross/perspektiv-v2/issues"
   },
-  "homepage": "https://github.com/markdcross/perspektiv-v2#readme"
+  "homepage": "https://github.com/markdcross/perspektiv-v2#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.12"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.7"
+  },
+  "proxy": "http://localhost:5000"
 }
