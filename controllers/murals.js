@@ -12,7 +12,7 @@ exports.getMurals = async (req, res, next) => {
 
     res.status(200).json({ success: true, count: murals.length, data: murals });
   } catch (err) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -33,7 +33,7 @@ exports.getMural = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: mural });
   } catch (err) {
-    next(new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404));
+    next(err);
   }
 };
 
@@ -51,7 +51,7 @@ exports.createMural = async (req, res, next) => {
       data: mural
     });
   } catch (err) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -68,12 +68,14 @@ exports.updateMural = async (req, res, next) => {
     });
 
     if (!mural) {
-      return res.status(400).json({ success: false });
+      return next(
+        new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404)
+      );
     }
 
     res.status(200).json({ success: true, data: mural });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -87,11 +89,13 @@ exports.deleteMural = async (req, res, next) => {
     const mural = await Mural.findByIdAndDelete(req.params.id);
 
     if (!mural) {
-      return res.status(400).json({ success: false });
+      return next(
+        new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404)
+      );
     }
 
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };

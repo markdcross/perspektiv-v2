@@ -14,7 +14,7 @@ exports.getRestaurants = async (req, res, next) => {
       .status(200)
       .json({ success: true, count: restaurants.length, data: restaurants });
   } catch (err) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -38,9 +38,7 @@ exports.getRestaurant = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: restaurant });
   } catch (err) {
-    next(
-      new ErrorResponse(`Restaurant not found with id of ${req.params.id}`, 404)
-    );
+    next(err);
   }
 };
 
@@ -58,7 +56,7 @@ exports.createRestaurant = async (req, res, next) => {
       data: restaurant
     });
   } catch (err) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -84,7 +82,7 @@ exports.updateRestaurant = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: restaurant });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -103,6 +101,6 @@ exports.deleteRestaurant = async (req, res, next) => {
 
     res.status(200).json({ success: true, data: {} });
   } catch (error) {
-    res.status(400).json({ success: false });
+    next(err);
   }
 };
