@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const Schema = mongoose.Schema;
 
@@ -8,6 +9,7 @@ const MuralSchema = new Schema({
     type: String,
     required: true
   },
+  slug: String,
   description: {
     type: String
   },
@@ -61,6 +63,12 @@ const MuralSchema = new Schema({
       required: true
     }
   }
+});
+
+// Create mural slug from the name
+MuralSchema.pre('save', function (next) {
+  this.slug = slugify(this.name, { lower: true });
+  next();
 });
 
 module.exports = Mural = mongoose.model('mural', MuralSchema);
