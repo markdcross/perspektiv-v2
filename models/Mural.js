@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const geocoder = require('../utils/geocoder');
 
 const Schema = mongoose.Schema;
 
@@ -44,30 +45,48 @@ const MuralSchema = new Schema({
     }
   },
 
-  // location information about the mural
+  // Location of the mural
   location: {
-    street: {
+    // GeoJSON Point
+    type: {
       type: String,
-      required: true
+      enum: ['Point']
     },
-    city: {
-      type: String,
-      required: true
+    coordinates: {
+      type: [Number],
+      index: '2dsphere'
     },
-    state: {
-      type: String,
-      required: true
-    },
-    zipCode: {
-      type: Number,
-      required: true
-    }
+    formattedAddress: String,
+    street: String,
+    city: String,
+    state: String,
+    zipcode: String,
+    country: String
   }
 });
 
 // Create mural slug from the name
 MuralSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
+  next();
+});
+
+// Geocode & create location field
+MuralSchema.pre('save', async function (next) {
+  const loc = await geocoder.geocode(this.address);
+  this.location = {
+    type: 'Point',
+    coordinates: [loc[0].longitude, loc[0].latitude],
+    formattedAddress: loc[0].formattedAddress,
+    street: loc[0].streetName,
+    city: loc[0].city,
+    state: loc[0].stateCode,
+    zipcode: loc[0].zipcode,
+    country: loc[0].countryCode
+  };
+
+  // Do not save address in DB
+  this.address = undefined;
   next();
 });
 
