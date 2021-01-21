@@ -1,8 +1,8 @@
 import express from 'express';
 
 // import the database models
-import User from '../../models/User';
-import Profile from '../../models/Profile';
+import User from '../models/User';
+import Profile from '../models/Profile';
 
 const app = express.Router();
 

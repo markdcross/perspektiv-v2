@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const errorHandler = require('./middleware/error.js');
 const connectDB = require('./config/db');
 
 // Load env vars
@@ -10,9 +11,13 @@ dotenv.config();
 // Connect Database
 connectDB();
 
+// Route files
+const murals = require('./routes/murals');
+const restaurants = require('./routes/restaurants');
+
 const app = express();
 
-// Init Middleware
+// Body parser
 app.use(express.json({ extended: false }));
 
 // Dev logging middleware
@@ -20,13 +25,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-app.get('/', (req, res) => res.send('API Running'));
+// Mount routers
+app.use('/api/v1/murals', murals);
+app.use('/api/v1/restaurants', restaurants);
 
-//* =============================================================
-//* Routes
-//* =============================================================
-require('./routes/api/murals')(app);
-require('./routes/api/restaurants')(app);
+// Init error handler
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
