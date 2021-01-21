@@ -44,7 +44,10 @@ const MuralSchema = new Schema({
       type: String
     }
   },
-
+  address: {
+    type: String,
+    required: [true, 'Please add an address']
+  },
   // Location of the mural
   location: {
     // GeoJSON Point
