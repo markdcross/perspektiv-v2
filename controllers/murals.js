@@ -80,3 +80,30 @@ exports.deleteMural = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({ success: true, data: {} });
 });
+
+//* ======================================
+//*   @route    GET /api/v1/murals/radius/:zipcode/:distance (This can take a /:units as well)
+//!   @desc     Get murals within a radius
+//*   @access   Private
+//* ======================================
+// You can use lat/lng here instead of zipcode and you don't have to use the geocoder
+exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
+  const { zipcode, distance } = req.params;
+
+  // Get lat/lng from geocoder
+  const loc = await geocoder.geocode(zipcode);
+  const lat = loc[0].latitude;
+  const lng = loc[0].longitude;
+
+  // Calc radius using radians
+  // Divide distance by radius of Earth
+  // Earth Radius = 3963 mi, 6378 kilometers
+  // Below is by half-mile
+  const radius = distance / 7926;
+
+  const murals = await Mural.find({
+    location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+  });
+
+  res.status(200).json({ success: true, count: murals.length, data: murals });
+});
