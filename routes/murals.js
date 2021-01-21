@@ -4,10 +4,13 @@ const {
   getMural,
   createMural,
   updateMural,
-  deleteMural
+  deleteMural,
+  getMuralsInRadius
 } = require('../controllers/murals');
 
 const router = express.Router();
+
+router.route('/radius/:zipcode/:distance').get(getMuralsInRadius);
 
 router.route('/').get(getMurals).post(createMural);
 
