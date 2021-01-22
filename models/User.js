@@ -50,6 +50,9 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
+// ======================
+// Securely store password
+// ======================
 // before the user is saved to the db, we need to encrpty the password
 UserSchema.pre('save', async function (next) {
   // create the salt that the plain password will run through for hashing
@@ -59,11 +62,22 @@ UserSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
+// ======================
+// Custom methods
+// ======================
 // create the jwt sign method that we can call from within our controller
 UserSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE
   });
 };
+// match user entered password to hashed password
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  // compare the entered password with the securely stored password in the db
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
+// ======================
+// Export
+// ======================
 module.exports = User = mongoose.model('User', UserSchema);
