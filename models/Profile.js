@@ -20,7 +20,7 @@ const ProfileSchema = new mongoose.Schema({
   },
 
   // use the following to show how many murals the user has visited
-  murals: [
+  muralsVisited: [
     {
       name: {
         type: Schema.Types.ObjectId,
@@ -35,7 +35,7 @@ const ProfileSchema = new mongoose.Schema({
   ],
 
   // use the following to show how many restaurants the user has visited
-  restaurants: [
+  restaurantsVisited: [
     {
       name: {
         type: Schema.Types.ObjectId,
