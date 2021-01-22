@@ -12,6 +12,7 @@ dotenv.config();
 connectDB();
 
 // Route files
+const users = require('./routes/users');
 const murals = require('./routes/murals');
 const restaurants = require('./routes/restaurants');
 
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Mount routers
+app.use('/api/v1/users', users);
 app.use('/api/v1/murals', murals);
 app.use('/api/v1/restaurants', restaurants);
 
