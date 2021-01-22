@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 
 // Read JSON files
 const murals = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/murals.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/_data/cleanMurals.json`, 'utf-8')
 );
 
 // Import into DB
