@@ -1,4 +1,4 @@
-const ErrorResponse = require('../utils/ErrorResponse');
+const ErrorResponse = require('../utils/errorResponse');
 const Mural = require('../models/Mural');
 const asyncHandler = require('../middleware/async');
 
@@ -37,7 +37,6 @@ exports.getMural = asyncHandler(async (req, res, next) => {
 //* ======================================
 exports.createMural = asyncHandler(async (req, res, next) => {
   const mural = await Mural.create(req.body);
-
   res.status(201).json({
     success: true,
     data: mural
@@ -87,7 +86,7 @@ exports.deleteMural = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 // You can use lat/lng here instead of zipcode and you don't have to use the geocoder
-exports.getBootcampsInRadius = asyncHandler(async (req, res, next) => {
+exports.getMuralsInRadius = asyncHandler(async (req, res, next) => {
   const { zipcode, distance } = req.params;
 
   // Get lat/lng from geocoder

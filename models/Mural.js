@@ -8,7 +8,7 @@ const MuralSchema = new Schema({
   // basic information regarding the mural
   name: {
     type: String,
-    required: true
+    required: [true, 'Please add a name']
   },
   slug: String,
   description: {

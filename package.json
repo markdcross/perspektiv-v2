@@ -4,7 +4,7 @@
   "description": "Perspektiv v2.0",
   "main": "server.js",
   "scripts": {
-    "start": "SET NODE_ENV=production & node server",
+    "start": "NODE_ENV=production node server",
     "server": "nodemon server",
     "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start"
