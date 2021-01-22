@@ -13,18 +13,18 @@ const ProfileSchema = new mongoose.Schema({
     type: String
   },
 
-  // "status" could be used like how you can set a status on slack
-  status: {
+  // level that they've earned on Perspektiv (Wanderer to Patron to ... etc)
+  badge: {
     type: String,
-    required: true
+    default: 'Wanderer'
   },
 
   // use the following to show how many murals the user has visited
   murals: [
     {
       name: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'mural',
+        type: Schema.Types.ObjectId,
+        ref: 'murals',
         required: true
       },
       date: {
@@ -38,8 +38,8 @@ const ProfileSchema = new mongoose.Schema({
   restaurants: [
     {
       name: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'restaurant',
+        type: Schema.Types.ObjectId,
+        ref: 'restaurants',
         required: true
       },
       date: {
@@ -65,7 +65,7 @@ const ProfileSchema = new mongoose.Schema({
     }
   },
 
-  // generic schema for mongodb
+  // generic schema for mongodb models
   date: {
     type: Date,
     default: Date.now
