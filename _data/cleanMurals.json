@@ -22,13 +22,9 @@
     }
   },
   {
-    "name": {
-      "__cdata": "Athena, Goddess of Wisdom & Military Strategy and Richmond Burning"
-    },
+    "name": "Athena, Goddess of Wisdom & Military Strategy and Richmond Burning",
     "address": "8 N. Belmont Ave. Richmond, VA",
-    "description": {
-      "__cdata": "Athena, Goddess of Wisdom & Military Strategy and Richmond Burning"
-    },
+    "description": "Athena, Goddess of Wisdom & Military Strategy and Richmond Burning",
     "key": "3.0",
     "area": "Behind Belmont Library on the side of Bear Granville Corporation",
     "artist": {
@@ -697,9 +693,7 @@
     "image": "https://doc-00-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/tkajghq33g54fsm2b49vg7sgts/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALqjihB5oVEqkMJb1EtSLhRZ5dZtzTuY0YHCnAdDWwDXCjJ1kNGThS-rxz6e0mKpEUA72XsowIxsjQHLmi8br4vw_bPY_koEtSG_DR9n7k4p7pAXCzw9iHjiRbVU0fXjjcmZqX1X6iX0g6xJGkng45-ldFHKNUvtUnSsDoTnV943XpbF6KvXGeL3Nc9X6OMZXZYQnKCEYyf5YEa4HetaqIP6Vx23PXFE8at8ei5ojO-aYte9cLDx0K7PuF9k72ufEf5nBZcuL6sQp_sXkLd5qxvjDsdp4A?session=0&fife",
     "description": "Intimidating Fish",
     "key": "62.0",
-    "area": {
-      "__cdata": "South wall of Buddy's"
-    },
+    "area": "South wall of Buddy's",
     "artist": {
       "name": "CLOGTWO"
     }
@@ -764,14 +758,10 @@
     }
   },
   {
-    "name": {
-      "__cdata": "Fly Anakin & Ohbliv"
-    },
+    "name": "Fly Anakin & Ohbliv",
     "address": "3310 W Clay St. Richmond, VA",
     "image": "https://doc-0o-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/1l1un6qqju13ok0bt7gnf8huc8/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALp1rHitMIs8KGbiCUAZBejjTZtfvv2aRoszecKiL4EZpkiT4aSa2sol277YDglgxa-DkAMxLUhpZ0D2rVpLQeJPuAfg_EfGae7sy7L46JZkHI8R9GLk6XCm1uC2jfEpmYhzDj6KIAUGj2BQZkNayQrZL9oEFuvm41BqNu2W1bSPQ0OLYSBUWIzrp6xG7QK6jWws_ARya7kuyA-i0GOWbgX6iH1LNjK0nUN5VAblxmc82rg5E3HcmL8syxHxpo4Q6d6JI-FGkhteQ5kKVIg_pOkNVQLe1w?session=0&fife",
-    "description": {
-      "__cdata": "Fly Anakin & Ohbliv"
-    },
+    "description": "Fly Anakin & Ohbliv",
     "key": "68.0",
     "area": "South wall",
     "artist": {
@@ -815,12 +805,8 @@
     "area": "River City Roll",
     "artist": {
       "name": "The Night Owl and Sure Hand Signs",
-      "social": {
-        "__cdata": "@thenightowl & @surehandsigns"
-      },
-      "website": {
-        "__cdata": "https://www.thenightowlwashere.com/about & http://surehandsigns.com/"
-      }
+      "social": "@thenightowl & @surehandsigns",
+      "website": "https://www.thenightowlwashere.com/about & http://surehandsigns.com/"
     }
   },
   {
@@ -845,11 +831,9 @@
     "area": "West wall",
     "artist": {
       "name": "Welcoming Walls featuring bmbprf and the Night Owl",
-      "social": {
-        "__cdata": "@bmbprf & @thenightowl"
-      },
-      "website": "https://www.welcomingwallsrva.com/"
-    }
+      "social": "@bmbprf & @thenightowl"
+    },
+    "website": "https://www.welcomingwallsrva.com/"
   },
   {
     "name": "Dog and cat",
@@ -870,9 +854,7 @@
     "image": "https://doc-0k-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/qbr6ft25rh7qjv5h9lgfmbq6t0/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALrHjbUYwlaO1jAVv8D9CS4WW19OpgfvyJ_f9GKSqI0kFmK6Hlcy86B5rv-U3OiOUev_Hlt-RXTWeERO5YbKHlRbc1p5igqktMZdkyKSPl-UGuyJ3S7j7uK1pK8ogHGGddmsVs9QzZPrxzLhRXuoW7LxzVfzBMlBtOrxxpk_htGxQIZgLzYtEc1XeLKODrc2kxxRoYOEiE60eaAQPCZS5zpa7U-T7ySK3J4ReIvmU8tmXHUfWKPkvWS_iTkzE2BbXZdSiiDR4NEA8Jk57cQHjPxdlZ6khg?session=0&fife",
     "description": "Fiery Hand",
     "key": "75.0",
-    "area": {
-      "__cdata": "West wall. Across from Lee's"
-    },
+    "area": "West wall. Across from Lee's",
     "artist": {
       "name": "MEGGS"
     }
@@ -1018,12 +1000,8 @@
     "area": "West wall of Charm School",
     "artist": {
       "name": "The Night Owl and Sure Hand Signs",
-      "social": {
-        "__cdata": "@thenightowl & @surehandsigns"
-      },
-      "website": {
-        "__cdata": "https://www.thenightowlwashere.com/about & http://surehandsigns.com/"
-      }
+      "social": "@thenightowl & @surehandsigns",
+      "website": "https://www.thenightowlwashere.com/about & http://surehandsigns.com/"
     }
   },
   {
@@ -1056,9 +1034,7 @@
     "key": "91.0",
     "area": "Two Murals. 1st = South wall",
     "artist": {
-      "name": {
-        "__cdata": "ROBERT \"TONE\" PROCH / ONUR and WES21 / ONUR"
-      }
+      "name": "ROBERT \"TONE\" PROCH / ONUR and WES21 / ONUR"
     }
   },
   {
@@ -1342,9 +1318,7 @@
     "image": "https://doc-04-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/vec2pp1ttkctc3cikvbr5hm2jo/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALqB6vaqGpTCRNihleR2cmsbAS6TURDQDB1Q4P81pPJ9VMOOT9Kplx9mJKX9RdFXBPWcnx51K34QF5m8xl9fuLUxkKlLhiepq8DgSKOwGK6-uosdCsY-rNhg0PviEAuqBp3PW9Uz9-Ny2XighTYEJJ4dnUP5B9lXuXIm6_OJ3q_YXVsKGy0q6WuoZAP4mH6dSgJR5WxTcZE8UyteopP4LAijWhlV9YB-9PRBEtMQPUfn0bHaTGoYLBKxD7egY2igAxBMuQkHhKb3fvv_kZcKDDw4aI2DQg?session=0&fife",
     "description": "A tree of people",
     "key": "118.0",
-    "area": {
-      "__cdata": "Clay's Bookstore - West wall"
-    },
+    "area": "Clay's Bookstore - West wall",
     "artist": {
       "name": "ART180"
     }
@@ -1443,9 +1417,7 @@
     "image": "https://doc-10-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/kv3ji85vba7dt7chdljbpn6krc/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALozUhVKZyKMK5xPq5kX5hQOF9HnizuE0lz1yVjZbNyDUz-Obu0Lb7v6TK1LZpwKoeavSMKWH-262ladQWsNgZnwOoxM2isFFJc9qQNJUURx_UJDXOS-rAXuWzRffWWqe8Fm4IQqne4If7BiIws_JfAD5_h3psSwW87w7-QaWn5GhU922i0QNEIJEFxlKQ4O3jqXfB301rMtomLKog8BtPvuFfdWLlAGXKVBtK-py1Ai_20uhnxrnbpQljT3JTuMgyefXhWJAUeJv6tFO4R4Qi1gNPzbRw?session=0&fife",
     "description": "Dog with honeycomb body and skull",
     "key": "127.0",
-    "area": {
-      "__cdata": "South wall. Across old Tiki Bob's"
-    },
+    "area": "South wall. Across old Tiki Bob's",
     "artist": {
       "name": "PIXEL PANCHO"
     }
@@ -1456,9 +1428,7 @@
     "image": "https://doc-0s-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/3copsbvkfiig4vi6autrc9h19c/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALoZe6JkZKoCiBu1Ru1TfYfJAxKtZsbkk--960HBL6QCvaxat1ud4DLgv9SI9T7luPVvAaIeTcHRI683jQnmSNQ8dwBNn7TGLUKKh93EMw0pLnggkhXIFG9SIMSnT7CmhJ4_dy3FycnOFnD1ZdaSD_AWig0U4lkH-p1-NEGeblVnwEpiU59UmzcNSl38h5SXxHljq4Bjup_ufh2n8tPlnTWMsrKaAFRNdSZoyLnAHnPWTBs_MBUx6auLgXKO4YVBOCJVvdTO1IEHacrMGTLAV0-PU_trqQ?session=0&fife",
     "description": "Fruits and veggies",
     "key": "128.0",
-    "area": {
-      "__cdata": "Near Farmer's Market. North wall of Tech Head"
-    },
+    "area": "Near Farmer's Market. North wall of Tech Head",
     "artist": {
       "name": "Aryz"
     }
@@ -1605,14 +1575,10 @@
     }
   },
   {
-    "name": {
-      "__cdata": "Quarter Pipe Extension & Quarter Pipe"
-    },
+    "name": "Quarter Pipe Extension & Quarter Pipe",
     "address": "Treasure Island Community Skatepark",
     "image": "https://doc-0c-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/vhfq3li4hl7lh90agf3d6p30ic/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALpqW7xqzczJzDcIBAXZiB_z1NMtg2q2yovf7vxmQXacUBPu7Z-fc_eDz-I-XaBwaaaWMmdxPCsucbKRFGXAChRVh61oXLev3eilpsJDRTBd3yUc9EqhAzuKzIuvh0s0cOpO3j3yUZFr3jVc6a-iLkv5qIAqhh1-KHbSCT9YcThiFpi3yjgqfo5mgEitU059gy9x2o9x0bGqwPCjwqoVQUAzX6Tt6p7qL-H8_22nC7rO6arZNA79fCO6dd9fUOHfc6x67fiqgXEZDF4qveeA-crZJvLhwg?session=0&fife https://doc-14-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/ukbtp15oh0k36er6m854mphitk/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALocEBdn5RSZynJuulEbBwstM3KXJK5biZ_6eIJDX1jhr_fgIP23x9GR-0g6v8LHzwx6djX4N_hmtyooFNEVevZneHc1HECzoYS6uwVi9c9plkui4hzFJ-NLA4_EZuxHY4UaoWlG_MPsuQCpLeel-QLQt15WMxRkoIflUBsy81aVEN-gWzE5BmV4xyZ4OZ1ISrFKe4RIRN2YIClG8EQFIQogeHmwfsPSniePNR8b_Dv0n548JblpZ_x092fq5YC6VDmS5FE5KEjifH3nXQ6mOE1bn5Dp_w?session=0&fife https://doc-00-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/17ea56qdte14gmnrvl25dfmbjo/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALoVmgwuHw5B3Y31wt_knVJ91rvRDj95o72hVJzIyOABTiEgDHFynxn4hVlQd2sAXXQ5KPz_ijLu_-tFAaQL5uAS58eCPDAWHHE6Sdw8M7vm7jMC0wRKaakzcaWVyPbSohZKYKcpnT4wN9vPVUnxuNeiPVIsfVsAhNr7YJOP84_irxNDaAM__mwtoEsUN4DkrCGvMs9wVwNMRvoay1QKx3aVj7hxkphwMnPiv4cA8VA3_YAlog9qEBhAds7jN4C6-UkYXtfUZ8U0sSXOfcX4Wm1nUjtVIA?session=0&fife",
-    "description": {
-      "__cdata": "Quarter Pipe Extension & Quarter Pipe"
-    },
+    "description": "Quarter Pipe Extension & Quarter Pipe",
     "key": "143.0",
     "area": "Treasure Island Community Skatepark",
     "artist": {
