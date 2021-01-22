@@ -14,7 +14,9 @@ const MuralSchema = new Schema({
   description: {
     type: String
   },
-
+  image: {
+    type: String
+  },
   // use the following information to show how long the mural took to create
   dates: {
     from: {
