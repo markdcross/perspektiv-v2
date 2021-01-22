@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -58,5 +58,12 @@ UserSchema.pre('save', async function (next) {
   // using bcrypt and the salt, hash this.password and set it to the hashed value
   this.password = await bcrypt.hash(this.password, salt);
 });
+
+// create the jwt sign method that we can call from within our controller
+UserSchema.methods.getSignedJwtToken = function () {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE
+  });
+};
 
 module.exports = User = mongoose.model('User', UserSchema);
