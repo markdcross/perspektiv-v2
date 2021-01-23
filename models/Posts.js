@@ -8,17 +8,20 @@ const PostSchema = new Schema({
     type: Schema.Types.Object,
     ref: 'users'
   },
-  text: {
-    type: String,
-    required: true
-  },
   name: {
     type: String
   },
   avatar: {
     type: String
   },
-
+  // main post content
+  text: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String
+  },
   // Posts can have likes from other users, so we need to include that within the model as an array that allows us to see which user has liked the post
   likes: [
     {
@@ -30,7 +33,6 @@ const PostSchema = new Schema({
       }
     }
   ],
-
   // posts can have comments too, so we need to define a comments array that allows us to see the user that commented, their comment, their name/avatar, and the date of the comment
   comments: [
     {
@@ -54,7 +56,6 @@ const PostSchema = new Schema({
       }
     }
   ],
-
   // generic date field for mongodb models
   date: {
     type: Date,
