@@ -20,11 +20,8 @@ exports.register = asyncHandler(async (req, res, next) => {
   });
   // create user using the schema we created
   const user = await User.create({ name, email, password, role, avatar });
-  // create token using method defined in the User model
-  // since this is called on the user object, it will have access to the user id for the payload
-  const token = user.getSignedJwtToken();
-  // send a success response with the token
-  res.status(200).json({ success: true, token });
+  // create and store the token in cookies using the sendTokenResponse() helper function
+  sendTokenResponse(user, 200, res);
 });
 
 // @desc    Login user
@@ -50,9 +47,31 @@ exports.login = asyncHandler(async (req, res, next) => {
   if (!isMatch) {
     return next(new ErrorResponse('Invalid credentials. Access denied.', 401));
   }
+  // create and store the token in cookies using the sendTokenResponse() helper function
+  sendTokenResponse(user, 200, res);
+});
+
+// get token from model, create cookie to store it in, and send a response
+const sendTokenResponse = (user, statusCode, res) => {
   // create token using method defined in the User model
   // since this is called on the user object, it will have access to the user id for the payload
   const token = user.getSignedJwtToken();
-  // send a success response with the token
-  res.status(200).json({ success: true, token });
-});
+  const options = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true
+  };
+
+  if (process.env.NODE_ENV === 'production') {
+    options.secure = true;
+  }
+
+  res
+    // send a response with the status code
+    .status(statusCode)
+    // then store the token as "token" in cookies (along with options)
+    .cookie('token', token, options)
+    // then send a success message with the token
+    .json({ success: true, token });
+};
