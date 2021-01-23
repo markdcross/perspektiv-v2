@@ -101,7 +101,7 @@ MuralSchema.pre('save', async function (next) {
 
 // Reverse populate with virtuals
 MuralSchema.virtual('posts', {
-  reg: 'Post',
+  ref: 'Post',
   localField: '_id',
   foreignField: 'mural',
   justOne: false
