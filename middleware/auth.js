@@ -1,24 +1,41 @@
-const jwt = require('jwt');
-const config = require('config');
+const jwt = require('jsonwebtoken');
+const asyncHandler = require('./async');
+const ErrorResponse = require('../utils/errorResponse');
+const User = require('../models/User');
 
-module.exports = function (req, res, next) {
-  // get the token from header
-  const token = req.header('x-auth-header');
-  // check if no token
-  if (!token) {
-    return res
-      .status(401)
-      .json({ msg: 'User token is not authorized. Access denied.' });
+// protect routes
+exports.protectedRoute = asyncHandler(async (req, res, next) => {
+  let token;
+  // check if the headers have an authorization token
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ')[1];
   }
-  // verify token if there is one included in the headers
+  // check if the cookies have an authorization token
+  else if (req.cookies.token) {
+    token = req.cookies.token;
+  }
+
+  // if there is no token, then the user fails the verification and is unauthorized
+  if (!token) {
+    return next(
+      new ErrorResponse('User is not authorized to access this content', 401)
+    );
+  }
+
   try {
-    // if valid, decode the tokens
-    const decoded = jwt.verify(token, config.get('jwtSecret'));
-    // set req.user equal to the decoded token so we can use it in any of our protected routes
-    req.user = decoded.user;
-    // run the next callback
+    // verify token using out jwt secret
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded);
+    // find the user in the database that matches that id
+    req.user = await User.findById(decoded.id);
+    // let them through to the protected route
     next();
   } catch (err) {
-    res.status(401).json({ msg: 'Token is not valid' });
+    return next(
+      new ErrorResponse('User is not authorized to access this content', 401)
+    );
   }
-};
+});
