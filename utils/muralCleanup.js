@@ -34,11 +34,11 @@ const writeToFile = (data, path) => {
   });
 };
 
-let rawData = fs.readFileSync('../_data/murals.json');
+let rawData = fs.readFileSync('./_data/murals.json');
 // console.log('🚀 ~ file: muralCleanup.js ~ line 37 ~ rawData', rawData);
 
 let uglyData = JSON.parse(rawData);
 // console.log('🚀 ~ file: muralCleanup.js ~ line 39 ~ uglyData', uglyData);
 
 getCleanData(uglyData);
-writeToFile(cleanData, '../_data/cleanMurals.json');
+writeToFile(cleanData, './_data/cleanMurals.json');
