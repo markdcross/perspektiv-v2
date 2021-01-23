@@ -1,18 +1,18 @@
 const express = require('express');
 const {
-  getAllPosts,
+  getPosts,
   getPostById,
   createPost,
   updatePost,
   deletePost
 } = require('../controllers/posts');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const { protectedRoute } = require('../middleware/auth');
 
 router
   .route('/')
-  .get(protectedRoute, getAllPosts)
+  .get(protectedRoute, getPosts)
   .post(protectedRoute, createPost);
 
 router

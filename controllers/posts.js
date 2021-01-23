@@ -1,15 +1,28 @@
 const ErrorResponse = require('../utils/errorResponse');
-const Posts = require('../models/Posts');
+const Post = require('../models/Post');
 const asyncHandler = require('../middleware/async');
 
 //* ======================================
 //*   @route    GET /api/v1/posts
-//!   @desc     Get All Posts
+//*   @route    GET /api/v1/murals/:muralId/posts
+//!   @desc     Get Posts
 //*   @access   Private
 //* ======================================
-exports.getAllPosts = asyncHandler(async (req, res, next) => {
+exports.getPosts = asyncHandler(async (req, res, next) => {
   // grab all posts and sort by the newest first
-  const posts = await Posts.find().sort({ date: -1 });
+  let query;
+
+  if (req.params.muralId) {
+    query = Post.find({ mural: req.params.muralId });
+  } else {
+    query = Post.find().populate({
+      path: 'mural',
+      select: 'name location artist'
+    });
+  }
+
+  const posts = await query;
+
   res.status(200).json({ success: true, count: posts.length, data: posts });
 });
 
@@ -36,7 +49,7 @@ exports.getPostById = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 exports.createPost = asyncHandler(async (req, res, next) => {
-  const post = await Posts.create(req.body);
+  const post = await Post.create(req.body);
   res.status(201).json({
     success: true,
     data: post
@@ -49,7 +62,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 exports.updatePost = asyncHandler(async (req, res, next) => {
-  const post = await Posts.findByIdAndUpdate(req.params.id, req.body, {
+  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
   });
@@ -69,7 +82,7 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 exports.deletePost = asyncHandler(async (req, res, next) => {
-  const post = await Posts.findByIdAndDelete(req.params.id);
+  const post = await Post.findByIdAndDelete(req.params.id);
 
   if (!post) {
     return next(

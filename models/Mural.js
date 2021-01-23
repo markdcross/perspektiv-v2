@@ -90,9 +90,7 @@ MuralSchema.pre('save', async function (next) {
     country: loc[0].countryCode
   };
 
-  // Do not save address in DB
-  this.address = undefined;
   next();
 });
 
-module.exports = Mural = mongoose.model('mural', MuralSchema);
+module.exports = Mural = mongoose.model('Mural', MuralSchema);

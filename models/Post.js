@@ -14,11 +14,17 @@ const PostSchema = new Schema({
   avatar: {
     type: String
   },
+  mural: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Mural',
+    required: true
+  },
   // main post content
   text: {
     type: String,
     required: true
   },
+  // TODO Add file upload functionality
   image: {
     type: String
   },
@@ -34,6 +40,7 @@ const PostSchema = new Schema({
     }
   ],
   // posts can have comments too, so we need to define a comments array that allows us to see the user that commented, their comment, their name/avatar, and the date of the comment
+
   comments: [
     {
       user: {
@@ -63,4 +70,4 @@ const PostSchema = new Schema({
   }
 });
 
-module.exports = Post = mongoose.model('post', PostSchema);
+module.exports = Post = mongoose.model('Post', PostSchema);
