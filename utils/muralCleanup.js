@@ -1,4 +1,3 @@
-// find the data in the json object, map over it, capture the new fields in the structure you want
 const fs = require('fs');
 
 let cleanData = [];
