@@ -8,9 +8,7 @@ const asyncHandler = require('../middleware/async');
 //*   @access   Public
 //* ======================================
 exports.getMurals = asyncHandler(async (req, res, next) => {
-  const murals = await Mural.find();
-
-  res.status(200).json({ success: true, count: murals.length, data: murals });
+  res.status(200).json(res.advancedResults);
 });
 
 //* ======================================
@@ -69,13 +67,15 @@ exports.updateMural = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 exports.deleteMural = asyncHandler(async (req, res, next) => {
-  const mural = await Mural.findByIdAndDelete(req.params.id);
+  const mural = await Mural.findById(req.params.id);
 
   if (!mural) {
     return next(
       new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404)
     );
   }
+
+  mural.remove();
 
   res.status(200).json({ success: true, data: {} });
 });

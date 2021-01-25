@@ -4,71 +4,77 @@ const geocoder = require('../utils/geocoder');
 
 const Schema = mongoose.Schema;
 
-const MuralSchema = new Schema({
-  // basic information regarding the mural
-  name: {
-    type: String,
-    required: [true, 'Please add a name']
-  },
-  slug: String,
-  description: {
-    type: String
-  },
-  image: {
-    type: String
-  },
-  // use the following information to show how long the mural took to create
-  dates: {
-    from: {
-      type: Date
-    },
-    to: {
-      type: Date
-    },
-    // if the mural is still being created, then we can set the current value to true
-    // (only use for brand new murals that are currently being painted)
-    current: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  // use the following to showcase information about the mural's creator
-  // TODO Do we need to connect this with an artist already registered with our app?
-  artist: {
+const MuralSchema = new Schema(
+  {
+    // basic information regarding the mural
     name: {
+      type: String,
+      required: [true, 'Please add a name']
+    },
+    slug: String,
+    description: {
       type: String
     },
-    bio: {
+    image: {
       type: String
     },
-    link: {
-      type: String
+    // use the following information to show how long the mural took to create
+    dates: {
+      from: {
+        type: Date
+      },
+      to: {
+        type: Date
+      },
+      // if the mural is still being created, then we can set the current value to true
+      // (only use for brand new murals that are currently being painted)
+      current: {
+        type: Boolean,
+        default: false
+      }
+    },
+
+    // use the following to showcase information about the mural's creator
+    // TODO Do we need to connect this with an artist already registered with our app?
+    artist: {
+      name: {
+        type: String
+      },
+      bio: {
+        type: String
+      },
+      link: {
+        type: String
+      }
+    },
+    address: {
+      type: String,
+      required: [true, 'Please add an address']
+    },
+    // Location of the mural
+    location: {
+      // GeoJSON Point
+      type: {
+        type: String,
+        enum: ['Point']
+      },
+      coordinates: {
+        type: [Number],
+        index: '2dsphere'
+      },
+      formattedAddress: String,
+      street: String,
+      city: String,
+      state: String,
+      zipcode: String,
+      country: String
     }
   },
-  address: {
-    type: String,
-    required: [true, 'Please add an address']
-  },
-  // Location of the mural
-  location: {
-    // GeoJSON Point
-    type: {
-      type: String,
-      enum: ['Point']
-    },
-    coordinates: {
-      type: [Number],
-      index: '2dsphere'
-    },
-    formattedAddress: String,
-    street: String,
-    city: String,
-    state: String,
-    zipcode: String,
-    country: String
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
   }
-});
+);
 
 // Create mural slug from the name
 MuralSchema.pre('save', function (next) {
@@ -90,9 +96,23 @@ MuralSchema.pre('save', async function (next) {
     country: loc[0].countryCode
   };
 
-  // Do not save address in DB
-  this.address = undefined;
   next();
 });
 
-module.exports = Mural = mongoose.model('mural', MuralSchema);
+// Cascade delete courses when a bootcamp is deleted
+MuralSchema.pre('remove', async function (next) {
+  console.log(`Posts being removed from mural ${this._id}`);
+
+  await this.model('Post').deleteMany({ mural: this._id });
+  next();
+});
+
+// Reverse populate with virtuals
+MuralSchema.virtual('posts', {
+  ref: 'Post',
+  localField: '_id',
+  foreignField: 'mural',
+  justOne: false
+});
+
+module.exports = Mural = mongoose.model('Mural', MuralSchema);
