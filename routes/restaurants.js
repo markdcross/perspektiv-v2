@@ -8,7 +8,7 @@ const {
 } = require('../controllers/restaurants');
 
 const router = express.Router();
-const { protectedRoute } = require('../middleware/auth');
+const { protectedRoute, authorize } = require('../middleware/auth');
 
 router
   .route('/')
