@@ -17,6 +17,8 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
   } else {
     query = Post.find().populate({
       path: 'mural',
+
+      // TODO Select what Mural data is being provided here
       select: 'name location artist'
     });
   }
@@ -28,12 +30,15 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 
 //* ======================================
 //*   @route    GET /api/v1/posts/:id
-//!   @desc     Get All Posts by a specific ID
+//!   @desc     Get single post
 //*   @access   Private
 //* ======================================
-exports.getPostById = asyncHandler(async (req, res, next) => {
+exports.getPost = asyncHandler(async (req, res, next) => {
   // grab the specific post by passing in the request parameter
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id).populate({
+    path: 'mural',
+    select: 'name address'
+  });
   // if there is no post with that ID, then return a 404 error
   if (!post) {
     return next(
@@ -44,13 +49,25 @@ exports.getPostById = asyncHandler(async (req, res, next) => {
 });
 
 //* ======================================
-//*   @route    POST /api/v1/posts
+//*   @route    POST /api/v1/murals/:muralId/posts
 //!   @desc     Create a new Post
 //*   @access   Private
 //* ======================================
 exports.createPost = asyncHandler(async (req, res, next) => {
+  req.body.mural = req.params.muralId;
+
+  const mural = await Mural.findById(req.params.muralId);
+
+  if (!mural) {
+    return next(
+      new Error(`No mural with the id of ${req.params.muralId}`),
+      404
+    );
+  }
+
   const post = await Post.create(req.body);
-  res.status(201).json({
+
+  res.status(200).json({
     success: true,
     data: post
   });

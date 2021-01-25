@@ -1,7 +1,7 @@
 const express = require('express');
 const {
   getPosts,
-  getPostById,
+  getPost,
   createPost,
   updatePost,
   deletePost
@@ -17,7 +17,7 @@ router
 
 router
   .route('/:id')
-  .get(protectedRoute, getPostById)
+  .get(protectedRoute, getPost)
   .put(protectedRoute, updatePost)
   .delete(protectedRoute, deletePost);
 
