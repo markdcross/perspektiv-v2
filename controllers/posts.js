@@ -60,7 +60,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 
   if (!mural) {
     return next(
-      new Error(`No mural with the id of ${req.params.muralId}`),
+      new ErrorResponse(`No mural with the id of ${req.params.muralId}`),
       404
     );
   }
@@ -79,16 +79,18 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 exports.updatePost = asyncHandler(async (req, res, next) => {
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+  let post = await Post.findById(req.params.id);
 
   if (!post) {
     return next(
       new ErrorResponse(`Post not found with id of ${req.params.id}`, 404)
     );
   }
+
+  post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
 
   res.status(200).json({ success: true, data: post });
 });
@@ -99,13 +101,15 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
 //*   @access   Private
 //* ======================================
 exports.deletePost = asyncHandler(async (req, res, next) => {
-  const post = await Post.findByIdAndDelete(req.params.id);
+  const post = await Post.findById(req.params.id);
 
   if (!post) {
     return next(
       new ErrorResponse(`Post not found with id of ${req.params.id}`, 404)
     );
   }
+
+  await post.remove();
 
   res.status(200).json({ success: true, data: {} });
 });
