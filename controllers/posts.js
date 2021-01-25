@@ -79,6 +79,12 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // check on the user to make sure it is the logged on user's post
+  // user's should only be able to delete their own posts
+  if (post.user.toString() !== req.user.id) {
+    return res.status(401).json({ msg: 'User not authorized' });
+  }
+
   post = await Post.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
@@ -101,6 +107,12 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // check on the user to make sure it is the logged on user's post
+  // user's should only be able to delete their own posts
+  if (post.user.toString() !== req.user.id) {
+    return res.status(401).json({ msg: 'User not authorized' });
+  }
+
   await post.remove();
 
   res.status(200).json({ success: true, data: {} });
@@ -118,6 +130,12 @@ exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponse(`Post not found with id of ${req.params.id}`, 404)
     );
+  }
+
+  // check on the user to make sure it is the logged on user's post
+  // user's should only be able to delete their own posts
+  if (post.user.toString() !== req.user.id) {
+    return res.status(401).json({ msg: 'User not authorized' });
   }
 
   if (!req.files) {
@@ -144,7 +162,7 @@ exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
   // Create custom filename
   file.name = `photo_${post._id}${path.parse(file.name).ext}`;
 
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
     if (err) {
       console.error(err);
       return next(new ErrorResponse(`Problem with file upload`, 500));
