@@ -11,23 +11,13 @@ const asyncHandler = require('../middleware/async');
 //*   @access   Private
 //* ======================================
 exports.getPosts = asyncHandler(async (req, res, next) => {
-  // grab all posts and sort by the newest first
-  let query;
-
   if (req.params.muralId) {
-    query = Post.find({ mural: req.params.muralId });
+    const posts = await Post.find({ mural: req.params.muralId });
+
+    res.status(200).json({ success: true, count: posts.length, data: posts });
   } else {
-    query = Post.find().populate({
-      path: 'mural',
-
-      // TODO Select what Mural data is being provided here
-      select: 'name location artist'
-    });
+    res.status(200).json(res.advancedResults);
   }
-
-  const posts = await query;
-
-  res.status(200).json({ success: true, count: posts.length, data: posts });
 });
 
 //* ======================================

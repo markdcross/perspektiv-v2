@@ -8,6 +8,9 @@ const {
   getMuralsInRadius
 } = require('../controllers/murals');
 
+const Mural = require('../models/Mural');
+const advancedResults = require('../middleware/advancedResults');
+
 // Include other resource routers
 const postRouter = require('./posts');
 
@@ -19,7 +22,10 @@ router.use('/:muralId/posts', postRouter);
 
 router.route('/radius/:zipcode/:distance').get(getMuralsInRadius);
 
-router.route('/').get(getMurals).post(protectedRoute, createMural);
+router
+  .route('/')
+  .get(advancedResults(Mural, 'posts'), getMurals)
+  .post(protectedRoute, createMural);
 
 router
   .route('/:id')

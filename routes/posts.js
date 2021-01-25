@@ -8,6 +8,9 @@ const {
   postPhotoUpload
 } = require('../controllers/posts');
 
+const Post = require('../models/Post');
+const advancedResults = require('../middleware/advancedResults');
+
 const router = express.Router({ mergeParams: true });
 const { protectedRoute } = require('../middleware/auth');
 
@@ -15,7 +18,15 @@ router.route('/:id/photo').put(postPhotoUpload);
 
 router
   .route('/')
-  .get(protectedRoute, getPosts)
+  .get(
+    protectedRoute,
+    advancedResults(Post, {
+      path: 'mural',
+      // TODO Select what Mural data is being provided here
+      select: 'name location artist'
+    }),
+    getPosts
+  )
   .post(protectedRoute, createPost);
 
 router
