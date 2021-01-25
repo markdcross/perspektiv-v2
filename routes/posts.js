@@ -14,7 +14,7 @@ const advancedResults = require('../middleware/advancedResults');
 const router = express.Router({ mergeParams: true });
 const { protectedRoute } = require('../middleware/auth');
 
-router.route('/:id/photo').put(postPhotoUpload);
+router.route('/:id/photo').put(protectedRoute, postPhotoUpload);
 
 router
   .route('/')

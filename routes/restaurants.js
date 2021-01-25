@@ -10,12 +10,15 @@ const {
 const router = express.Router();
 const { protectedRoute } = require('../middleware/auth');
 
-router.route('/').get(getRestaurants).post(protectedRoute, createRestaurant);
+router
+  .route('/')
+  .get(getRestaurants)
+  .post(protectedRoute, authorize('restaurant', 'admin'), createRestaurant);
 
 router
   .route('/:id')
   .get(getRestaurant)
-  .put(protectedRoute, updateRestaurant)
-  .delete(protectedRoute, deleteRestaurant);
+  .put(protectedRoute, authorize('restaurant', 'admin'), updateRestaurant)
+  .delete(protectedRoute, authorize('restaurant', 'admin'), deleteRestaurant);
 
 module.exports = router;

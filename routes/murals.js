@@ -16,7 +16,7 @@ const postRouter = require('./posts');
 
 const router = express.Router();
 
-const { protectedRoute } = require('../middleware/auth');
+const { protectedRoute, authorize } = require('../middleware/auth');
 
 router.use('/:muralId/posts', postRouter);
 
@@ -25,12 +25,12 @@ router.route('/radius/:zipcode/:distance').get(getMuralsInRadius);
 router
   .route('/')
   .get(advancedResults(Mural, 'posts'), getMurals)
-  .post(protectedRoute, createMural);
+  .post(protectedRoute, authorize('artist', 'admin'), createMural);
 
 router
   .route('/:id')
   .get(getMural)
-  .put(protectedRoute, updateMural)
-  .delete(protectedRoute, deleteMural);
+  .put(protectedRoute, authorize('artist', 'admin'), updateMural)
+  .delete(protectedRoute, authorize('artist', 'admin'), deleteMural);
 
 module.exports = router;

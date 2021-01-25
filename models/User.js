@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
   // establishing the role-based access strategy
   role: {
     type: String,
-    enum: ['user', 'publisher'],
+    enum: ['user', 'artist', 'restaurant'],
     default: 'user'
   },
 
