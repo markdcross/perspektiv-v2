@@ -26,7 +26,8 @@ const PostSchema = new Schema({
   },
   // TODO Add file upload functionality
   image: {
-    type: String
+    type: String,
+    default: 'no-photo.jpg'
   },
   // Posts can have likes from other users, so we need to include that within the model as an array that allows us to see which user has liked the post
   likes: [

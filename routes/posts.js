@@ -4,11 +4,14 @@ const {
   getPost,
   createPost,
   updatePost,
-  deletePost
+  deletePost,
+  postPhotoUpload
 } = require('../controllers/posts');
 
 const router = express.Router({ mergeParams: true });
 const { protectedRoute } = require('../middleware/auth');
+
+router.route('/:id/photo').put(postPhotoUpload);
 
 router
   .route('/')

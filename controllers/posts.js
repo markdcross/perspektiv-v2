@@ -1,3 +1,5 @@
+const path = require('path');
+
 const ErrorResponse = require('../utils/errorResponse');
 const Post = require('../models/Post');
 const asyncHandler = require('../middleware/async');
@@ -112,4 +114,57 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
   await post.remove();
 
   res.status(200).json({ success: true, data: {} });
+});
+
+//* ======================================
+//*   @route    PUT /api/v1/posts/:id/photo
+//!   @desc     Upload photo for post
+//*   @access   Private
+//* ======================================
+exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
+  const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    return next(
+      new ErrorResponse(`Post not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  if (!req.files) {
+    return next(new ErrorResponse(`Please upload a file`, 400));
+  }
+
+  const file = req.files.file;
+
+  // Make sure the image is a photo
+  if (!file.mimetype.startsWith('image')) {
+    return next(new ErrorResponse(`Please upload an image`, 400));
+  }
+
+  // Check filesize
+  if (file.size > process.env.MAX_FILE_UPLOAD) {
+    return next(
+      new ErrorResponse(
+        `Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,
+        400
+      )
+    );
+  }
+
+  // Create custom filename
+  file.name = `photo_${post._id}${path.parse(file.name).ext}`;
+
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+    if (err) {
+      console.error(err);
+      return next(new ErrorResponse(`Problem with file upload`, 500));
+    }
+
+    await Post.findByIdAndUpdate(req.params.id, { image: file.name });
+
+    res.status(200).json({
+      success: true,
+      data: file.name
+    });
+  });
 });
