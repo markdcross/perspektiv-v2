@@ -6,9 +6,9 @@ const {
   updatePost,
   deletePost,
   postPhotoUpload
-} = require('../controllers/posts');
+} = require('../controllers/mural-posts');
 
-const Post = require('../models/Post');
+const MuralPost = require('../models/MuralPost');
 const advancedResults = require('../middleware/advancedResults');
 
 const router = express.Router({ mergeParams: true });
@@ -20,7 +20,7 @@ router
   .route('/')
   .get(
     protectedRoute,
-    advancedResults(Post, {
+    advancedResults(MuralPost, {
       path: 'mural',
       // TODO Select what Mural data is being provided here
       select: 'name location artist'
