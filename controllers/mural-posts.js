@@ -1,7 +1,7 @@
 const path = require('path');
 
 const ErrorResponse = require('../utils/errorResponse');
-const Post = require('../models/Post');
+const MuralPost = require('../models/MuralPost');
 const asyncHandler = require('../middleware/async');
 
 //* ======================================
@@ -12,7 +12,7 @@ const asyncHandler = require('../middleware/async');
 //* ======================================
 exports.getPosts = asyncHandler(async (req, res, next) => {
   if (req.params.muralId) {
-    const posts = await Post.find({ mural: req.params.muralId });
+    const posts = await MuralPost.find({ mural: req.params.muralId });
 
     res.status(200).json({ success: true, count: posts.length, data: posts });
   } else {
@@ -21,13 +21,13 @@ exports.getPosts = asyncHandler(async (req, res, next) => {
 });
 
 //* ======================================
-//*   @route    GET /api/v1/posts/:id
+//*   @route    GET /api/v1/mural-posts/:id
 //!   @desc     Get single post
 //*   @access   Private
 //* ======================================
 exports.getPost = asyncHandler(async (req, res, next) => {
   // grab the specific post by passing in the request parameter
-  const post = await Post.findById(req.params.id).populate({
+  const post = await MuralPost.findById(req.params.id).populate({
     path: 'mural',
     select: 'name address'
   });
@@ -58,7 +58,7 @@ exports.createPost = asyncHandler(async (req, res, next) => {
     );
   }
 
-  const post = await Post.create(req.body);
+  const post = await MuralPost.create(req.body);
 
   res.status(200).json({
     success: true,
@@ -67,12 +67,12 @@ exports.createPost = asyncHandler(async (req, res, next) => {
 });
 
 //* ======================================
-//*   @route    PUT /api/v1/posts/:id
+//*   @route    PUT /api/v1/mural-posts/:id
 //!   @desc     Update Post
 //*   @access   Private
 //* ======================================
 exports.updatePost = asyncHandler(async (req, res, next) => {
-  let post = await Post.findById(req.params.id);
+  let post = await MuralPost.findById(req.params.id);
 
   if (!post) {
     return next(
@@ -90,7 +90,7 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
     );
   }
 
-  post = await Post.findByIdAndUpdate(req.params.id, req.body, {
+  post = await MuralPost.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
   });
@@ -99,12 +99,12 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
 });
 
 //* ======================================
-//*   @route    DELETE /api/v1/posts/:id
+//*   @route    DELETE /api/v1/mural-posts/:id
 //!   @desc     Delete Post
 //*   @access   Private
 //* ======================================
 exports.deletePost = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+  const post = await MuralPost.findById(req.params.id);
 
   if (!post) {
     return next(
@@ -128,12 +128,12 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
 });
 
 //* ======================================
-//*   @route    PUT /api/v1/posts/:id/photo
+//*   @route    PUT /api/v1/mural-posts/:id/photo
 //!   @desc     Upload photo for post
 //*   @access   Private
 //* ======================================
 exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
-  const post = await Post.findById(req.params.id);
+  const post = await MuralPost.findById(req.params.id);
 
   if (!post) {
     return next(
@@ -141,7 +141,7 @@ exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // Make sure user is post owner
+  // Make sure user is post owner OR an admin
   if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
