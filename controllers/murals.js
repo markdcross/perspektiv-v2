@@ -62,7 +62,7 @@ exports.updateMural = asyncHandler(async (req, res, next) => {
   if (mural.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
-        `User ${req.params.id} is not authorized to update this mural`,
+        `User ${req.user.id} is not authorized to update this mural`,
         401
       )
     );
@@ -94,7 +94,7 @@ exports.deleteMural = asyncHandler(async (req, res, next) => {
   if (mural.user.toString() !== req.user.id && req.user.role !== 'admin') {
     return next(
       new ErrorResponse(
-        `User ${req.params.id} is not authorized to delete this mural`,
+        `User ${req.user.id} is not authorized to delete this mural`,
         401
       )
     );

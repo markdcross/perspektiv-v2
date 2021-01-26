@@ -47,6 +47,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 //* ======================================
 exports.createPost = asyncHandler(async (req, res, next) => {
   req.body.mural = req.params.muralId;
+  req.body.user = req.user.id;
 
   const mural = await Mural.findById(req.params.muralId);
 
@@ -79,6 +80,16 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // Make sure user is post owner
+  if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this post`,
+        401
+      )
+    );
+  }
+
   post = await Post.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
@@ -101,6 +112,16 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     );
   }
 
+  // Make sure user is post owner
+  if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this post`,
+        401
+      )
+    );
+  }
+
   await post.remove();
 
   res.status(200).json({ success: true, data: {} });
@@ -117,6 +138,16 @@ exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
   if (!post) {
     return next(
       new ErrorResponse(`Post not found with id of ${req.params.id}`, 404)
+    );
+  }
+
+  // Make sure user is post owner
+  if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this post`,
+        401
+      )
     );
   }
 
