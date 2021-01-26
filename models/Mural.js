@@ -68,6 +68,11 @@ const MuralSchema = new Schema(
       state: String,
       zipcode: String,
       country: String
+    },
+    user: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+      required: true
     }
   },
   {
