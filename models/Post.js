@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
   // a user is connected to each post (makes it so they can only delete their own posts, and allows us to show the user's avatar)
   user: {
-    type: Schema.Types.Object,
+    type: Schema.Types.ObjectId,
     ref: 'users'
   },
   name: {
