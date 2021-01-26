@@ -47,6 +47,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 //* ======================================
 exports.createPost = asyncHandler(async (req, res, next) => {
   req.body.mural = req.params.muralId;
+  req.body.user = req.user.id;
 
   const mural = await Mural.findById(req.params.muralId);
 
@@ -79,10 +80,14 @@ exports.updatePost = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // check on the user to make sure it is the logged on user's post
-  // user's should only be able to delete their own posts
-  if (post.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: 'User not authorized' });
+  // Make sure user is post owner
+  if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this post`,
+        401
+      )
+    );
   }
 
   post = await Post.findByIdAndUpdate(req.params.id, req.body, {
@@ -107,10 +112,14 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // check on the user to make sure it is the logged on user's post
-  // user's should only be able to delete their own posts
-  if (post.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: 'User not authorized' });
+  // Make sure user is post owner
+  if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this post`,
+        401
+      )
+    );
   }
 
   await post.remove();
@@ -132,10 +141,14 @@ exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
     );
   }
 
-  // check on the user to make sure it is the logged on user's post
-  // user's should only be able to delete their own posts
-  if (post.user.toString() !== req.user.id) {
-    return res.status(401).json({ msg: 'User not authorized' });
+  // Make sure user is post owner
+  if (post.user.toString() !== req.user.id && req.user.role !== 'admin') {
+    return next(
+      new ErrorResponse(
+        `User ${req.user.id} is not authorized to update this post`,
+        401
+      )
+    );
   }
 
   if (!req.files) {
