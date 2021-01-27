@@ -12,7 +12,7 @@ export default {
   },
   // get a single mural
   getMural: function (id) {
-    return axios.get('/api/v1/murals/' + id);
+    return axios.get(`/api/v1/murals/${id}`);
   },
   // create a new mural
   createMural: function () {
@@ -20,11 +20,11 @@ export default {
   },
   // update a mural
   updateMural: function (id) {
-    return axios.put('/api/v1/murals/' + id);
+    return axios.put(`/api/v1/murals/${id}`);
   },
   // delete a mural
   deleteMural: function (id) {
-    return axios.delete('/api/v1/murals/' + id);
+    return axios.delete(`/api/v1/murals/${id}`);
   },
   // get murals within a certain radius
   getMuralsInRadius: function (zip, distance) {
