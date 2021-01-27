@@ -22,7 +22,8 @@ const PostSchema = new Schema({
   // main post content
   text: {
     type: String,
-    required: true
+    required: true,
+    maxlength: 140
   },
   // TODO Add file upload functionality
   image: {
