@@ -11,26 +11,28 @@ import API from "../utils/API";
 
 export default function ScrollContent() {
 
-const [muralState, setMuralState] = useState();
+const [muralState, setMuralState] = useState([]);
 
 useEffect(() => {
     API.getMurals().then((data) => {
         setMuralState(data);
+        console.log(data);
     });
 },[]);
-console.log(muralState);
 
-    return (
-        <Row>
+console.log(muralState);
+return (
+    <Row>
+            {!muralState.data ? <div>"loading"</div> : 
             <Col className="scrollButt">
-                {muralData.features.map(murals => (
-                    murals.ExtendedData.Data.map((img, i) => {
-                    if (i === 6) {
+                {muralState.data.data.map(mural => {
+                    // murals.ExtendedData.Data.map((img, i) => {
+                    // if (i === 6) {
                         return (
                         <div>
                             <Row className="sideImgBox">
                             <Col className="p-0 parent">
-                                <Image className="img-fluid w-100 inner" src={img.value.__cdata}/>
+                                <Image className="img-fluid w-100 inner" src={mural.image}/>
                             </Col>
                             </Row>
                             <Row className="mb-4 pt-1">
@@ -64,10 +66,11 @@ console.log(muralState);
                             </Row>
                         </div>
                         );
-                        }
-                    })
-                ))}
+                        // }
+                    // })
+                })}
             </Col>
+            }
         </Row>
     );
 }
