@@ -12,7 +12,7 @@ const Mural = require('../models/Mural');
 const advancedResults = require('../middleware/advancedResults');
 
 // Include other resource routers
-const postRouter = require('./posts');
+const postRouter = require('./mural-posts');
 
 const router = express.Router();
 

@@ -18,7 +18,7 @@ connectDB();
 // const users = require('./routes/users');
 const auth = require('./routes/auth');
 const murals = require('./routes/murals');
-const posts = require('./routes/posts');
+const muralPosts = require('./routes/mural-posts');
 const restaurants = require('./routes/restaurants');
 
 const app = express();
@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'client/public')));
 // app.use('/api/v1/users', users);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/murals', murals);
-app.use('/api/v1/posts', posts);
+app.use('/api/v1/mural-posts', muralPosts);
 app.use('/api/v1/restaurants', restaurants);
 
 // Init error handler

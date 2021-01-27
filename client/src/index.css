@@ -5,9 +5,243 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.marker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  /* outline: none; */
+}
+
+.marker-btn img {
+  width: 10%;
+}
+
+.rounder img {
+  object-fit: cover;
+}
+
+.zoom {
+  transition: transform .2s; /* Animation */
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.sideImgBox {
+  /* height: 100px; */
+  overflow: hidden;
+}
+
+.scrollButt {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.scrollButtMural {
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.parent {
+  height: 150px;
+  position: relative;
+}
+ 
+.inner {
+  position: absolute;
+  height: 100%;
+  object-fit: cover;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.parentMural {
+  height: 200px;
+  position: relative;
+}
+ 
+.innerMural {
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.achievementMark {
+  position: relative;
+  height: 40px;
+  border-radius: 20px !important;
+}
+
+.achievementMarkCount {
+  background-color: black;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px !important;
+  position: absolute;
+  top: -16px;
+  right: -10px;
+}
+
+.achievementMarkText {
+  /* position: absolute; */
+  top: 5px;
+  text-align: center;
+  padding: 5px 0px 0px 0px;
+}
+
+
+.respLoginBreak {
+  display: none;
+}
+
+.respTextInline{
+  display: inline-block;
+}
+
+.react-modal-sheet-backdrop {
+  background-color: rgba(0,0,0,0) !important;
+}
+
+.fbNav {
+  background-color: #ffffff;
+}
+
+.sheetZfix {
+  position: static !important;
+  overflow-y: hidden !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sheetZfix ::-webkit-scrollbar {
+  display: none;
+}
+
+.achievementMarkMural {
+  position: relative;
+  top: 155px;
+  left: 15px;
+  height: 25px;
+  width: 150px;
+  border-radius: 20px !important;
+}
+
+.achievementMarkCountMural {
+  background-color: black;
+  height: 25px;
+  width: 25px;
+  border-radius: 30px !important;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.achievementMarkTextMural {
+  /* position: absolute; */
+  top: 2px;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 5px 0px 0px 0px;
+}
+
+.achievementMarkAvatarMural {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/* @media only screen and (min-width: 768px) {
+
+} */
+.mapSpace {
+  height: 100vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .mapSpace {
+    height: 93vh;
+  }
+
+  .respLogin {
+    display: none;
+  }
+
+  .respLoginBreak {
+    display: inline-block;
+  }
+  
+  .achievementMarkCount {
+    background-color: black;
+    height: 30px;
+    width: 30px;
+    border-radius: 30px !important;
+    position: absolute;
+    top: 4px;
+    right: 5px;
+  }
+  
+  .achievementMarkText {
+    /* position: absolute; */
+    top: 5px;
+    text-align: center;
+    padding: 5px 0px 0px 0px;
+  }
+
+  .achievementMarkAvatar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+
+}
+
+/* There has to be a better way to handle this. This section will need to be looked at when we have time. */
+
+.respLoginDN {
+  display: none;
+}
+
+.respLoginBreakDN {
+  display: inline-block;
+}
+
+.achievementMarkCountDN {
+  background-color: black;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px !important;
+  position: absolute;
+  top: 4px;
+  right: 5px;
+}
+
+.achievementMarkTextDN {
+  /* position: absolute; */
+  top: 5px;
+  text-align: center;
+  padding: 5px 0px 0px 0px;
+}
+
+.achievementMarkAvatarDN {
+  position: absolute;
+  top: 0px;
+  left: 0px;
 }
