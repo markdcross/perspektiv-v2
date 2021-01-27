@@ -5,19 +5,20 @@ import {
   Image
  } from 'react-bootstrap';
 import { Button, Checkbox } from 'semantic-ui-react';
-import * as muralData from "../data/murals.json";
+// import * as muralData from "../data/murals.json";
+import API from "../utils/API";
 
 
 export default function ScrollContent() {
 
-const [muralsState, setMuralsState] = useState();
+const [muralState, setMuralState] = useState();
 
-useEffect(async() => {
-    const data = await fetch("/api/v1/murals")
-    setMuralsState(
-        
-    );
-});
+useEffect(() => {
+    API.getMurals().then((data) => {
+        setMuralState(data);
+    });
+},[]);
+console.log(muralState);
 
     return (
         <Row>
