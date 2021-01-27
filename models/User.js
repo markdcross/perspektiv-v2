@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -34,8 +36,8 @@ const UserSchema = new mongoose.Schema({
     // select false prevents the user api call from returning the user's password as part of the returned json
     select: false
   },
-  resetPasswordToken: { String },
-  resetPasswordExpire: { Date },
+  resetPasswordToken: String,
+  resetPasswordExpire: Date,
 
   // we'll use this later in routes/api/users.js to pull in the avatar from the user's email address
   // [JOSH] refer to the Traversy MERN tutorial on Udemy
@@ -55,6 +57,9 @@ const UserSchema = new mongoose.Schema({
 // ======================
 // before the user is saved to the db, we need to encrpty the password
 UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
   // create the salt that the plain password will run through for hashing
   // the higher the number, the more secure (and the more resources used; 10 is recommended)
   const salt = await bcrypt.genSalt(10);
@@ -75,6 +80,23 @@ UserSchema.methods.getSignedJwtToken = function () {
 UserSchema.methods.matchPassword = async function (enteredPassword) {
   // compare the entered password with the securely stored password in the db
   return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// Generate and hash password token
+UserSchema.methods.getResetPasswordToken = function () {
+  // Generate token
+  const resetToken = crypto.randomBytes(20).toString('hex');
+
+  // Hash token and set to resetPasswordToken field
+  this.resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(resetToken)
+    .digest('hex');
+
+  // Set expire
+  this.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+
+  return resetToken;
 };
 
 // ======================
