@@ -18,6 +18,7 @@ import {
 import Mapbucket from "../components/Mapbucket";
 import ScrollContent from "../components/ScrollContent";
 import MuralContent from "../components/MuralContent";
+import RestaurantContent from "../components/RestaurantContent";
 import NavDesktop from "../components/NavDesktop";
 import NavDesktopM from "../components/NavDesktopM";
 import NavMobile from "../components/NavMobile";
@@ -84,6 +85,9 @@ function Home() {
                   </Route>
                   <Route path="/murals">
                     <MuralContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
+                  </Route>
+                  <Route path="/restaurants">
+                    <RestaurantContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
                   </Route>
                 </Switch>
                 {/* <ScrollContent /> */}

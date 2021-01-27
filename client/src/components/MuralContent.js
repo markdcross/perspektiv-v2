@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import {
   Row,
   Col,
-  Image
+  Image,
+  Carousel
  } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 import { Button, Checkbox } from 'semantic-ui-react';
 import MuralUserContent from "./MuralUserContent";
-import { Frame, Page,  } from "framer"
+// import { Frame, Page,  } from "framer"
 
 export default function MuralContent(props) {
 
@@ -21,7 +23,7 @@ export default function MuralContent(props) {
             <Col className="scrollButtMural">
                 <Row>
                     <Col className="pb-2">
-                        <Button content='Back' color="gray"/>
+                        <Link to="/"><Button content='Back'/></Link>
                     </Col>
                     <Col className="text-right pb-2">
                         <Button content='Post Photo' color="yellow"/>
@@ -49,13 +51,11 @@ export default function MuralContent(props) {
                     <Col xs={5} className="text-right">
                         <Button
                             size='mini'
-                            color='gray'
                             content='Visits'
                             icon='street view'
                             label={{
                                 as: 'a',
                                 basic: true,
-                                color: 'gray',
                                 pointing: 'left',
                                 content: '2,048',
                             }}
@@ -70,7 +70,7 @@ export default function MuralContent(props) {
                         {/* <p>This is a story of a man named Jed. Poor mountaineer hardly kept his family fed. Jelly halvah croissant.</p> */}
                     </Col>
                 </Row>
-                <Row className="h-100 w-100 mx-0">
+                <Row  className="h-100 w-100 mx-0">
                     <Col className="p-0">
                         <Row className="pt-2">
                             <Col className="pr-1 text-right">
@@ -86,7 +86,17 @@ export default function MuralContent(props) {
                                     }                        
                             </Col>
                         </Row>
-                        <Page width={"100%"} height={"100%"}
+
+                        <Carousel interval={10000000} wrap={false}>
+                            <Carousel.Item>
+                                <MuralUserContent />
+                            </Carousel.Item>
+                            <Carousel.Item>
+                                <MuralUserContent />
+                            </Carousel.Item>
+                        </Carousel>
+
+                        {/* <Page width={"100%"} height={"100%"}
                         onChangePage={(current) => 
                             {current===0?setPageInd(true) : setPageInd(false)}
                         }
@@ -97,7 +107,7 @@ export default function MuralContent(props) {
                             <Frame backgroundColor="#FFFFFF">
                                 <MuralUserContent />
                             </Frame>
-                        </Page>
+                        </Page> */}
                     </Col>
                 </Row>
             </Col>

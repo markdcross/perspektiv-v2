@@ -175,6 +175,10 @@ code {
   height: 100vh;
 }
 
+.loader {
+  height: 600px;
+}
+
 @media only screen and (max-width: 768px) {
   .mapSpace {
     height: 93vh;
