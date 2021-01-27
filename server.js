@@ -19,6 +19,7 @@ connectDB();
 const auth = require('./routes/auth');
 const murals = require('./routes/murals');
 const muralPosts = require('./routes/mural-posts');
+const restaurantPosts = require('./routes/restaurant-posts');
 const restaurants = require('./routes/restaurants');
 const users = require('./routes/users');
 
@@ -42,12 +43,12 @@ app.use(fileupload());
 app.use(express.static(path.join(__dirname, 'client/public')));
 
 // Mount routers
-// app.use('/api/v1/users', users);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/users', users);
 app.use('/api/v1/murals', murals);
 app.use('/api/v1/mural-posts', muralPosts);
 app.use('/api/v1/restaurants', restaurants);
+app.use('/api/v1/restaurant-posts', restaurantPosts);
 
 // Init error handler
 app.use(errorHandler);
