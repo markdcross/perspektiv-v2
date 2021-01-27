@@ -1,14 +1,15 @@
+const crypto = require('crypto');
 const ErrorResponse = require('../utils/errorResponse');
 const asyncHandler = require('../middleware/async');
 const sendEmail = require('../utils/sendEmail');
 const User = require('../models/User');
 const gravatar = require('gravatar');
 
-//* ======================================
+//* ===============================================================
 //* @route   POST /api/v1/auth/register
 //! @desc    Register a new user
 //* @access  public
-//* ======================================
+//* ===============================================================
 exports.register = asyncHandler(async (req, res, next) => {
   // get the request body
   const { name, email, password, role } = req.body;
@@ -27,11 +28,11 @@ exports.register = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-//* ======================================
+//* ===============================================================
 //* @desc    Login user
 //! @route   POST /api/v1/auth/login
 //* @access  public
-//* ======================================
+//* ===============================================================
 exports.login = asyncHandler(async (req, res, next) => {
   // get the request body
   const { email, password } = req.body;
@@ -56,11 +57,11 @@ exports.login = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-//* ======================================
+//* ===============================================================
 //* @route   GET /api/v1/auth/logout
 //! @desc    Log user out and clear cookies
 //* @access  private
-//* ======================================
+//* ===============================================================
 exports.logout = asyncHandler(async (req, res, next) => {
   res.cookie('token', 'none', {
     expires: new Date(Date.now() + 10 * 1000),
@@ -69,21 +70,21 @@ exports.logout = asyncHandler(async (req, res, next) => {
   res.status(200).json({ success: true, data: {} });
 });
 
-//* ======================================
+//* ===============================================================
 //* @route   POST /api/v1/auth/me
 //! @desc    Get current logged in user
 //* @access  private
-//* ======================================
+//* ===============================================================
 exports.getMe = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
   res.status(200).json({ success: true, data: user });
 });
 
-//* ======================================
+//* ===============================================================
 //*   @route    POST /api/v1/auth/forgotpassword
 //!   @desc     Forgot Password
 //*   @access   Public
-//* ======================================
+//* ===============================================================
 exports.forgotPassword = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
@@ -99,9 +100,9 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   // Create reset url
   const resetUrl = `${req.protocol}://${req.get(
     'host'
-  )}/api/v1/resetpassword/${resetToken}`;
+  )}/api/v1/auth/resetpassword/${resetToken}`;
 
-  const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please click here to reset your password ${resetUrl}`;
+  const message = `You are receiving this email because you (or someone else) has requested the reset of a password. Please make a PUT request to: \n\n ${resetUrl}`;
 
   try {
     await sendEmail({
@@ -125,6 +126,36 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
     success: true,
     data: user
   });
+});
+
+//* ===============================================================
+//*   @route    PUT /api/v1/auth/resetpassword/:resettoken
+//!   @desc     Reset password
+//*   @access   Public
+//* ===============================================================
+exports.resetPassword = asyncHandler(async (req, res, next) => {
+  // Get hashed token
+  const resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(req.params.resettoken)
+    .digest('hex');
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() }
+  });
+
+  if (!user) {
+    return next(new ErrorResponse('Invalid token', 400));
+  }
+
+  // Set new password
+  user.password = req.body.password;
+  user.resetPassswordToken = undefined;
+  user.resetPassswordExpire = undefined;
+  await user.save();
+
+  sendTokenResponse(user, 200, res);
 });
 
 // get token from model, create cookie to store it in, and send a response
