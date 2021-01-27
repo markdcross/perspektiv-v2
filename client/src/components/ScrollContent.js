@@ -4,7 +4,7 @@ import {
   Col,
   Image
  } from 'react-bootstrap';
-import { Button, Checkbox } from 'semantic-ui-react';
+import { Image as SemImage, Button, Checkbox, Dimmer, Loader, Segment } from 'semantic-ui-react';
 // import * as muralData from "../data/murals.json";
 import API from "../utils/API";
 
@@ -23,7 +23,7 @@ useEffect(() => {
 console.log(muralState);
 return (
     <Row>
-            {!muralState.data ? <div>"loading"</div> : 
+            {!muralState.data ? <div>Loading...</div> : 
             <Col className="scrollButt">
                 {muralState.data.data.map(mural => {
                     // murals.ExtendedData.Data.map((img, i) => {
