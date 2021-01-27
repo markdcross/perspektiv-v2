@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
   Image
  } from 'react-bootstrap';
 import { Button, Checkbox } from 'semantic-ui-react';
-import * as muralData from "../data/murals.json";
+// import * as muralData from "../data/murals.json";
+import API from "../utils/API";
 
 
 export default function ScrollContent() {
+
+const [muralState, setMuralState] = useState();
+
+useEffect(() => {
+    API.getMurals().then((data) => {
+        setMuralState(data);
+    });
+},[]);
+console.log(muralState);
 
     return (
         <Row>
