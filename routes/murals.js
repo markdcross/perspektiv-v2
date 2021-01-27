@@ -9,13 +9,13 @@ const {
 } = require('../controllers/murals');
 
 const Mural = require('../models/Mural');
-const advancedResults = require('../middleware/advancedResults');
 
 // Include other resource routers
 const postRouter = require('./mural-posts');
 
 const router = express.Router();
 
+const advancedResults = require('../middleware/advancedResults');
 const { protectedRoute, authorize } = require('../middleware/auth');
 
 router.use('/:muralId/posts', postRouter);
