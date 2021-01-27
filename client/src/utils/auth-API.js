@@ -13,5 +13,25 @@ export default {
   // logout a user
   logoutUser: function () {
     return axios.get('/api/v1/auth/logout');
+  },
+  // get currently logged in user
+  getCurrentUser: function () {
+    return axios.get('/api/v1/auth/me');
+  },
+  // update currently logged in user's information
+  updateUserInfo: function () {
+    return axios.put('/api/v1/auth/updatedetails');
+  },
+  // update currently logged in user's password
+  updatePassword: function () {
+    return axios.put('/api/v1/auth/updatepassword');
+  },
+  // forgot password
+  forgotPassword: function () {
+    return axios.post('/api/v1/auth/forgotpassword');
+  },
+  // reset password
+  resetPassword: function (resettoken) {
+    return axios.put(`/api/v1/auth/resetpassword/${resettoken}`);
   }
 };
