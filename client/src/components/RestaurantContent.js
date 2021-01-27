@@ -51,7 +51,7 @@ export default function MuralContent(props) {
                     <Col>
                         <p>RESTAURANT: {"{restname}"} Stalin's Steaks</p>
                         <p>TYPE: {"{resttype}"} Oppressive Flavor</p>
-                        <p>ADDRESS: {"{restaddress}"} 2152 Mass Grave way</p>
+                        <p>ADDRESS: {"{restaddress}"} 2152 Mass Grave Way</p>
                         <p>NUMBER: {"{restnumber}"} +49 1-888-DASVIDANIYA</p>
                     </Col>
                 </Row>
