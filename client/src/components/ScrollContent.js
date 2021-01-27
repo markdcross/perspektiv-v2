@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -9,6 +9,15 @@ import * as muralData from "../data/murals.json";
 
 
 export default function ScrollContent() {
+
+const [muralsState, setMuralsState] = useState();
+
+useEffect(async() => {
+    const data = await fetch("/api/v1/murals")
+    setMuralsState(
+        
+    );
+});
 
     return (
         <Row>
