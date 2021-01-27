@@ -71,7 +71,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
 });
 
 //* ===============================================================
-//* @route   POST /api/v1/auth/me
+//* @route   GET /api/v1/auth/me
 //! @desc    Get current logged in user
 //* @access  private
 //* ===============================================================
