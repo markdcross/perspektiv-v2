@@ -13,7 +13,7 @@ import {
   Col,
   Image
  } from 'react-bootstrap';
- import { Button, Checkbox } from 'semantic-ui-react';
+ import { Button, Checkbox, Progress } from 'semantic-ui-react';
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import Mapbucket from "../components/Mapbucket";
 import ScrollContent from "../components/ScrollContent";
@@ -58,7 +58,7 @@ function Home() {
                 <Sheet 
                   isOpen={true}
                   onClose={() => setOpen(false)}
-                  snapPoints={[600, 400, 90]}
+                  snapPoints={[600, 400, 100]}
                   initialSnap={2}
                   onSnap={snapIndex =>
                     console.log('> Current snap point index:', snapIndex)
@@ -67,7 +67,8 @@ function Home() {
                   >
                   <NavMobile />
                   <Sheet.Container>
-                    <Sheet.Header />
+                    <Sheet.Header >
+                    </Sheet.Header>
                     <Sheet.Content>
                       <ScrollContent />                      
                     </Sheet.Content>

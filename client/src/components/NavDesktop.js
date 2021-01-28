@@ -5,7 +5,7 @@ import {
   Col,
   Image
  } from 'react-bootstrap';
- import { Button } from 'semantic-ui-react';
+ import { Button, Progress, Act } from 'semantic-ui-react';
 
 export default function NavDesktop() {
 
@@ -31,9 +31,14 @@ export default function NavDesktop() {
                     {/* <Image src="./assets/images/avatars/matthew.png" /> */}
                     {/* </Col>
                     <Col sm={6} className="my-auto"> */}
-                    <Button className="achievementMark my-auto ml-1" color='yellow' >Tesdfgsdfgsergsergsergt
-                        <div className="achievementMarkCount"><p className="achievementMarkText">999</p></div>
+                    <Button className="achievementMark my-auto ml-1" color='yellow' >Explorer
+                        <div className="achievementMarkCount"><p className="achievementMarkText">42</p></div>
                     </Button>
+                </Col>
+            </Row>
+            <Row className="pb-2">
+                <Col>
+                    <Progress progress='value' value={3} total={10} active color='pink'size='small'/>
                 </Col>
             </Row>
         </div>
