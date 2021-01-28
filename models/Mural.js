@@ -34,6 +34,15 @@ const MuralSchema = new Schema(
       }
     },
 
+    visits: [
+      {
+        user: {
+          type: Schema.Types.ObjectId,
+          ref: 'users'
+        }
+      }
+    ],
+
     // use the following to showcase information about the mural's creator
     // TODO Do we need to connect this with an artist already registered with our app?
     artist: {
