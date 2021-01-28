@@ -1,7 +1,7 @@
 const express = require('express');
 // methods
 const {
-  protectedRoutegetPosts,
+  getPosts,
   getPost,
   createPost,
   updatePost,
