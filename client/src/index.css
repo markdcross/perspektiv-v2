@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 code {
@@ -177,6 +177,10 @@ code {
 
 .loader {
   height: 600px;
+}
+
+.bigScroll {
+  overflow-y: scroll;
 }
 
 @media only screen and (max-width: 768px) {

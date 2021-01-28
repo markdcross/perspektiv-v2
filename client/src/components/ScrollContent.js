@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import {
-  Image as SemImage,
   Button,
   Checkbox,
-  Dimmer,
-  Loader,
-  Segment
 } from 'semantic-ui-react';
-// import * as muralData from "../data/murals.json";
+import { Link } from "react-router-dom";
 import muralsAPI from '../utils/murals-API';
 
 export default function ScrollContent() {
@@ -17,11 +13,10 @@ export default function ScrollContent() {
   useEffect(() => {
     muralsAPI.getMurals().then((data) => {
       setMuralState(data);
-      console.log(data);
     });
   }, []);
 
-  console.log(muralState);
+
   return (
     <Row>
       {!muralState.data ? (
@@ -29,16 +24,16 @@ export default function ScrollContent() {
       ) : (
         <Col className="scrollButt">
           {muralState.data.data.map((mural) => {
-            // murals.ExtendedData.Data.map((img, i) => {
-            // if (i === 6) {
             return (
               <div>
                 <Row className="sideImgBox">
                   <Col className="p-0 parent">
-                    <Image
-                      className="img-fluid w-100 inner"
-                      src={mural.image}
-                    />
+                    <Link to={"/murals/" + mural.id}>
+                      <Image
+                        className="img-fluid w-100 inner"
+                        src={mural.image}
+                      />
+                    </Link>
                   </Col>
                 </Row>
                 <Row className="mb-4 pt-1">
@@ -62,23 +57,19 @@ export default function ScrollContent() {
                   <Col xs={5} className="text-right">
                     <Button
                       size="mini"
-                      color="gray"
                       content="Visits"
                       icon="street view"
                       label={{
                         as: 'a',
                         basic: true,
-                        color: 'gray',
                         pointing: 'left',
-                        content: '2,048'
+                        content: mural.__v
                       }}
                     />
                   </Col>
                 </Row>
               </div>
             );
-            // }
-            // })
           })}
         </Col>
       )}

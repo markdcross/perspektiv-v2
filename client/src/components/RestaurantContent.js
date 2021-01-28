@@ -17,8 +17,8 @@ export default function MuralContent(props) {
 
 
     return (
-        <Row className="pt-2">
-            <Col className="scrollButtMural">
+        <Row className="pt-2 bigScroll">
+            <Col>
                 <Row>
                     <Col className="pb-2">
                         <Link to="/murals"><Button content='Back'/></Link>
