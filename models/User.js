@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const Schema = mongoose.Schema;
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -44,7 +46,19 @@ const UserSchema = new mongoose.Schema({
   avatar: {
     type: String
   },
-
+  // use the following to show how many murals the user has visited
+  muralsVisited: [
+    {
+      mural: {
+        type: Schema.Types.ObjectId,
+        ref: 'murals',
+        required: true
+      },
+      date: {
+        type: Date
+      }
+    }
+  ],
   // generic schema for mongodb
   date: {
     type: Date,

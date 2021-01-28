@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const Mural = require('../models/Mural');
+const User = require('../models/User');
 const asyncHandler = require('../middleware/async');
 
 //* ======================================
@@ -139,24 +140,27 @@ exports.getMuralsInRadius = asyncHandler(async (req, res, next) => {
 //* ==============================
 exports.visitMural = asyncHandler(async (req, res, next) => {
   let mural = await Mural.findById(req.params.id);
+  let user = await User.findById(req.user.id);
 
   if (!mural) {
     return next(
       new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404)
     );
   }
-
-  // Check if the mural has already been visited by the user
+  // Check if the user has already visited the mural
   if (
-    mural.visits.filter(visit => visit.user.toString() === req.user.id).length >
-    0
+    user.muralsVisited.filter(
+      muralVisited => muralVisited.mural.toString() === req.params.id
+    ).length > 0
   ) {
     return res.status(400).json({ msg: 'Mural already visited' });
   }
 
   mural.visits.unshift({ user: req.user.id });
+  user.muralsVisited.unshift({ mural: req.params.id, date: Date.now() });
 
   await mural.save();
+  await user.save();
 
   // If this doesn't update the count immediately, replace await mural.save() with the next line:
   // mural = await Mural.findByIdAndUpdate(req.params.id, req.body, {
@@ -174,6 +178,7 @@ exports.visitMural = asyncHandler(async (req, res, next) => {
 //* ==============================
 exports.unvisitMural = asyncHandler(async (req, res, next) => {
   let mural = await Mural.findById(req.params.id);
+  let user = await User.findById(req.user.id);
 
   if (!mural) {
     return next(
@@ -183,20 +188,27 @@ exports.unvisitMural = asyncHandler(async (req, res, next) => {
 
   // Check if the mural has already been visited by the user
   if (
-    mural.visits.filter(visit => visit.user.toString() === req.user.id)
-      .length === 0
+    user.muralsVisited.filter(
+      muralVisited => muralVisited.mural.toString() === req.params.id
+    ).length === 0
   ) {
     return res.status(400).json({ msg: 'Mural not yet visited' });
   }
 
   // Get remove index
-  const removeIndex = mural.visits
+  const removeMuralIndex = mural.visits
     .map(visit => visit.user.toString())
     .indexOf(req.user.id);
+  mural.visits.splice(removeMuralIndex, 1);
 
-  mural.visits.splice(removeIndex, 1);
+  // Get remove index
+  const removeUserIndex = user.muralsVisited
+    .map(mural => mural.mural.toString())
+    .indexOf(req.params.id);
+  user.muralsVisited.splice(removeUserIndex, 1);
 
   await mural.save();
+  await user.save();
 
   // If this doesn't update the count immediately, replace await mural.save() with the next line:
   // mural = await Mural.findByIdAndUpdate(req.params.id, req.body, {
