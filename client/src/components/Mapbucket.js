@@ -16,7 +16,7 @@ export default function Mapbucket() {
   const [selectedMural, setSelectedMural] = useState(null);
 
   useEffect(() => {
-    const listener = e => {
+    const listener = (e) => {
       if (e.key === 'Escape') {
         setSelectedMural(null);
       }
@@ -38,19 +38,19 @@ export default function Mapbucket() {
           height={height}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
           // mapStyle="mapbox://styles/leighhalliday/cjufmjn1r2kic1fl9wxg7u1l4"
-          onViewportChange={viewport => {
+          onViewportChange={(viewport) => {
             setViewport(viewport);
           }}
         >
-          {muralData.features.map(murals => (
+          {muralData.features.map((murals) => (
             <Marker
               key={parseInt(murals.ExtendedData.Data[0].value)}
               latitude={murals.latitude}
               longitude={murals.longitude}
             >
               <button
-                className='marker-btn zoom'
-                onClick={e => {
+                className="marker-btn zoom"
+                onClick={(e) => {
                   e.preventDefault();
                   setSelectedMural(murals);
                 }}
@@ -58,13 +58,13 @@ export default function Mapbucket() {
                 {murals.ExtendedData.Data.map((img, i) => {
                   if (i === 6) {
                     return (
-                      <div className='rounder' key={i}>
+                      <div className="rounder" key={i}>
                         <ReactRoundedImage
                           image={img.value.__cdata}
-                          roundedColor='#ffffff'
-                          roundedSize='3'
-                          imageWidth='40'
-                          imageHeight='40'
+                          roundedColor="#ffffff"
+                          roundedSize="3"
+                          imageWidth="40"
+                          imageHeight="40"
                         />
                       </div>
                     );
