@@ -5,18 +5,20 @@ import {
   Col,
   Image
  } from 'react-bootstrap';
- import { Button } from 'semantic-ui-react';
+ import { Button, Progress } from 'semantic-ui-react';
 
 export default function NavMobile() {
     return (
         <Row className="fixed-bottom fbNav">
+            <Col>
+            <Row>
             <Col className="pt-2">
                 <Image className="w-100" src="./assets/images/logo/plogo.png" />
             </Col>
             <Col className="my-2 respLoginBreak fluid">
                 <Button content="Tesdfgsdfg" className="achievementMark px-6 w-100 clearfix" color='yellow' >
-                    Master
-                    <div className="achievementMarkCount"><p className="achievementMarkText">999</p></div>
+                    Explorer
+                    <div className="achievementMarkCount"><p className="achievementMarkText">42</p></div>
                     <div className="achievementMarkAvatar">
                         <ReactRoundedImage
                             image="./assets/images/avatars/matthew.png"
@@ -31,6 +33,13 @@ export default function NavMobile() {
             <Col className="text-right pt-2">
                 <Button content='LOGIN' basic/>
             </Col>
+            </Row>
+            <Row className="pb-2">
+                      <Col className="ml-2 mr-2">
+                          <Progress progress='value' value={3} total={10} active color='pink'size='small'/>
+                      </Col>
+                    </Row>
+                    </Col>
         </Row>
     );
 }

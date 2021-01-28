@@ -9,6 +9,8 @@ import { Link, useParams } from "react-router-dom";
 import { Button, Checkbox, Icon } from 'semantic-ui-react';
 import muralsAPI from '../utils/murals-API';
 import MuralUserContent from "./MuralUserContent";
+import RestaurantList from "./RestaurantList";
+
 // import { Frame, Page,  } from "framer"
 
 export default function MuralContent(props) {
@@ -127,7 +129,7 @@ export default function MuralContent(props) {
                                             <MuralUserContent />
                                         </Carousel.Item>
                                         <Carousel.Item>
-                                            <MuralUserContent />
+                                            <RestaurantList />
                                         </Carousel.Item>
                                     </Carousel>
 
