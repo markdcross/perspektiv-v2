@@ -38,8 +38,8 @@
     "mongoose": "^5.11.12",
     "morgan": "^1.10.0",
     "node-geocoder": "^3.27.0",
-    "react-map-gl-directions": "^1.0.4",
     "nodemailer": "^6.4.17",
+    "react-map-gl-directions": "^1.0.4",
     "slugify": "^1.4.6"
   },
   "devDependencies": {

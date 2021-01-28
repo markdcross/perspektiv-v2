@@ -1,116 +1,160 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
   Image,
   Carousel
  } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import { Button, Checkbox } from 'semantic-ui-react';
+import { Link, useParams } from "react-router-dom";
+import { Button, Checkbox, Icon } from 'semantic-ui-react';
+import muralsAPI from '../utils/murals-API';
 import MuralUserContent from "./MuralUserContent";
 // import { Frame, Page,  } from "framer"
 
 export default function MuralContent(props) {
+
+    const { artId } = useParams();
+
+    const [muralState, setMuralState] = useState([]);
+
+    useEffect(() => {
+      muralsAPI.getMural(artId).then((data) => {
+        setMuralState(data);
+        console.log(data);
+      });
+    }, []);
+
+
+
 
     const [pageInd, setPageInd] = useState(true);
 
     const setMNav = props.setDesktopMNav;
     setMNav(true);
 
+    function resetNav() {
+        setMNav(false);
+      }
+
+    function pageIndicate() {
+        if (pageInd) {
+            setPageInd(false);
+        } else {
+            setPageInd(true);
+        }
+    }
+
+
+
 
     return (
-        <Row className="pt-2">
-            <Col className="scrollButtMural">
-                <Row>
-                    <Col className="pb-2">
-                        <Link to="/"><Button content='Back'/></Link>
-                    </Col>
-                    <Col className="text-right pb-2">
-                        <Button content='Post Photo' color="yellow"/>
-                    </Col>
-                </Row>
-                <Row className="sideImgBox">
-                    <Col className="p-0">
-                        <Image className="img-fluid w-100" src="https://doc-0k-64-mymaps.googleusercontent.com/untrusted/hostedimage/eu6g64mterdev2kl51im39lbvg/f4nabjcl8v0egsiv4ullr9joh4/1601130498500/YG7sw_Ardp6TjVMKCDnPrtHYy_GrqAdf/10485590891576421370/5AF2TALqMMHmxczgGZTXbnmaaI67mpGtBpNh083O7OMBQYZd3rh15H4vXgsHpKFrQ16N15NR5tr61Ndz-YM6rKJWN8F7npV5kS5eaYMnwPM8GNvApwn_Xw3hU_sFuxMsH-WkxIhv4Iw78ECVZ92pd9WUYTGU7fKcIG-iwsdonh65hAHNcbJ9FKQxI20bz-rNDiwNiYNXQnJhTokokhIs-Nm889i3_9qrwHAh5Xo2XlozR9JsV3NVrZHKH4aOqjZL7WVEe6I0D8Gm3uab0d9HBtZlMH58nROQ7Iw?session=0&fife"/>
-                        {/* <Image className="img-fluid w-100 inner" src={props.image}/> */}
-                    </Col>
-                </Row>
-                <Row className="mb-4 pt-1">
-                    <Col xs={2} className="my-auto">
-                        <Checkbox label='VISITED' />
-                    </Col>
-                    <Col xs={5} className="text-right">
-                        <Button
-                        size='mini'
-                        color='yellow'
-                        content='Distance'
-                        icon='location arrow'
-                        label={{ basic: true, color: 'yellow', pointing: 'left', content: '2,048' }}
-                        />
-                    </Col>
-                    <Col xs={5} className="text-right">
-                        <Button
-                            size='mini'
-                            content='Visits'
-                            icon='street view'
-                            label={{
-                                as: 'a',
-                                basic: true,
-                                pointing: 'left',
-                                content: '2,048',
-                            }}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <p>ARTIST: {props.artistinfo}Lord Rasputin</p>
-                        <p>TITLE: {props.arttitle}The Devil's Cherry Ass</p>
-                        <p>LOCATION: {props.arttitle}In The Devil's Cherry Ass</p>
-                        {/* <p>This is a story of a man named Jed. Poor mountaineer hardly kept his family fed. Jelly halvah croissant.</p> */}
-                    </Col>
-                </Row>
-                <Row  className="h-100 w-100 mx-0">
-                    <Col className="p-0">
-                        <Row className="pt-2">
-                            <Col className="pr-1 text-right">
-                                {pageInd? 
-                                    <Button size="mini" color="yellow" compact floated="right"/> : 
-                                    <Button size="mini" color="yellow" compact floated="right" disabled/>
+        <Row className="pt-2 bigScroll">
+            {!muralState.data ? (
+                <div>Loading...</div>
+            ) : (
+            <Col>
+                {/* {muralState.data.data.map((mural) => {
+                    return (
+                        <div> */}
+                            <Row>
+                                <Col className="pb-2">
+                                    <Link to="/" onClick={resetNav}><Button content='Back'/></Link>
+                                </Col>
+                                <Col className="text-right pb-2">
+                                    <Button content='Post Photo' color="yellow"/>
+                                </Col>
+                            </Row>
+                            <Row className="sideImgBox">
+                                <Col className="p-0">
+                                    <Image className="img-fluid w-100" src={muralState.data.data.image}/>
+                                    {/* <Image className="img-fluid w-100 inner" src={props.image}/> */}
+                                </Col>
+                            </Row>
+                            <Row className="mb-4 pt-1">
+                                <Col xs={2} className="my-auto">
+                                    <Checkbox label='VISITED' />
+                                </Col>
+                                <Col xs={5} className="text-right">
+                                    <Button
+                                    size='mini'
+                                    color='yellow'
+                                    content='Distance'
+                                    icon='location arrow'
+                                    label={{ basic: true, color: 'yellow', pointing: 'left', content: '2,048' }}
+                                    />
+                                </Col>
+                                <Col xs={5} className="text-right">
+                                    <Button
+                                        size='mini'
+                                        content='Visits'
+                                        icon='street view'
+                                        label={{
+                                            as: 'a',
+                                            basic: true,
+                                            pointing: 'left',
+                                            content: muralState.data.data.__v,
+                                        }}
+                                    />
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <p>ARTIST: {!muralState.data.data.artist ? ("No available info") : (muralState.data.data.artist.name) }</p>
+                                    <p>TITLE: {muralState.data.data.name}</p>
+                                    <p>LOCATION: {muralState.data.data.address}</p>
+                                    {/* <p>This is a story of a man named Jed. Poor mountaineer hardly kept his family fed. Jelly halvah croissant.</p> */}
+                                </Col>
+                            </Row>
+                            <Row  className="h-100 w-100 mx-0">
+                                <Col className="p-0">
+                                    <Row className="pt-2">
+                                        <Col className="pr-1 text-right">
+                                            {pageInd? 
+                                                <Button size="mini" color="yellow" compact floated="right"/> : 
+                                                <Button size="mini" color="yellow" compact floated="right" disabled/>
+                                                }
+                                        </Col>
+                                        <Col className="pl-1 text-left">
+                                            {pageInd? 
+                                                <Button size="mini" color="yellow" compact floated="left" disabled/> : 
+                                                <Button size="mini" color="yellow" compact floated="left"/>
+                                                }                        
+                                        </Col>
+                                    </Row>
+
+                                    <Carousel interval={10000000} wrap={false} onClick={pageIndicate} nextIcon={<Icon name='dot circle outline' color='pink' size='huge' />} prevIcon={<Icon name='dot circle outline' color='pink' size='huge' />}>
+                                        <Carousel.Item>
+                                            <MuralUserContent />
+                                        </Carousel.Item>
+                                        <Carousel.Item>
+                                            <MuralUserContent />
+                                        </Carousel.Item>
+                                    </Carousel>
+
+                                    {/* <Page width={"100%"} height={"100%"}
+                                    onChangePage={(current) => 
+                                        {current===0?setPageInd(true) : setPageInd(false)}
                                     }
-                            </Col>
-                            <Col className="pl-1 text-left">
-                                {pageInd? 
-                                    <Button size="mini" color="yellow" compact floated="left" disabled/> : 
-                                    <Button size="mini" color="yellow" compact floated="left"/>
-                                    }                        
-                            </Col>
-                        </Row>
-
-                        <Carousel interval={10000000} wrap={false}>
-                            <Carousel.Item>
-                                <MuralUserContent />
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <MuralUserContent />
-                            </Carousel.Item>
-                        </Carousel>
-
-                        {/* <Page width={"100%"} height={"100%"}
-                        onChangePage={(current) => 
-                            {current===0?setPageInd(true) : setPageInd(false)}
-                        }
-                        >
-                            <Frame backgroundColor="#FFFFFF">
-                                <MuralUserContent />
-                            </Frame>
-                            <Frame backgroundColor="#FFFFFF">
-                                <MuralUserContent />
-                            </Frame>
-                        </Page> */}
-                    </Col>
-                </Row>
+                                    >
+                                        <Frame backgroundColor="#FFFFFF">
+                                            <MuralUserContent />
+                                        </Frame>
+                                        <Frame backgroundColor="#FFFFFF">
+                                            <MuralUserContent />
+                                        </Frame>
+                                    </Page> */}
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col>
+                                    <div>footer foot cooter</div>
+                                </Col>
+                            </Row>
+                        {/* </div>
+                    );
+                })} */}
             </Col>
+            )}
         </Row>
     );
 }

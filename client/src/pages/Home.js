@@ -74,6 +74,8 @@ function Home() {
                   </Sheet.Container>
                 </Sheet>
               </Mobile>
+
+              
               <Desktop>
               {desktopMNav ? <NavDesktopM /> : <NavDesktop />}
               {/* <NavDesktop /> */}
@@ -83,7 +85,7 @@ function Home() {
                   <Route exact path={path}>
                     <ScrollContent />
                   </Route>
-                  <Route path="/murals">
+                  <Route path="/murals/:artId">
                     <MuralContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
                   </Route>
                   <Route path="/restaurants">

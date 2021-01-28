@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import ReactRoundedImage from 'react-rounded-image';
 import { AutoSizer } from 'react-virtualized';
-import * as muralData from '../data/murals.json';
+import muralsAPI from '../utils/murals-API';
+// import * as muralData from '../data/murals.json';
 
 export default function Mapbucket() {
+
+  const [muralState, setMuralState] = useState([]);
+
+  useEffect(() => {
+    muralsAPI.getMurals().then((data) => {
+      setMuralState(data);
+      console.log(data);
+    });
+  }, []);
+
+
   const [viewport, setViewport] = useState({
     latitude: 37.54129,
     longitude: -77.434769,
@@ -31,63 +44,78 @@ export default function Mapbucket() {
 
   return (
     <AutoSizer>
+
       {({ height, width }) => (
         <ReactMapGL
-          {...viewport}
-          width={width}
-          height={height}
-          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          // mapStyle="mapbox://styles/leighhalliday/cjufmjn1r2kic1fl9wxg7u1l4"
-          onViewportChange={(viewport) => {
-            setViewport(viewport);
-          }}
+        {...viewport}
+        width={width}
+        height={height}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        // mapStyle="mapbox://styles/leighhalliday/cjufmjn1r2kic1fl9wxg7u1l4"
+        onViewportChange={(viewport) => {
+          setViewport(viewport);
+        }}
         >
-          {muralData.features.map((murals) => (
-            <Marker
-              key={parseInt(murals.ExtendedData.Data[0].value)}
-              latitude={murals.latitude}
-              longitude={murals.longitude}
-            >
-              <button
-                className="marker-btn zoom"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setSelectedMural(murals);
-                }}
-              >
-                {murals.ExtendedData.Data.map((img, i) => {
-                  if (i === 6) {
-                    return (
-                      <div className="rounder" key={i}>
-                        <ReactRoundedImage
-                          image={img.value.__cdata}
-                          roundedColor="#ffffff"
-                          roundedSize="3"
-                          imageWidth="40"
-                          imageHeight="40"
-                        />
-                      </div>
-                    );
-                  }
-                })}
-              </button>
-            </Marker>
-          ))}
 
-          {selectedMural ? (
-            <Popup
-              latitude={selectedMural.latitude}
-              longitude={selectedMural.longitude}
-              onClose={() => {
-                setSelectedMural(null);
-              }}
-            >
-              <div>
-                <h2>{selectedMural.name}</h2>
-                <p>{selectedMural.ExtendedData.Data[2].value}</p>
-              </div>
-            </Popup>
-          ) : null}
+        {!muralState.data ? (<div>Loading...</div>) : (
+            <div>
+              {muralState.data.data.map((mural) => {
+                return (
+                  <div>
+                    <Marker
+                      key={mural.id}
+                      latitude={mural.location.coordinates[1]}
+                      longitude={mural.location.coordinates[0]}
+                    >
+                      <button
+                        className="marker-btn zoom"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          console.log("clickit or ticket");
+                          // setSelectedMural(murals);
+                        }}
+                      >
+                        {/* {murals.ExtendedData.Data.map((img, i) => {
+                          if (i === 6) {
+                            return ( */}
+                            <Link to={"/murals/" + mural.id}>
+                              <div className="rounder">
+                                <ReactRoundedImage
+                                  image={mural.image}
+                                  roundedColor="#ffffff"
+                                  roundedSize="3"
+                                  imageWidth="40"
+                                  imageHeight="40"
+                                />
+                              </div>
+                            </Link>
+                        {/* //     );
+                        //   }
+                        // })} */}
+                      </button>
+                    </Marker>
+
+
+                  {/* {selectedMural ? (
+                    <Popup
+                      latitude={selectedMural.latitude}
+                      longitude={selectedMural.longitude}
+                      onClose={() => {
+                        setSelectedMural(null);
+                      }}
+                    >
+                      <div>
+                        <h2>{selectedMural.name}</h2>
+                        <p>{selectedMural.ExtendedData.Data[2].value}</p>
+                      </div>
+                    </Popup>
+                  ) : null} */}
+     
+                </div>
+                );
+              })}
+            </div>
+          )}
         </ReactMapGL>
       )}
     </AutoSizer>
