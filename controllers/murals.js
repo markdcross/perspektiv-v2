@@ -147,10 +147,11 @@ exports.visitMural = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404)
     );
   }
-  // Check if the mural has already been visited by the user
+  // Check if the user has already visited the mural
   if (
-    mural.visits.filter(visit => visit.user.toString() === req.user.id).length >
-    0
+    user.muralsVisited.filter(
+      muralVisited => muralVisited.mural.toString() === req.params.id
+    ).length > 0
   ) {
     return res.status(400).json({ msg: 'Mural already visited' });
   }
@@ -187,8 +188,9 @@ exports.unvisitMural = asyncHandler(async (req, res, next) => {
 
   // Check if the mural has already been visited by the user
   if (
-    mural.visits.filter(visit => visit.user.toString() === req.user.id)
-      .length === 0
+    user.muralsVisited.filter(
+      muralVisited => muralVisited.mural.toString() === req.params.id
+    ).length === 0
   ) {
     return res.status(400).json({ msg: 'Mural not yet visited' });
   }
