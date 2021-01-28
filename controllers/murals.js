@@ -1,5 +1,6 @@
 const ErrorResponse = require('../utils/errorResponse');
 const Mural = require('../models/Mural');
+const User = require('../models/User');
 const asyncHandler = require('../middleware/async');
 
 //* ======================================
@@ -139,6 +140,7 @@ exports.getMuralsInRadius = asyncHandler(async (req, res, next) => {
 //* ==============================
 exports.visitMural = asyncHandler(async (req, res, next) => {
   let mural = await Mural.findById(req.params.id);
+  let user = await User.findById(req.user.id);
 
   if (!mural) {
     return next(
@@ -155,8 +157,10 @@ exports.visitMural = asyncHandler(async (req, res, next) => {
   }
 
   mural.visits.unshift({ user: req.user.id });
+  user.muralsVisited.unshift({ mural: req.params.id, date: Date.now() });
 
   await mural.save();
+  await user.save();
 
   // If this doesn't update the count immediately, replace await mural.save() with the next line:
   // mural = await Mural.findByIdAndUpdate(req.params.id, req.body, {
