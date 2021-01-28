@@ -5,7 +5,9 @@ const {
   createMural,
   updateMural,
   deleteMural,
-  getMuralsInRadius
+  getMuralsInRadius,
+  visitMural,
+  unvisitMural
 } = require('../controllers/murals');
 
 const Mural = require('../models/Mural');
@@ -32,5 +34,8 @@ router
   .get(getMural)
   .put(protectedRoute, authorize('artist', 'admin'), updateMural)
   .delete(protectedRoute, authorize('artist', 'admin'), deleteMural);
+
+router.route('/visit/:id').put(protectedRoute, visitMural);
+router.route('/unvisit/:id').put(protectedRoute, unvisitMural);
 
 module.exports = router;
