@@ -1,5 +1,5 @@
 // ======================================================================
-// RUNNING THE CODE BELOW WILL REWRITE QR CODES TO EVERY MURAL IN THE DB
+// RUNNING THE CODE BELOW WILL CREATE QR CODES TO EVERY MURAL IN THE DB
 // ======================================================================
 
 // const axios = require('axios');
