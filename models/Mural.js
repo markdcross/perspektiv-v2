@@ -60,6 +60,12 @@ const MuralSchema = new Schema(
       type: String,
       required: [true, 'Please add an address']
     },
+
+    // qr code for the mural
+    qrCode: {
+      type: String
+    },
+
     // Location of the mural
     location: {
       // GeoJSON Point
@@ -83,6 +89,7 @@ const MuralSchema = new Schema(
       ref: 'User'
     }
   },
+
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true }

@@ -1,10 +1,8 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import NavTabs from "./components/NavTabs";
-import Home from "./pages/Home";
-import {
-  Container
- } from 'react-bootstrap';
+import Home from './pages/Home';
+import { Container } from 'react-bootstrap';
 // import About from "./components/pages/About";
 // import Blog from "./components/pages/Blog";
 // import Contact from "./components/pages/Contact";
@@ -25,8 +23,6 @@ function App() {
 }
 
 export default App;
-
-
 
 // import React, { useState } from "react";
 // import ReactRoundedImage from "react-rounded-image";
@@ -49,7 +45,6 @@ export default App;
 // import { motion } from "framer-motion";
 // // import * as muralData from "./data/murals.json";
 
-
 // function App() {
 
 //   const Desktop = ({ children }) => {
@@ -65,7 +60,6 @@ export default App;
 
 //   const [isOpen, setOpen] = useState(false);
 
-
 //   return (
 //     // <Router>
 //       <div>
@@ -76,7 +70,7 @@ export default App;
 //             </Col>
 //             <Col md={5}>
 //               <Mobile>
-//                 <Sheet 
+//                 <Sheet
 //                   isOpen={true}
 //                   onClose={() => setOpen(false)}
 //                   snapPoints={[600, 400, 90]}
@@ -90,7 +84,7 @@ export default App;
 //                   <Sheet.Container>
 //                     <Sheet.Header />
 //                     <Sheet.Content>
-//                       <ScrollContent />                      
+//                       <ScrollContent />
 //                     </Sheet.Content>
 //                   </Sheet.Container>
 //                 </Sheet>
@@ -110,20 +104,6 @@ export default App;
 // }
 
 // export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from "react";
 // import ReactMapGL, { Marker, Popup } from "react-map-gl";
@@ -145,7 +125,6 @@ export default App;
 //   //   imageWidth: "40",
 //   //   imageHeight: "40",
 //   // });
-
 
 //   useEffect(() => {
 //     const listener = e => {
@@ -195,7 +174,7 @@ export default App;
 //               //     imageWidth: "40",
 //               //     imageHeight: "40",
 //               //   });
-//               // }}  
+//               // }}
 //             >
 //               {/* {murals.ExtendedData.Data.map((img, i) => {
 //                 if (i === 6) {
@@ -218,8 +197,8 @@ export default App;
 //               {murals.ExtendedData.Data.map((img, i) => {
 //                 if (i === 6) {
 //                   return (
-//                   <div className="rounder" key={i} 
-                  
+//                   <div className="rounder" key={i}
+
 //                   // onMouseEnter={e => {
 //                   //   setMuralPop({
 //                   //     imageWidth: "150",
@@ -232,7 +211,7 @@ export default App;
 //                   //     imageWidth: "40",
 //                   //     imageHeight: "40",
 //                   //   });
-//                   // }}                              
+//                   // }}
 //                   >
 //                     <ReactRoundedImage
 //                       image={img.value.__cdata}
@@ -247,7 +226,7 @@ export default App;
 //                 }
 //               }
 //               )}
-              
+
 //             </button>
 //           </Marker>
 //         ))}
@@ -270,4 +249,3 @@ export default App;
 //     </div>
 //   );
 // }
-
