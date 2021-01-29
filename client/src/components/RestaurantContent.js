@@ -7,6 +7,8 @@ import {
 import { Link } from "react-router-dom";
 import { Button, Rating } from 'semantic-ui-react';
 import RestaurantUserContent from "./RestaurantUserContent";
+import DistanceButton from './DistanceButton';
+
 
 export default function MuralContent(props) {
 
