@@ -150,7 +150,7 @@ exports.visitMural = asyncHandler(async (req, res, next) => {
   // Check if the user has already visited the mural
   if (
     user.muralsVisited.filter(
-      muralVisited => muralVisited.mural.toString() === req.params.id
+      (muralVisited) => muralVisited.mural.toString() === req.params.id
     ).length > 0
   ) {
     return res.status(400).json({ msg: 'Mural already visited' });
@@ -189,7 +189,7 @@ exports.unvisitMural = asyncHandler(async (req, res, next) => {
   // Check if the mural has already been visited by the user
   if (
     user.muralsVisited.filter(
-      muralVisited => muralVisited.mural.toString() === req.params.id
+      (muralVisited) => muralVisited.mural.toString() === req.params.id
     ).length === 0
   ) {
     return res.status(400).json({ msg: 'Mural not yet visited' });
@@ -197,13 +197,13 @@ exports.unvisitMural = asyncHandler(async (req, res, next) => {
 
   // Get remove index
   const removeMuralIndex = mural.visits
-    .map(visit => visit.user.toString())
+    .map((visit) => visit.user.toString())
     .indexOf(req.user.id);
   mural.visits.splice(removeMuralIndex, 1);
 
   // Get remove index
   const removeUserIndex = user.muralsVisited
-    .map(mural => mural.mural.toString())
+    .map((mural) => mural.mural.toString())
     .indexOf(req.params.id);
   user.muralsVisited.splice(removeUserIndex, 1);
 
