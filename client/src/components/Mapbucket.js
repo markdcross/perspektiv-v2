@@ -13,7 +13,6 @@ export default function Mapbucket() {
   useEffect(() => {
     muralsAPI.getMurals().then((data) => {
       setMuralState(data);
-      console.log(data);
     });
   }, []);
 
