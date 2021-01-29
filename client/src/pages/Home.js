@@ -89,7 +89,7 @@ function Home() {
                   <Route path="/murals/:artId">
                     <MuralContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
                   </Route>
-                  <Route path="/restaurants">
+                  <Route path="/restaurants/:restId">
                     <RestaurantContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
                   </Route>
                 </Switch>

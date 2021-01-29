@@ -6,10 +6,12 @@ import {
   Image
  } from 'react-bootstrap';
 import { Button, Rating } from 'semantic-ui-react';
+import { Link, useParams } from "react-router-dom";
 import restaurantsAPI from '../utils/restaurants-API';
 
 
 export default function RestaurantList() {
+
     const [restaurantListState, setRestaurantListState] = useState([]);
 
     useEffect(() => {
@@ -31,7 +33,9 @@ export default function RestaurantList() {
                         <div>
                             <Row >
                                 <Col className="parentRestaurant">
+                                <Link to={"/restaurants/" + restaurant._id}>
                                     <Image className="innerRestaurant" src={restaurant.image} />
+                                </Link>
                                 </Col>
                             </Row>
                             <Row className="pb-3">

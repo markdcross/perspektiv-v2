@@ -27,7 +27,7 @@ export default function MuralUserContent() {
                                     <div className="achievementMarkCountMural"><p className="achievementMarkTextMural">999</p></div>
                                     <div className="achievementMarkAvatarMural">
                                     <ReactRoundedImage
-                                        image="./assets/images/avatars/matthew.png"
+                                        image="/assets/images/avatars/matthew.png"
                                         roundedColor="#ffffff"
                                         roundedSize="0"
                                         imageWidth="25"
