@@ -3,7 +3,6 @@ import { Row, Col, Image } from 'react-bootstrap';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import MuralContext from '../context/MuralContext';
-import getDirections from '../utils/getDirections';
 import DistanceButton from './DistanceButton';
 
 export default function ScrollContent() {

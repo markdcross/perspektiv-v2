@@ -31,7 +31,7 @@ const App = () => {
     // });
 
     // get the murals from the api
-    muralsAPI.getMurals().then((data) => {
+    muralsAPI.getMurals().then(data => {
       setMuralState(data);
     });
   }, []);
@@ -39,22 +39,22 @@ const App = () => {
   const position = usePosition();
 
   return (
-    <AuthProvider>
-      <MuralContext.Provider value={muralState}>
-        <LocationContext.Provider value={position}>
-          <Router>
-            <Container fluid>
-              {/* <NavTabs /> */}
-              <Route path="/" component={Home} />
-              {/* <Route exact path="/home" component={Home} /> */}
-              {/* <Route exact path="/about" component={About} />
+    // <AuthProvider>
+    <MuralContext.Provider value={muralState}>
+      <LocationContext.Provider value={position}>
+        <Router>
+          <Container fluid>
+            {/* <NavTabs /> */}
+            <Route path='/' component={Home} />
+            {/* <Route exact path="/home" component={Home} /> */}
+            {/* <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} /> */}
-            </Container>
-          </Router>
-        </LocationContext.Provider>
-      </MuralContext.Provider>
-    </AuthProvider>
+          </Container>
+        </Router>
+      </LocationContext.Provider>
+    </MuralContext.Provider>
+    // </AuthProvider>
   );
 };
 
