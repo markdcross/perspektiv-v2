@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import muralsAPI from '../utils/murals-API';
+import MuralContext from '../utils/MuralContext';
 import DistanceButton from './DistanceButton';
 
 export default function ScrollContent() {
-  const [muralState, setMuralState] = useState([]);
-
-  useEffect(() => {
-    muralsAPI.getMurals().then(data => {
-      setMuralState(data);
-    });
-  }, []);
-
-
+  const muralState = useContext(MuralContext);
 
   return (
     <Row>
@@ -24,7 +16,7 @@ export default function ScrollContent() {
         <Col className='scrollButt'>
           {muralState.data.data.map(mural => {
             return (
-              <div>
+              <div key={mural.id}>
                 <Row className='sideImgBox'>
                   <Col className='p-0 parent'>
                     <Link to={'/murals/' + mural.id}>

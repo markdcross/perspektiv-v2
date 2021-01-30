@@ -13,7 +13,7 @@ const DistanceButton = ({ location }) => {
     { latitude: latitude, longitude: longitude },
     { latitude: location[1], longitude: location[0] }
   );
-  console.log(distance);
+  // console.log(distance);
 
   return (
     <Fragment>
