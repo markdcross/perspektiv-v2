@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import NavTabs from "./components/NavTabs";
 import Home from './pages/Home';
 import LocationContext from './utils/LocationContext';
+import MuralContext from './utils/MuralContext';
+import muralsAPI from './utils/murals-API';
+
 import { usePosition } from 'use-position';
 import { Container } from 'react-bootstrap';
 // import About from "./components/pages/About";
@@ -10,23 +13,31 @@ import { Container } from 'react-bootstrap';
 // import Contact from "./components/pages/Contact";
 
 const App = () => {
-  const watch = true;
-  const position = usePosition(watch);
+  const [muralState, setMuralState] = useState([]);
 
+  useEffect(() => {
+    muralsAPI.getMurals().then(data => {
+      setMuralState(data);
+    });
+  }, []);
+
+  const position = usePosition();
 
   return (
-    <LocationContext.Provider value={position}>
-      <Router>
-        <Container fluid>
-          {/* <NavTabs /> */}
-          <Route path='/' component={Home} />
-          {/* <Route exact path="/home" component={Home} /> */}
-          {/* <Route exact path="/about" component={About} />
+    <MuralContext.Provider value={muralState}>
+      <LocationContext.Provider value={position}>
+        <Router>
+          <Container fluid>
+            {/* <NavTabs /> */}
+            <Route path='/' component={Home} />
+            {/* <Route exact path="/home" component={Home} /> */}
+            {/* <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} /> */}
-        </Container>
-      </Router>
-    </LocationContext.Provider>
+          </Container>
+        </Router>
+      </LocationContext.Provider>
+    </MuralContext.Provider>
   );
 };
 

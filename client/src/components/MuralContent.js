@@ -1,25 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { Row, Col, Image, Carousel } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Checkbox, Icon } from 'semantic-ui-react';
-import muralsAPI from '../utils/murals-API';
 import MuralUserContent from './MuralUserContent';
 import RestaurantList from './RestaurantList';
 import DistanceButton from './DistanceButton';
+import MuralContext from '../utils/MuralContext.js';
 
 // import { Frame, Page,  } from "framer"
 
 export default function MuralContent(props) {
   const { artId } = useParams();
 
-  const [muralState, setMuralState] = useState([]);
-
-  useEffect(() => {
-    muralsAPI.getMural(artId).then(data => {
-      setMuralState(data);
-      console.log(data);
-    });
-  }, []);
+  const muralState = useContext(MuralContext);
 
   const [pageInd, setPageInd] = useState(true);
 
