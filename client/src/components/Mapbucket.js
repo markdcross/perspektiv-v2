@@ -4,7 +4,7 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import ReactRoundedImage from 'react-rounded-image';
 import { AutoSizer } from 'react-virtualized';
 // import * as muralData from '../data/murals.json';
-import MuralContext from '../utils/MuralContext';
+import MuralContext from '../context/MuralContext';
 
 export default function Mapbucket() {
   const muralState = useContext(MuralContext);
