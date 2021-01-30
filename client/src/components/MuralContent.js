@@ -3,13 +3,15 @@ import {
   Row,
   Col,
   Image,
-  Carousel
+  Carousel,
+  Button as BootButton,
  } from 'react-bootstrap';
 import { Link, useParams } from "react-router-dom";
 import { Button, Checkbox, Icon } from 'semantic-ui-react';
 import muralsAPI from '../utils/murals-API';
 import MuralUserContent from "./MuralUserContent";
 import RestaurantList from "./RestaurantList";
+import PhotoModal from "./PhotoModal";
 
 // import { Frame, Page,  } from "framer"
 
@@ -46,6 +48,8 @@ export default function MuralContent(props) {
         }
     }
 
+    const [modalShow, setModalShow] = useState(false);
+
 
 
 
@@ -63,8 +67,16 @@ export default function MuralContent(props) {
                                     <Link to="/" onClick={resetNav}><Button content='Back'/></Link>
                                 </Col>
                                 <Col className="text-right pb-2">
-                                    <Button content='Post Photo' color="yellow"/>
+                                    {/* <Button content='Post Photo' color="yellow"/> */}
+                                    <Button color="yellow" onClick={() => setModalShow(true)}>
+                                        Post Photo
+                                    </Button>
+                                    <PhotoModal
+                                        show={modalShow}
+                                        onHide={() => setModalShow(false)}
+                                    />
                                 </Col>
+                                {/* <PhotoModal /> */}
                             </Row>
                             <Row className="sideImgBox">
                                 <Col className="p-0">

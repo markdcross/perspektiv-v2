@@ -5,7 +5,7 @@ Row,
 Col,
 Image
 } from 'react-bootstrap';
-import { Button, Progress, Act } from 'semantic-ui-react';
+import { Button, Progress } from 'semantic-ui-react';
 import { Link } from "react-router-dom";
 
 export default function NavDesktop() {
