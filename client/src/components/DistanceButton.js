@@ -1,7 +1,7 @@
 import React, { Fragment, useContext } from 'react';
 import { Button } from 'semantic-ui-react';
 import getDistance from 'geolib/es/getDistance';
-import LocationContext from '../utils/LocationContext';
+import LocationContext from '../context/LocationContext';
 
 const DistanceButton = ({ location }) => {
   // Location is an array [lng, lat]

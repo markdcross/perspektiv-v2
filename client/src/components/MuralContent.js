@@ -5,7 +5,7 @@ import { Button, Checkbox, Icon } from 'semantic-ui-react';
 import MuralUserContent from './MuralUserContent';
 import RestaurantList from './RestaurantList';
 import DistanceButton from './DistanceButton';
-import MuralContext from '../utils/MuralContext.js';
+import MuralContext from '../context/MuralContext.js';
 
 // import { Frame, Page,  } from "framer"
 
