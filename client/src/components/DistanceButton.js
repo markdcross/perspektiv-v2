@@ -31,7 +31,7 @@ const DistanceButton = ({ location }) => {
           basic: true,
           color: 'yellow',
           pointing: 'left',
-          content: distance
+          content: `${distance}m`
         }}
       />
     </Fragment>
