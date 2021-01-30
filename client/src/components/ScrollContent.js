@@ -3,6 +3,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import MuralContext from '../utils/MuralContext';
+import getDirections from '../utils/getDirections';
 import DistanceButton from './DistanceButton';
 
 export default function ScrollContent() {
@@ -32,7 +33,7 @@ export default function ScrollContent() {
                     <Checkbox label='VISITED' />
                   </Col>
                   <Col xs={5} className='text-right'>
-                    <DistanceButton location={mural.location.coordinates} />
+                    <DistanceButton location={mural.location.coordinates} id={mural.id} />
                   </Col>
                   <Col xs={5} className='text-right'>
                     <Button
