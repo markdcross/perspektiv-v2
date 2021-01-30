@@ -14,37 +14,32 @@ export default function ScrollContent() {
       {!muralState.data ? (
         <div>Loading...</div>
       ) : (
-        <Col className="scrollButt">
-          {muralState.data.data.map((mural) => {
+        <Col className='scrollButt'>
+          {muralState.data.data.map(mural => {
             return (
               <div key={mural.id}>
-                <Row className="sideImgBox">
-                  <Col className="p-0 parent">
+                <Row className='sideImgBox'>
+                  <Col className='p-0 parent'>
                     <Link to={'/murals/' + mural.id}>
                       <Image
-                        className="img-fluid w-100 inner"
+                        className='img-fluid w-100 inner'
                         src={mural.image}
                       />
                     </Link>
                   </Col>
                 </Row>
-                <Row className="mb-4 pt-1">
-                  <Col xs={2} className="my-auto">
-                    <Checkbox label="VISITED" />
+                <Row className='mb-4 pt-1'>
+                  <Col xs={2} className='my-auto'>
+                    <Checkbox label='VISITED' />
                   </Col>
-<<<<<<< HEAD
                   <Col xs={5} className='text-right'>
-                    <DistanceButton location={mural.location.coordinates} id={mural.id} />
-=======
-                  <Col xs={5} className="text-right">
                     <DistanceButton location={mural.location.coordinates} />
->>>>>>> 053cea88bfc7b619b55a40cb0439261d35a4bb33
                   </Col>
-                  <Col xs={5} className="text-right">
+                  <Col xs={5} className='text-right'>
                     <Button
-                      size="mini"
-                      content="Visits"
-                      icon="street view"
+                      size='mini'
+                      content='Visits'
+                      icon='street view'
                       label={{
                         as: 'a',
                         basic: true,
