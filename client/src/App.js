@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import NavTabs from "./components/NavTabs";
 import Home from './pages/Home';
-import LocationContext from './utils/LocationContext';
-import MuralContext from './utils/MuralContext';
+import LocationContext from './context/LocationContext';
+import MuralContext from './context/MuralContext';
+import { AuthProvider } from './context/AuthContext';
 import muralsAPI from './utils/murals-API';
-
+// import authAPI from './utils/auth-API';
 import { usePosition } from 'use-position';
 import { Container } from 'react-bootstrap';
 // import About from "./components/pages/About";
@@ -14,9 +15,23 @@ import { Container } from 'react-bootstrap';
 
 const App = () => {
   const [muralState, setMuralState] = useState([]);
+  // const [userState, setUserState] = useState();
 
   useEffect(() => {
-    muralsAPI.getMurals().then(data => {
+    // // check for a currently logged in user from the api
+    // authAPI.getCurrentUser().then((data) => {
+    //   // if the check comes back as a success, then set the userState object to the logged in user and set isAuthenticated to true
+    //   if (data.status === 200) {
+    //     setUserState({ data, isAuthenticated: true });
+    //   }
+    //   // otherwise, set isAuthenticated to false
+    //   else {
+    //     setUserState({ isAuthenticated: false });
+    //   }
+    // });
+
+    // get the murals from the api
+    muralsAPI.getMurals().then((data) => {
       setMuralState(data);
     });
   }, []);
@@ -24,20 +39,22 @@ const App = () => {
   const position = usePosition();
 
   return (
-    <MuralContext.Provider value={muralState}>
-      <LocationContext.Provider value={position}>
-        <Router>
-          <Container fluid>
-            {/* <NavTabs /> */}
-            <Route path='/' component={Home} />
-            {/* <Route exact path="/home" component={Home} /> */}
-            {/* <Route exact path="/about" component={About} />
+    <AuthProvider>
+      <MuralContext.Provider value={muralState}>
+        <LocationContext.Provider value={position}>
+          <Router>
+            <Container fluid>
+              {/* <NavTabs /> */}
+              <Route path="/" component={Home} />
+              {/* <Route exact path="/home" component={Home} /> */}
+              {/* <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} /> */}
-          </Container>
-        </Router>
-      </LocationContext.Provider>
-    </MuralContext.Provider>
+            </Container>
+          </Router>
+        </LocationContext.Provider>
+      </MuralContext.Provider>
+    </AuthProvider>
   );
 };
 
