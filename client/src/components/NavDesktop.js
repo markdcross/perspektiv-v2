@@ -1,11 +1,12 @@
 import React from "react";
 import ReactRoundedImage from "react-rounded-image";
 import {
-  Row,
-  Col,
-  Image
- } from 'react-bootstrap';
- import { Button, Progress, Act } from 'semantic-ui-react';
+Row,
+Col,
+Image
+} from 'react-bootstrap';
+import { Button, Progress, Act } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 
 export default function NavDesktop() {
 
@@ -13,7 +14,9 @@ export default function NavDesktop() {
         <div>
             <Row>
                 <Col className="pt-2">
-                    <Image className="w-100" src="./assets/images/logo/plogo.png" />
+                    <Link to={"/"}>
+                        <Image className="w-100" src="./assets/images/logo/plogo.png" />
+                    </Link>
                 </Col>
                 <Col className="text-right pt-2">
                     <Button content='LOGIN' basic/>
