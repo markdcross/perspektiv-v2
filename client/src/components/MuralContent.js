@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Image, Carousel } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Checkbox, Icon } from 'semantic-ui-react';
 import MuralUserContent from './MuralUserContent';
 import RestaurantList from './RestaurantList';
 import DistanceButton from './DistanceButton';
-import MuralContext from '../context/MuralContext.js';
+import muralsAPI from '../utils/murals-API';
 import PhotoModal from "./PhotoModal";
 
 // import { Frame, Page,  } from "framer"
@@ -13,7 +13,14 @@ import PhotoModal from "./PhotoModal";
 export default function MuralContent(props) {
   const { artId } = useParams();
 
-  const muralState = useContext(MuralContext);
+  const [singleMuralState, setSingleMuralState] = useState([]);
+
+  useEffect(() => {
+    muralsAPI.getMural(artId).then((data) => {
+      setSingleMuralState(data);
+      console.log(data);
+    });
+  }, []);
 
   const [pageInd, setPageInd] = useState(true);
 
@@ -39,11 +46,11 @@ export default function MuralContent(props) {
 
     return (
         <Row className="pt-2 bigScroll">
-            {!muralState.data ? (
+            {!singleMuralState.data ? (
                 <div>Loading...</div>
             ) : (
             <Col>
-                {/* {muralState.data.data.map((mural) => {
+                {/* {singleMuralState.data.data.map((mural) => {
                     return (
                         <div> */}
                             <Row>
@@ -64,7 +71,7 @@ export default function MuralContent(props) {
                             </Row>
                             <Row className="sideImgBox">
                                 <Col className="p-0">
-                                    <Image className="img-fluid w-100" src={muralState.data.data.image}/>
+                                    <Image className="img-fluid w-100" src={singleMuralState.data.data.image}/>
                                     {/* <Image className="img-fluid w-100 inner" src={props.image}/> */}
                                 </Col>
                             </Row>
@@ -90,16 +97,16 @@ export default function MuralContent(props) {
                                             as: 'a',
                                             basic: true,
                                             pointing: 'left',
-                                            content: muralState.data.data.__v,
+                                            content: singleMuralState.data.data.__v,
                                         }}
                                     />
                                 </Col>
                             </Row>
                             <Row>
                                 <Col>
-                                    <p>ARTIST: {!muralState.data.data.artist ? ("No available info") : (muralState.data.data.artist.name) }</p>
-                                    <p>TITLE: {muralState.data.data.name}</p>
-                                    <p>LOCATION: {muralState.data.data.address}</p>
+                                    <p>ARTIST: {!singleMuralState.data.data.artist ? ("No available info") : (singleMuralState.data.data.artist.name) }</p>
+                                    <p>TITLE: {singleMuralState.data.data.name}</p>
+                                    <p>LOCATION: {singleMuralState.data.data.address}</p>
                                     {/* <p>This is a story of a man named Jed. Poor mountaineer hardly kept his family fed. Jelly halvah croissant.</p> */}
                                 </Col>
                             </Row>
