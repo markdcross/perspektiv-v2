@@ -7,7 +7,8 @@ const {
   deleteMural,
   getMuralsInRadius,
   visitMural,
-  unvisitMural
+  unvisitMural,
+  getDirections
 } = require('../controllers/murals');
 
 const Mural = require('../models/Mural');

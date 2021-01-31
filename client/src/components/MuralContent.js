@@ -1,52 +1,36 @@
-import React, { useState, useEffect } from "react";
-import {
-  Row,
-  Col,
-  Image,
-  Carousel,
-  Button as BootButton,
- } from 'react-bootstrap';
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Row, Col, Image, Carousel } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
 import { Button, Checkbox, Icon } from 'semantic-ui-react';
-import muralsAPI from '../utils/murals-API';
-import MuralUserContent from "./MuralUserContent";
-import RestaurantList from "./RestaurantList";
+import MuralUserContent from './MuralUserContent';
+import RestaurantList from './RestaurantList';
+import DistanceButton from './DistanceButton';
+import MuralContext from '../context/MuralContext.js';
 import PhotoModal from "./PhotoModal";
 
 // import { Frame, Page,  } from "framer"
 
 export default function MuralContent(props) {
+  const { artId } = useParams();
 
-    const { artId } = useParams();
+  const muralState = useContext(MuralContext);
 
-    const [muralState, setMuralState] = useState([]);
+  const [pageInd, setPageInd] = useState(true);
 
-    useEffect(() => {
-      muralsAPI.getMural(artId).then((data) => {
-        setMuralState(data);
-        console.log(data);
-      });
-    }, []);
+  const setMNav = props.setDesktopMNav;
+  setMNav(true);
 
+  function resetNav() {
+    setMNav(false);
+  }
 
-
-
-    const [pageInd, setPageInd] = useState(true);
-
-    const setMNav = props.setDesktopMNav;
-    setMNav(true);
-
-    function resetNav() {
-        setMNav(false);
-      }
-
-    function pageIndicate() {
-        if (pageInd) {
-            setPageInd(false);
-        } else {
-            setPageInd(true);
-        }
+  function pageIndicate() {
+    if (pageInd) {
+      setPageInd(false);
+    } else {
+      setPageInd(true);
     }
+  }
 
     const [modalShow, setModalShow] = useState(false);
 
@@ -157,18 +141,18 @@ export default function MuralContent(props) {
                                             <MuralUserContent />
                                         </Frame>
                                     </Page> */}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <div>footer foot cooter</div>
-                                </Col>
-                            </Row>
-                        {/* </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div>footer foot cooter</div>
+            </Col>
+          </Row>
+          {/* </div>
                     );
                 })} */}
-            </Col>
-            )}
-        </Row>
-    );
+        </Col>
+      )}
+    </Row>
+  );
 }

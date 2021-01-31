@@ -5,6 +5,12 @@ const morgan = require('morgan');
 const colors = require('colors');
 const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const cors = require('cors');
 const errorHandler = require('./middleware/error.js');
 const connectDB = require('./config/db');
 
@@ -39,8 +45,28 @@ if (process.env.NODE_ENV === 'development') {
 // File uploading
 app.use(fileupload());
 
-// Set static folder
-app.use(express.static(path.join(__dirname, 'client/public')));
+// Sanitize data
+app.use(mongoSanitize());
+
+// Set security headers
+app.use(helmet());
+
+// Prevent XSS attacks
+app.use(xss());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 100
+});
+
+app.use(limiter);
+
+// Prevent http param pollution
+app.use(hpp());
+
+// Enable CORS
+app.use(cors());
 
 // Mount routers
 app.use('/api/v1/auth', auth);
@@ -52,6 +78,18 @@ app.use('/api/v1/restaurant-posts', restaurantPosts);
 
 // Init error handler
 app.use(errorHandler);
+
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+} else {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, 'client/public')));
+}
 
 const PORT = process.env.PORT || 5000;
 

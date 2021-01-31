@@ -1,32 +1,64 @@
-import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import NavTabs from "./components/NavTabs";
-import Home from "./pages/Home";
-import {
-  Container
- } from 'react-bootstrap';
+import Home from './pages/Home';
+import LocationContext from './context/LocationContext';
+import MuralContext from './context/MuralContext';
+import { AuthProvider } from './context/AuthContext';
+import muralsAPI from './utils/murals-API';
+// import authAPI from './utils/auth-API';
+import { usePosition } from 'use-position';
+import { Container } from 'react-bootstrap';
 // import About from "./components/pages/About";
 // import Blog from "./components/pages/Blog";
 // import Contact from "./components/pages/Contact";
 
-function App() {
+const App = () => {
+  const [muralState, setMuralState] = useState([]);
+  // const [userState, setUserState] = useState();
+
+  useEffect(() => {
+    // // check for a currently logged in user from the api
+    // authAPI.getCurrentUser().then((data) => {
+    //   // if the check comes back as a success, then set the userState object to the logged in user and set isAuthenticated to true
+    //   if (data.status === 200) {
+    //     setUserState({ data, isAuthenticated: true });
+    //   }
+    //   // otherwise, set isAuthenticated to false
+    //   else {
+    //     setUserState({ isAuthenticated: false });
+    //   }
+    // });
+
+    // get the murals from the api
+    muralsAPI.getMurals().then(data => {
+      setMuralState(data);
+    });
+  }, []);
+
+  const position = usePosition();
+
   return (
-    <Router>
-      <Container fluid>
-        {/* <NavTabs /> */}
-        <Route path="/" component={Home} />
-        {/* <Route exact path="/home" component={Home} /> */}
-        {/* <Route exact path="/about" component={About} />
+    // <AuthProvider>
+    <MuralContext.Provider value={muralState}>
+      <LocationContext.Provider value={position}>
+        <Router>
+          <Container fluid>
+            {/* <NavTabs /> */}
+            <Route path='/' component={Home} />
+            {/* <Route exact path="/home" component={Home} /> */}
+            {/* <Route exact path="/about" component={About} />
         <Route exact path="/blog" component={Blog} />
         <Route path="/contact" component={Contact} /> */}
-      </Container>
-    </Router>
+          </Container>
+        </Router>
+      </LocationContext.Provider>
+    </MuralContext.Provider>
+    // </AuthProvider>
   );
-}
+};
 
 export default App;
-
-
 
 // import React, { useState } from "react";
 // import ReactRoundedImage from "react-rounded-image";
@@ -49,7 +81,6 @@ export default App;
 // import { motion } from "framer-motion";
 // // import * as muralData from "./data/murals.json";
 
-
 // function App() {
 
 //   const Desktop = ({ children }) => {
@@ -65,7 +96,6 @@ export default App;
 
 //   const [isOpen, setOpen] = useState(false);
 
-
 //   return (
 //     // <Router>
 //       <div>
@@ -76,7 +106,7 @@ export default App;
 //             </Col>
 //             <Col md={5}>
 //               <Mobile>
-//                 <Sheet 
+//                 <Sheet
 //                   isOpen={true}
 //                   onClose={() => setOpen(false)}
 //                   snapPoints={[600, 400, 90]}
@@ -90,7 +120,7 @@ export default App;
 //                   <Sheet.Container>
 //                     <Sheet.Header />
 //                     <Sheet.Content>
-//                       <ScrollContent />                      
+//                       <ScrollContent />
 //                     </Sheet.Content>
 //                   </Sheet.Container>
 //                 </Sheet>
@@ -110,20 +140,6 @@ export default App;
 // }
 
 // export default App;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from "react";
 // import ReactMapGL, { Marker, Popup } from "react-map-gl";
@@ -145,7 +161,6 @@ export default App;
 //   //   imageWidth: "40",
 //   //   imageHeight: "40",
 //   // });
-
 
 //   useEffect(() => {
 //     const listener = e => {
@@ -195,7 +210,7 @@ export default App;
 //               //     imageWidth: "40",
 //               //     imageHeight: "40",
 //               //   });
-//               // }}  
+//               // }}
 //             >
 //               {/* {murals.ExtendedData.Data.map((img, i) => {
 //                 if (i === 6) {
@@ -218,8 +233,8 @@ export default App;
 //               {murals.ExtendedData.Data.map((img, i) => {
 //                 if (i === 6) {
 //                   return (
-//                   <div className="rounder" key={i} 
-                  
+//                   <div className="rounder" key={i}
+
 //                   // onMouseEnter={e => {
 //                   //   setMuralPop({
 //                   //     imageWidth: "150",
@@ -232,7 +247,7 @@ export default App;
 //                   //     imageWidth: "40",
 //                   //     imageHeight: "40",
 //                   //   });
-//                   // }}                              
+//                   // }}
 //                   >
 //                     <ReactRoundedImage
 //                       image={img.value.__cdata}
@@ -247,7 +262,7 @@ export default App;
 //                 }
 //               }
 //               )}
-              
+
 //             </button>
 //           </Marker>
 //         ))}
@@ -270,4 +285,3 @@ export default App;
 //     </div>
 //   );
 // }
-

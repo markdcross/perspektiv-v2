@@ -11,8 +11,10 @@
     "bootstrap": "^4.6.0",
     "framer": "^1.2.15",
     "framer-motion": "^3.2.2-rc.1",
+    "geolib": "^3.3.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
+    "react-content-loader": "^6.0.1",
     "react-dom": "^17.0.1",
     "react-map-gl": "^6.0.3",
     "react-map-gl-directions": "^1.0.4",
@@ -26,6 +28,7 @@
     "react-virtualized-auto-sizer": "^1.0.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
+    "use-position": "0.0.8",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

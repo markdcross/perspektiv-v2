@@ -42,7 +42,6 @@ const UserSchema = new mongoose.Schema({
   resetPasswordExpire: Date,
 
   // we'll use this later in routes/api/users.js to pull in the avatar from the user's email address
-  // [JOSH] refer to the Traversy MERN tutorial on Udemy
   avatar: {
     type: String
   },

@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import ReactRoundedImage from 'react-rounded-image';
 import { AutoSizer } from 'react-virtualized';
-import muralsAPI from '../utils/murals-API';
 // import * as muralData from '../data/murals.json';
+import MuralContext from '../context/MuralContext';
 
 export default function Mapbucket() {
-
-  const [muralState, setMuralState] = useState([]);
-
-  useEffect(() => {
-    muralsAPI.getMurals().then((data) => {
-      setMuralState(data);
-      console.log(data);
-    });
-  }, []);
-
+  const muralState = useContext(MuralContext);
 
   const [viewport, setViewport] = useState({
     latitude: 37.54129,
@@ -29,7 +20,7 @@ export default function Mapbucket() {
   const [selectedMural, setSelectedMural] = useState(null);
 
   useEffect(() => {
-    const listener = (e) => {
+    const listener = e => {
       if (e.key === 'Escape') {
         setSelectedMural(null);
       }
@@ -44,59 +35,58 @@ export default function Mapbucket() {
 
   return (
     <AutoSizer>
-
       {({ height, width }) => (
         <ReactMapGL
-        {...viewport}
-        width={width}
-        height={height}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        // mapStyle="mapbox://styles/leighhalliday/cjufmjn1r2kic1fl9wxg7u1l4"
-        onViewportChange={(viewport) => {
-          setViewport(viewport);
-        }}
+          {...viewport}
+          width={width}
+          height={height}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+          // mapStyle="mapbox://styles/leighhalliday/cjufmjn1r2kic1fl9wxg7u1l4"
+          onViewportChange={viewport => {
+            setViewport(viewport);
+          }}
         >
-
-        {!muralState.data ? (<div>Loading...</div>) : (
+          {!muralState.data ? (
+            <div>Loading...</div>
+          ) : (
             <div>
-              {muralState.data.data.map((mural) => {
+              {muralState.data.data.map(mural => {
                 return (
-                  <div>
+                  <div key={mural.id}>
                     <Marker
                       key={mural.id}
                       latitude={mural.location.coordinates[1]}
                       longitude={mural.location.coordinates[0]}
                     >
                       <button
-                        className="marker-btn zoom"
-                        onClick={(e) => {
+                        className='marker-btn zoom'
+                        onClick={e => {
                           e.preventDefault();
-                          console.log("clickit or ticket");
+                          console.log('clickit or ticket');
                           // setSelectedMural(murals);
                         }}
                       >
                         {/* {murals.ExtendedData.Data.map((img, i) => {
                           if (i === 6) {
                             return ( */}
-                            <Link to={"/murals/" + mural.id}>
-                              <div className="rounder">
-                                <ReactRoundedImage
-                                  image={mural.image}
-                                  roundedColor="#ffffff"
-                                  roundedSize="3"
-                                  imageWidth="40"
-                                  imageHeight="40"
-                                />
-                              </div>
-                            </Link>
+                        <Link to={'/murals/' + mural.id}>
+                          <div className='rounder'>
+                            <ReactRoundedImage
+                              image={mural.image}
+                              roundedColor='#ffffff'
+                              roundedSize='3'
+                              imageWidth='40'
+                              imageHeight='40'
+                            />
+                          </div>
+                        </Link>
                         {/* //     );
                         //   }
                         // })} */}
                       </button>
                     </Marker>
 
-
-                  {/* {selectedMural ? (
+                    {/* {selectedMural ? (
                     <Popup
                       latitude={selectedMural.latitude}
                       longitude={selectedMural.longitude}
@@ -110,8 +100,7 @@ export default function Mapbucket() {
                       </div>
                     </Popup>
                   ) : null} */}
-     
-                </div>
+                  </div>
                 );
               })}
             </div>

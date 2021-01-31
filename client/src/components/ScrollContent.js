@@ -1,64 +1,44 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
-import {
-  Button,
-  Checkbox,
-} from 'semantic-ui-react';
-import { Link } from "react-router-dom";
-import muralsAPI from '../utils/murals-API';
+import { Button, Checkbox } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import MuralContext from '../context/MuralContext';
+import DistanceButton from './DistanceButton';
 
 export default function ScrollContent() {
-  const [muralState, setMuralState] = useState([]);
-
-  useEffect(() => {
-    muralsAPI.getMurals().then((data) => {
-      setMuralState(data);
-    });
-  }, []);
-
+  const muralState = useContext(MuralContext);
 
   return (
     <Row>
       {!muralState.data ? (
         <div>Loading...</div>
       ) : (
-        <Col className="scrollButt">
-          {muralState.data.data.map((mural) => {
+        <Col className='scrollButt'>
+          {muralState.data.data.map(mural => {
             return (
-              <div>
-                <Row className="sideImgBox">
-                  <Col className="p-0 parent">
-                    <Link to={"/murals/" + mural.id}>
+              <div key={mural.id}>
+                <Row className='sideImgBox'>
+                  <Col className='p-0 parent'>
+                    <Link to={'/murals/' + mural.id}>
                       <Image
-                        className="img-fluid w-100 inner"
+                        className='img-fluid w-100 inner'
                         src={mural.image}
                       />
                     </Link>
                   </Col>
                 </Row>
-                <Row className="mb-4 pt-1">
-                  <Col xs={2} className="my-auto">
-                    <Checkbox label="VISITED" />
+                <Row className='mb-4 pt-1'>
+                  <Col xs={2} className='my-auto'>
+                    <Checkbox label='VISITED' />
                   </Col>
-                  <Col xs={5} className="text-right">
-                    <Button
-                      size="mini"
-                      color="yellow"
-                      content="Distance"
-                      icon="location arrow"
-                      label={{
-                        basic: true,
-                        color: 'yellow',
-                        pointing: 'left',
-                        content: '2,048'
-                      }}
-                    />
+                  <Col xs={5} className='text-right'>
+                    <DistanceButton location={mural.location.coordinates} />
                   </Col>
-                  <Col xs={5} className="text-right">
+                  <Col xs={5} className='text-right'>
                     <Button
-                      size="mini"
-                      content="Visits"
-                      icon="street view"
+                      size='mini'
+                      content='Visits'
+                      icon='street view'
                       label={{
                         as: 'a',
                         basic: true,

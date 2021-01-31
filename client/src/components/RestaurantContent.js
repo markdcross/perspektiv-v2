@@ -9,6 +9,8 @@ import { Button, Rating } from 'semantic-ui-react';
 import restaurantsAPI from '../utils/restaurants-API';
 
 import RestaurantUserContent from "./RestaurantUserContent";
+import DistanceButton from './DistanceButton';
+
 
 export default function RestaurantContent(props) {
 
