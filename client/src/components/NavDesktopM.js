@@ -1,18 +1,21 @@
 import React from "react";
 import ReactRoundedImage from "react-rounded-image";
 import {
-  Row,
-  Col,
-  Image
- } from 'react-bootstrap';
- import { Button, Progress } from 'semantic-ui-react';
+Row,
+Col,
+Image
+} from 'react-bootstrap';
+import { Button, Progress } from 'semantic-ui-react';
+import { Link } from "react-router-dom";
 
 export default function NavDesktopM() {
     return (
         <>
         <Row className="fbNav">
             <Col className="pt-2">
-                <Image className="w-100" src="/assets/images/logo/plogo.png" />
+                <Link to={"/"}>
+                    <Image className="w-100" src="/assets/images/logo/plogo.png" />
+                </Link>
             </Col>
             <Col className="my-2 respLoginBreakDN fluid">
                 <Button content="Tesdfgsdfg" className="achievementMark px-6 w-100 clearfix" color='yellow' >

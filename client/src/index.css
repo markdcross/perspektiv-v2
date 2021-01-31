@@ -284,3 +284,23 @@ code {
   height: auto;
   overflow: visible;
 }
+
+
+/* ///////////////////////////////////////////////// */
+/* overides to image uploader */
+
+.uploadPictureContainer {
+  width: 100% !important;
+}
+
+.fileContainer {
+  padding: 0 0 !important;
+  margin: 0;
+  box-shadow: none;
+
+}
+
+.imageUpButton {
+  background-color: grey !important;
+  border-radius: .25rem !important;
+}
