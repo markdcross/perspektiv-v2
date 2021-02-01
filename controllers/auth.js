@@ -13,6 +13,12 @@ const gravatar = require('gravatar');
 exports.register = asyncHandler(async (req, res, next) => {
   // get the request body
   const { name, email, password, role } = req.body;
+
+  let existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return next(new ErrorResponse('User already exists.', 400));
+  }
+
   // get users gravatar based on email address used to register
   const avatar = gravatar.url(email, {
     // set the size for the gravatar
@@ -221,5 +227,5 @@ const sendTokenResponse = (user, statusCode, res) => {
     // then store the token as "token" in cookies (along with options)
     .cookie('token', token, options)
     // then send a success message with the token
-    .json({ success: true, token });
+    .json({ token });
 };
