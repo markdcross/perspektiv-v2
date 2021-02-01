@@ -30,6 +30,7 @@
     "semantic-ui-react": "^2.0.3",
     "use-position": "0.0.8",
     "uuid": "^8.3.2",
+    "use-supercluster": "^0.2.9",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

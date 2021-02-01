@@ -1,4 +1,6 @@
 import React, { useReducer } from 'react';
+import AuthAPI from '../../utils/auth-API';
+import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
 
@@ -27,6 +29,27 @@ const AuthState = (props) => {
   // load user
 
   // register user
+  const register = async (formData) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await AuthAPI.registerUser(formData, config);
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err
+      });
+    }
+  };
 
   // login user
 

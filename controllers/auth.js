@@ -221,5 +221,5 @@ const sendTokenResponse = (user, statusCode, res) => {
     // then store the token as "token" in cookies (along with options)
     .cookie('token', token, options)
     // then send a success message with the token
-    .json({ success: true, token });
+    .json({ token });
 };
