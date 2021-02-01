@@ -13,6 +13,7 @@ const hpp = require('hpp');
 const cors = require('cors');
 const errorHandler = require('./middleware/error.js');
 const connectDB = require('./config/db');
+const compression = require('compression');
 
 // Load env vars
 dotenv.config();
@@ -30,6 +31,9 @@ const restaurants = require('./routes/restaurants');
 const users = require('./routes/users');
 
 const app = express();
+
+// compression middleware
+app.use(compression());
 
 // Body parser
 app.use(express.json({ extended: false }));
