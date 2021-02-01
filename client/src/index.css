@@ -25,19 +25,27 @@ code {
   width: 10%;
 }
 
+.markerZ {
+  z-index: 1;
+}
+
+.markerZ:hover {
+  z-index: 2 !important;
+}
+
 .rounder img {
   object-fit: cover;
 }
 
 .zoom {
   transition: transform .2s; /* Animation */
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   margin: 0 auto;
 }
 
 .zoom:hover {
-  transform: scale(3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(3.3); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .sideImgBox {
@@ -304,3 +312,17 @@ code {
   background-color: grey !important;
   border-radius: .25rem !important;
 }
+
+
+/* ///////////////////////////////////////////////// */
+/* Map Cluster Styling */
+
+/* .cluster-marker {
+  color: #fff;
+  background: #e291db71;
+  border-radius: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */

@@ -1,106 +1,119 @@
-import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-  useRouteMatch
-} from "react-router-dom";
-import {
-  Container,
-  Row,
-  Col,
-  Image
- } from 'react-bootstrap';
- import { Button, Checkbox, Progress } from 'semantic-ui-react';
-// import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
+import { Row, Col } from "react-bootstrap";
 import Mapbucket from "../components/Mapbucket";
+import UserLogin from "../components/UserLogin";
+import UserCreateAcct from "../components/UserCreateAcct";
 import ScrollContent from "../components/ScrollContent";
 import MuralContent from "../components/MuralContent";
 import RestaurantContent from "../components/RestaurantContent";
-import NavDesktop from "../components/NavDesktop";
-import NavDesktopM from "../components/NavDesktopM";
 import NavMobile from "../components/NavMobile";
-import { useMediaQuery } from 'react-responsive'
-import Sheet from 'react-modal-sheet';
-import { motion } from "framer-motion";
-// import * as muralData from "./data/murals.json";
-
+import { useMediaQuery } from "react-responsive";
+import Sheet from "react-modal-sheet";
 
 function Home() {
+	const Desktop = ({ children }) => {
+		const isDesktop = useMediaQuery({ minWidth: 768 });
+		return isDesktop ? children : null;
+	};
+	const Mobile = ({ children }) => {
+		const isMobile = useMediaQuery({ maxWidth: 767 });
+		return isMobile ? children : null;
+	};
 
-  const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 768 })
-    return isDesktop ? children : null
-  }
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 })
-    return isMobile ? children : null
-  }
+	const [isOpen, setOpen] = useState(false);
 
-  const [desktopMNav, setDesktopMNav] = useState(false);
+	let { path } = useRouteMatch();
 
-  const [isOpen, setOpen] = useState(false);
+	// Screensize detection for mobile view
 
-    let { path, url } = useRouteMatch();
+	const getWindowDimensions = () => {
+		const { innerWidth: width, innerHeight: height } = window;
+		return {
+			width,
+			height,
+		};
+	};
 
-  return (
-      // <div>
-      //   <Container fluid>
-          <Row>
-            <Col md={7} className="mapSpace p-0">
-              <Mapbucket />
-            </Col>
-            <Col md={5}>
+	const [windowDimensions, setWindowDimensions] = useState(
+		getWindowDimensions()
+	);
 
-              <Mobile>
-                <Sheet 
-                  isOpen={true}
-                  onClose={() => setOpen(false)}
-                  snapPoints={[600, 400, 100]}
-                  initialSnap={2}
-                  onSnap={snapIndex =>
-                    console.log('> Current snap point index:', snapIndex)
-                  }
-                  className="sheetZfix"
-                  >
-                  <NavMobile />
-                  <Sheet.Container>
-                    <Sheet.Header >
-                    </Sheet.Header>
-                    <Sheet.Content>
-                      <ScrollContent />                      
-                    </Sheet.Content>
-                  </Sheet.Container>
-                </Sheet>
-              </Mobile>
+	useEffect(() => {
+		function handleResize() {
+			setWindowDimensions(getWindowDimensions());
+		}
 
-              
-              <Desktop>
-              {desktopMNav ? <NavDesktopM /> : <NavDesktop />}
-              {/* <NavDesktop /> */}
-              </Desktop>
-              <Desktop>
-                <Switch>
-                  <Route exact path={path}>
-                    <ScrollContent />
-                  </Route>
-                  <Route path="/murals/:artId">
-                    <MuralContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
-                  </Route>
-                  <Route path="/restaurants/:restId">
-                    <RestaurantContent desktopMNav={desktopMNav} setDesktopMNav={setDesktopMNav}/>
-                  </Route>
-                </Switch>
-                {/* <ScrollContent /> */}
-                {/* <MuralContent /> */}
-              </Desktop>
-            </Col>
-          </Row>
-      //   </Container>
-      // </div>
-  );
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	console.log(windowDimensions.height);
+
+	return (
+		<Row>
+			<Col md={7} className='mapSpace p-0'>
+				<Mapbucket />
+			</Col>
+			<Col md={5}>
+				<Mobile>
+					<Sheet
+						isOpen={true}
+						onClose={() => setOpen(false)}
+						snapPoints={[windowDimensions.height, 250, 108]}
+						initialSnap={1}
+						onSnap={(snapIndex) =>
+							console.log("> Current snap point index:", snapIndex)
+						}
+						className='sheetZfix'
+					>
+						<NavMobile />
+						<Sheet.Container>
+							<Sheet.Header></Sheet.Header>
+							<Sheet.Content>
+								<Switch>
+									<Route path='/login'>
+										<UserLogin />
+									</Route>
+									<Route path='/createacct'>
+										<UserCreateAcct />
+									</Route>
+									<Route exact path={path}>
+										<ScrollContent />
+									</Route>
+									<Route path='/murals/:artId'>
+										<MuralContent />
+									</Route>
+									<Route path='/restaurants/:restId'>
+										<RestaurantContent />
+									</Route>
+								</Switch>
+							</Sheet.Content>
+						</Sheet.Container>
+					</Sheet>
+				</Mobile>
+				<Desktop>
+					<Switch>
+						<Route path='/login'>
+							<UserLogin />
+						</Route>
+						<Route path='/createacct'>
+							<UserCreateAcct />
+						</Route>
+						<Route exact path={path}>
+							<ScrollContent />
+						</Route>
+						<Route path='/murals/:artId'>
+							<MuralContent />
+						</Route>
+						<Route path='/restaurants/:restId'>
+							<RestaurantContent />
+						</Route>
+					</Switch>
+				</Desktop>
+			</Col>
+		</Row>
+	);
 }
 
 export default Home;
