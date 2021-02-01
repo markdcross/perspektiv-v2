@@ -27,6 +27,9 @@ const AuthState = (props) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 
   // load user
+  const loadUser = () => {
+    console.log('load user');
+  };
 
   // register user
   const register = async (formData) => {
@@ -37,7 +40,7 @@ const AuthState = (props) => {
     };
 
     try {
-      const res = await AuthAPI.registerUser(formData, config);
+      const res = await axios.post('/api/v1/auth/register', formData, config);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -46,16 +49,26 @@ const AuthState = (props) => {
     } catch (err) {
       dispatch({
         type: REGISTER_FAIL,
-        payload: err
+        payload: err.response.data.error
       });
     }
   };
 
   // login user
+  const login = () => {
+    console.log('login user');
+  };
 
   // logout user
+  const logout = () => {
+    console.log('logout user');
+  };
 
   // clear errors
+  const clearErrors = () => {
+    console.log('clear errors');
+    dispatch({ type: CLEAR_ERRORS });
+  };
 
   return (
     <AuthContext.Provider
@@ -64,7 +77,12 @@ const AuthState = (props) => {
         isAuthenticated: state.isAuthenticated,
         loading: state.loading,
         user: state.user,
-        error: state.error
+        error: state.error,
+        register,
+        loadUser,
+        login,
+        logout,
+        clearErrors
       }}
     >
       {props.children}

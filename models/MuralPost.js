@@ -25,7 +25,6 @@ const PostSchema = new Schema({
     required: true,
     maxlength: 140
   },
-  // TODO Add file upload functionality
   image: {
     type: String,
     default: 'no-photo.jpg'
