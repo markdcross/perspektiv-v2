@@ -20,7 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "content_security_policy": "script-src 'self' 'sha256-hRFZC5n7KZPXE059Cwmf919lrFPOxIOg8xdmaNFOvUc='",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }
