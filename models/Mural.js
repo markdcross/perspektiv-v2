@@ -18,6 +18,10 @@ const MuralSchema = new Schema(
     image: {
       type: String
     },
+    imageFile: {
+      type: String,
+      default: 'no-photo.jpg'
+    },
     // use the following information to show how long the mural took to create
     dates: {
       from: {
