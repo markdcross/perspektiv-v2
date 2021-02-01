@@ -22,7 +22,7 @@ export default function ScrollContent() {
                     <Link to={'/murals/' + mural.id}>
                       <Image
                         className='img-fluid w-100 inner'
-                        src={mural.image}
+                        src={`../../../muralImages/${mural.imageFile}`}
                       />
                     </Link>
                   </Col>
