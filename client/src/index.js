@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-virtualized/styles.css';
 import './index.css';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Fragment>
     <App />
-  </React.StrictMode>,
+  </Fragment>,
   document.getElementById('root')
 );
 
