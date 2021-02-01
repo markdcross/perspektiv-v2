@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -8,9 +8,9 @@ import 'react-virtualized/styles.css';
 import './index.css';
 
 ReactDOM.render(
-  <Fragment>
+  <React.StrictMode>
     <App />
-  </Fragment>,
+  </React.StrictMode>,
   document.getElementById('root')
 );
 
