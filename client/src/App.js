@@ -8,14 +8,12 @@ import MuralContext from './context/MuralContext';
 // NEW auth context provider
 import AuthState from './context/auth-v2/AuthState';
 import AlertState from './context/alert/AlertState';
+import setAuthToken from './utils/setAuthToken';
 
 // page components
 import Home from './pages/Home';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-
-// OLD auth context provider
-// import { AuthProvider } from './context/AuthContext';
 
 // mural API
 import muralsAPI from './utils/murals-API';
@@ -26,6 +24,11 @@ import muralsAPI from './utils/murals-API';
 import history from './components/History';
 import { usePosition } from 'use-position';
 import { Container } from 'react-bootstrap';
+
+//
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
   const [muralState, setMuralState] = useState([]);
@@ -43,7 +46,6 @@ const App = () => {
   return (
     <AuthState>
       <AlertState>
-        {/* <AuthProvider> */}
         <MuralContext.Provider value={muralState}>
           <LocationContext.Provider value={position}>
             <Router history={history}>
@@ -55,7 +57,6 @@ const App = () => {
             </Router>
           </LocationContext.Provider>
         </MuralContext.Provider>
-        {/* </AuthProvider> */}
       </AlertState>
     </AuthState>
   );

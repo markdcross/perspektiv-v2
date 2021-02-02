@@ -25,7 +25,7 @@ export default function MuralContent(props) {
   const [singleMuralState, setSingleMuralState] = useState([]);
 
   useEffect(() => {
-    muralsAPI.getMural(artId).then(data => {
+    muralsAPI.getMural(artId).then((data) => {
       setSingleMuralState(data);
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,21 +55,21 @@ export default function MuralContent(props) {
       <Desktop>
         <NavDesktopM />
       </Desktop>
-      <Row className='pt-2 bigScroll'>
+      <Row className="pt-2 bigScroll">
         {!singleMuralState.data ? (
           <div>Loading...</div>
         ) : (
           <Col>
             <Mobile>
-              <Row className='px-3'>
-                <Col className='pb-2'>
+              <Row className="px-3">
+                <Col className="pb-2">
                   {/* <Link to='/' onClick={resetNav}> */}
-                  <Link to='/'>
-                    <Button content='Back' />
+                  <Link to="/">
+                    <Button content="Back" />
                   </Link>
                 </Col>
-                <Col className='text-right pb-2'>
-                  <Button color='yellow' onClick={() => setModalShow(true)}>
+                <Col className="text-right pb-2">
+                  <Button color="yellow" onClick={() => setModalShow(true)}>
                     Post Photo
                   </Button>
                   <PhotoModal
@@ -81,14 +81,14 @@ export default function MuralContent(props) {
             </Mobile>
             <Desktop>
               <Row>
-                <Col className='pb-2'>
+                <Col className="pb-2">
                   {/* <Link to='/' onClick={resetNav}> */}
-                  <Link to='/'>
-                    <Button content='Back' />
+                  <Link to="/">
+                    <Button content="Back" />
                   </Link>
                 </Col>
-                <Col className='text-right pb-2'>
-                  <Button color='yellow' onClick={() => setModalShow(true)}>
+                <Col className="text-right pb-2">
+                  <Button color="yellow" onClick={() => setModalShow(true)}>
                     Post Photo
                   </Button>
                   <PhotoModal
@@ -98,25 +98,25 @@ export default function MuralContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className='sideImgBox'>
-              <Col className='p-0'>
+            <Row className="sideImgBox">
+              <Col className="p-0">
                 <Image
-                  className='img-fluid w-100'
+                  className="img-fluid w-100"
                   src={`../../muralImages/${singleMuralState.data.data.imageFile}`}
                 />
               </Col>
             </Row>
             <Mobile>
-              <Row className='mb-4 pt-1 px-3'>
-                <Col xs={2} className='my-auto'>
-                  <Checkbox label='VISITED' />
+              <Row className="mb-4 pt-1 px-3">
+                <Col xs={2} className="my-auto">
+                  <Checkbox label="VISITED" />
                 </Col>
-                <Col xs={5} className='text-right'>
+                <Col xs={5} className="text-right">
                   <Button
-                    size='mini'
-                    color='yellow'
-                    content='Distance'
-                    icon='location arrow'
+                    size="mini"
+                    color="yellow"
+                    content="Distance"
+                    icon="location arrow"
                     label={{
                       basic: true,
                       color: 'yellow',
@@ -125,11 +125,11 @@ export default function MuralContent(props) {
                     }}
                   />
                 </Col>
-                <Col xs={5} className='text-right'>
+                <Col xs={5} className="text-right">
                   <Button
-                    size='mini'
-                    content='Visits'
-                    icon='street view'
+                    size="mini"
+                    content="Visits"
+                    icon="street view"
                     label={{
                       as: 'a',
                       basic: true,
@@ -142,16 +142,16 @@ export default function MuralContent(props) {
             </Mobile>
 
             <Desktop>
-              <Row className='mb-4 pt-1'>
-                <Col xs={2} className='my-auto'>
-                  <Checkbox label='VISITED' />
+              <Row className="mb-4 pt-1">
+                <Col xs={2} className="my-auto">
+                  <Checkbox label="VISITED" />
                 </Col>
-                <Col xs={5} className='text-right'>
+                <Col xs={5} className="text-right">
                   <Button
-                    size='mini'
-                    color='yellow'
-                    content='Distance'
-                    icon='location arrow'
+                    size="mini"
+                    color="yellow"
+                    content="Distance"
+                    icon="location arrow"
                     label={{
                       basic: true,
                       color: 'yellow',
@@ -160,11 +160,11 @@ export default function MuralContent(props) {
                     }}
                   />
                 </Col>
-                <Col xs={5} className='text-right'>
+                <Col xs={5} className="text-right">
                   <Button
-                    size='mini'
-                    content='Visits'
-                    icon='street view'
+                    size="mini"
+                    content="Visits"
+                    icon="street view"
                     label={{
                       as: 'a',
                       basic: true,
@@ -176,7 +176,7 @@ export default function MuralContent(props) {
               </Row>
             </Desktop>
             <Mobile>
-              <Row className='px-3'>
+              <Row className="px-3">
                 <Col>
                   <p>
                     ARTIST:{' '}
@@ -203,42 +203,42 @@ export default function MuralContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className='h-100 w-100 mx-0'>
-              <Col className='p-0'>
-                <Row className='pt-2'>
-                  <Col className='pr-1 text-right'>
+            <Row className="h-100 w-100 mx-0">
+              <Col className="p-0">
+                <Row className="pt-2">
+                  <Col className="pr-1 text-right">
                     {pageInd ? (
                       <Button
-                        size='mini'
-                        color='yellow'
+                        size="mini"
+                        color="yellow"
                         compact
-                        floated='right'
+                        floated="right"
                       />
                     ) : (
                       <Button
-                        size='mini'
-                        color='yellow'
+                        size="mini"
+                        color="yellow"
                         compact
-                        floated='right'
+                        floated="right"
                         disabled
                       />
                     )}
                   </Col>
-                  <Col className='pl-1 text-left'>
+                  <Col className="pl-1 text-left">
                     {pageInd ? (
                       <Button
-                        size='mini'
-                        color='yellow'
+                        size="mini"
+                        color="yellow"
                         compact
-                        floated='left'
+                        floated="left"
                         disabled
                       />
                     ) : (
                       <Button
-                        size='mini'
-                        color='yellow'
+                        size="mini"
+                        color="yellow"
                         compact
-                        floated='left'
+                        floated="left"
                       />
                     )}
                   </Col>
@@ -248,10 +248,10 @@ export default function MuralContent(props) {
                   wrap={false}
                   onClick={pageIndicate}
                   nextIcon={
-                    <Icon name='dot circle outline' color='pink' size='huge' />
+                    <Icon name="dot circle outline" color="pink" size="huge" />
                   }
                   prevIcon={
-                    <Icon name='dot circle outline' color='pink' size='huge' />
+                    <Icon name="dot circle outline" color="pink" size="huge" />
                   }
                 >
                   <Carousel.Item>
