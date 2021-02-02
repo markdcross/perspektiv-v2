@@ -8,7 +8,7 @@ const colors = require('colors');
 const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
@@ -56,21 +56,21 @@ app.use(fileupload());
 app.use(mongoSanitize());
 
 // Set security headers
-app.use(helmet());
+// app.use(helmet());
 
 // Prevent XSS attacks
-app.use(xss());
+// app.use(xss());
 
 // Rate limiting
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 1000
-});
+// const limiter = rateLimit({
+//   windowMs: 10 * 60 * 1000, // 10 minutes
+//   max: 1000
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
 // Prevent http param pollution
-app.use(hpp());
+// app.use(hpp());
 
 // Enable CORS
 app.use(cors());
@@ -98,30 +98,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/public')));
 }
 
-// // SSL in production
-// if (process.env.NODE_ENV === 'production') {
-//   const privateKey = fs.readFileSync(
-//     '/etc/letsencrypt/live/perspektivrva.com/privkey.pem',
-//     'utf8'
-//   );
-//   const certificate = fs.readFileSync(
-//     '/etc/letsencrypt/live/perspektivrva.com/fullchain.pem',
-//     'utf8'
-//   );
-//   const credentials = {
-//     key: privateKey,
-//     cert: certificate
-//   };
-
-//   https
-//     .createServer(credentials, app)
-//     .listen(PORT, () =>
-//       console.log(
-//         `HTTPS server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-//           .yellow.bold
-//       )
-//     );
-// } else {
 app.listen(PORT, () =>
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
