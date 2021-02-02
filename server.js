@@ -117,17 +117,10 @@ if (process.env.NODE_ENV === 'production') {
     .createServer(credentials, app)
     .listen(PORT, () =>
       console.log(
-        `HTTPS server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
+        `HTTPS server running in ${process.env.NODE_ENV} mode on port ${PORT}`
           .yellow.bold
       )
     );
-
-  http.createServer(function (req, res) {
-    res.writeHead(301, {
-      location: 'https://' + req.headers['host'] + req.url
-    });
-    res.end();
-  });
 } else {
   app.listen(PORT, () =>
     console.log(
