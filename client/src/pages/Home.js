@@ -48,8 +48,6 @@ function Home() {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	console.log(windowDimensions.height);
-
 	return (
 		<Row>
 			<Col md={7} className='mapSpace p-0'>
