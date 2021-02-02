@@ -121,6 +121,13 @@ if (process.env.NODE_ENV === 'production') {
           .yellow.bold
       )
     );
+
+  http.createServer(function (req, res) {
+    res.writeHead(301, {
+      location: 'https://' + req.headers['host'] + req.url
+    });
+    res.end();
+  });
 } else {
   app.listen(PORT, () =>
     console.log(
