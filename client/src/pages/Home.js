@@ -56,8 +56,6 @@ function Home() {
     // eslint-disable-next-line
   }, []);
 
-  console.log(windowDimensions.height);
-
   return (
     <Row>
       <Col md={7} className="mapSpace p-0">
