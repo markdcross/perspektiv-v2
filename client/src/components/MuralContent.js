@@ -9,6 +9,8 @@ import RestaurantList from './RestaurantList';
 import muralsAPI from '../utils/murals-API';
 import PhotoModal from './PhotoModal';
 import { useMediaQuery } from 'react-responsive';
+import { SRLWrapper } from "simple-react-lightbox";
+
 
 export default function MuralContent(props) {
   const Desktop = ({ children }) => {
@@ -49,6 +51,48 @@ export default function MuralContent(props) {
   }
 
   const [modalShow, setModalShow] = useState(false);
+
+  const options = {
+    settings: {
+      overlayColor: "rgba(255, 105, 180, 0.8)",
+      autoplaySpeed: 0,
+      transitionSpeed: 900,
+      disableKeyboardControls: true,
+      disablePanzoom: false,
+      disableWheelControls: true,
+    },
+    buttons: {
+      showAutoplayButton: false,
+      showCloseButton: false,
+      showDownloadButton: false,
+      showFullscreenButton: false,
+      showNextButton: false,
+      showPrevButton: false,
+      showThumbnailsButton: false,
+    },
+    caption: {
+      captionColor: "#000000",
+      captionFontFamily: "Raleway, sans-serif",
+      captionFontWeight: "300",
+      captionTextTransform: "uppercase",
+    },
+    thumbnails: {
+      showThumbnails: false,
+    }
+  };
+
+  const [index, setIndex] = useState(0);
+  const localSelect = () => {
+    setIndex(0);
+  };
+
+  const foodSelect = () => {
+    setIndex(1);
+  };
+
+  const handleSelect = (selectedIndex, e) => {
+    setIndex(selectedIndex);
+  };
 
   return (
     <>
@@ -98,12 +142,17 @@ export default function MuralContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className="sideImgBox">
-              <Col className="p-0">
+            <Row className='sideImgBox'>
+              <Col className='p-0'>
+              <SRLWrapper options={options}>
+
                 <Image
                   className="img-fluid w-100"
                   src={`../../muralImages/${singleMuralState.data.data.imageFile}`}
+                  alt={singleMuralState.data.data.description}
                 />
+                              </SRLWrapper>
+
               </Col>
             </Row>
             <Mobile>
@@ -209,49 +258,60 @@ export default function MuralContent(props) {
                   <Col className="pr-1 text-right">
                     {pageInd ? (
                       <Button
-                        size="mini"
-                        color="yellow"
+                        size='small'
+                        color='yellow'
                         compact
-                        floated="right"
+                        floated='right'
+                        className="w-75"
+                        content="Locals!"
                       />
                     ) : (
                       <Button
-                        size="mini"
-                        color="yellow"
+                        size='small'
+                        color='grey'
                         compact
-                        floated="right"
-                        disabled
+                        floated='right'
+                        className="w-75"
+                        content="Locals!"
+                        onClick={localSelect}
                       />
                     )}
                   </Col>
                   <Col className="pl-1 text-left">
                     {pageInd ? (
                       <Button
-                        size="mini"
-                        color="yellow"
+                        size='small'
+                        color='grey'
                         compact
-                        floated="left"
-                        disabled
+                        floated='left'
+                        className="w-75"
+                        content="Get Food!"
+                        onClick={foodSelect}
                       />
                     ) : (
                       <Button
-                        size="mini"
-                        color="yellow"
+                        size='small'
+                        color='yellow'
                         compact
-                        floated="left"
+                        floated='left'
+                        content="Get Food!"
+                        className="w-75"
                       />
                     )}
                   </Col>
                 </Row>
                 <Carousel
+                  activeIndex={index}
+                  onSelect={handleSelect}
+                  touch={true}
                   interval={10000000}
                   wrap={false}
-                  onClick={pageIndicate}
+                  onSlide={pageIndicate}
                   nextIcon={
-                    <Icon name="dot circle outline" color="pink" size="huge" />
+                    <Icon name='angle right' size='huge' />
                   }
                   prevIcon={
-                    <Icon name="dot circle outline" color="pink" size="huge" />
+                    <Icon name='angle left' size='huge' />
                   }
                 >
                   <Carousel.Item>
