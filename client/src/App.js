@@ -27,7 +27,15 @@ import history from './components/History';
 import { usePosition } from 'use-position';
 import { Container } from 'react-bootstrap';
 
+// Loading Screen
+import LoadingScreen from './components/Loading'
+
 const App = () => {
+  const [loading, setLoading] = useState(true)
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000)
+  }, [])
+
   const [muralState, setMuralState] = useState([]);
   // const [userState, setUserState] = useState();
 
@@ -41,6 +49,8 @@ const App = () => {
   const position = usePosition();
 
   return (
+    <>
+    {loading === false ? (
     <MuralContext.Provider value={muralState}>
     <LocationContext.Provider value={position}>
       <Router history={history}>
@@ -50,6 +60,10 @@ const App = () => {
       </Router>
     </LocationContext.Provider>
   </MuralContext.Provider>
+        ) : (
+          <LoadingScreen />
+        )}
+        </>
     // <AuthState>
     //   <AlertState>
     //     {/* <AuthProvider> */}
