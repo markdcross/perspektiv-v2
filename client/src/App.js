@@ -6,16 +6,14 @@ import LocationContext from "./context/LocationContext";
 import MuralContext from "./context/MuralContext";
 
 // NEW auth context provider
-import AuthState from "./context/auth-v2/AuthState";
-import AlertState from "./context/alert/AlertState";
+import AuthState from './context/auth-v2/AuthState';
+import AlertState from './context/alert/AlertState';
+import setAuthToken from './utils/setAuthToken';
 
 // page components
 import Home from "./pages/Home";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-
-// OLD auth context provider
-// import { AuthProvider } from './context/AuthContext';
 
 // mural API
 import muralsAPI from "./utils/murals-API";
@@ -29,6 +27,11 @@ import { Container } from "react-bootstrap";
 
 // Loading Screen
 import LoadingScreen from "./components/Loading";
+
+//
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
 	const [loading, setLoading] = useState(true);
@@ -50,16 +53,16 @@ const App = () => {
 
 	return (
 		<>
-			{/* <AuthState>
-				<AlertState> */}
+			<AuthState>
+				<AlertState>
 					{loading === false ? (
 						<MuralContext.Provider value={muralState}>
 							<LocationContext.Provider value={position}>
 								<Router history={history}>
 									<Container fluid>
 										<Route path='/' component={Home} />
-										{/* <Route exact path="/register" component={Register} />
-		            			<Route exact path="/login" component={Login} /> */}
+										<Route exact path="/register" component={Register} />
+										<Route exact path="/login" component={Login} />
 									</Container>
 								</Router>
 							</LocationContext.Provider>
@@ -67,8 +70,8 @@ const App = () => {
 					) : (
 						<LoadingScreen />
 					)}
-				{/* </AlertState>
-			</AuthState> */}
+				</AlertState>
+			</AuthState>
 		</>
 	);
 };

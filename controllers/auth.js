@@ -51,13 +51,13 @@ exports.login = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({ email }).select('+password');
   // if user doesnt exist, then send error
   if (!user) {
-    return next(new ErrorResponse('Invalid credentials. Access denied.', 401));
+    return next(new ErrorResponse('Invalid credentials.', 401));
   }
   // check if the password matches
   const isMatch = await user.matchPassword(password);
   // if the passwords do not match, then send an error message
   if (!isMatch) {
-    return next(new ErrorResponse('Invalid credentials. Access denied.', 401));
+    return next(new ErrorResponse('Invalid credentials.', 401));
   }
   // create and store the token in cookies using the sendTokenResponse() helper function
   sendTokenResponse(user, 200, res);
