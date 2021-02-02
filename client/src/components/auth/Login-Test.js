@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth-v2/authContext';
 import Alerts from '../Alerts';
+import { useHistory } from 'react-router-dom';
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);
   const authContext = useContext(AuthContext);
+  const history = useHistory();
+
   const { setAlert } = alertContext;
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      history.push('/');
     }
     if (error === 'Invalid credentials.') {
       setAlert(error, 'danger');
