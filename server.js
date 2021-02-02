@@ -1,4 +1,6 @@
 const path = require('path');
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
@@ -6,7 +8,7 @@ const colors = require('colors');
 const fileupload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
+// const helmet = require('helmet');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
@@ -31,12 +33,13 @@ const restaurants = require('./routes/restaurants');
 const users = require('./routes/users');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // compression middleware
 app.use(compression());
 
 // Body parser
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended: true }));
 
 // cookie parse
 app.use(cookieParser());
@@ -53,21 +56,21 @@ app.use(fileupload());
 app.use(mongoSanitize());
 
 // Set security headers
-app.use(helmet());
+// app.use(helmet());
 
 // Prevent XSS attacks
-app.use(xss());
+// app.use(xss());
 
 // Rate limiting
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000, // 10 minutes
-  max: 100
-});
+// const limiter = rateLimit({
+//   windowMs: 10 * 60 * 1000, // 10 minutes
+//   max: 1000
+// });
 
-app.use(limiter);
+// app.use(limiter);
 
 // Prevent http param pollution
-app.use(hpp());
+// app.use(hpp());
 
 // Enable CORS
 app.use(cors());
@@ -85,7 +88,7 @@ app.use(errorHandler);
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, 'client/build')));
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
@@ -95,14 +98,13 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/public')));
 }
 
-const PORT = process.env.PORT || 5000;
-
 app.listen(PORT, () =>
   console.log(
     `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
       .yellow.bold
   )
 );
+// }
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
