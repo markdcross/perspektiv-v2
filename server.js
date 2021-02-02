@@ -1,4 +1,6 @@
 const path = require('path');
+const https = require('https');
+const fs = require('fs');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
@@ -31,6 +33,7 @@ const restaurants = require('./routes/restaurants');
 const users = require('./routes/users');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // compression middleware
 app.use(compression());
@@ -95,14 +98,37 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/public')));
 }
 
-const PORT = process.env.PORT || 5000;
+// SSL in production
+if (process.env.NODE_ENV === 'production') {
+  const privateKey = fs.readFileSync(
+    '/etc/letsencrypt/live/perspektivrva.com/privkey.pem',
+    'utf8'
+  );
+  const certificate = fs.readFileSync(
+    '/etc/letsencrypt/live/perspektivrva.com/fullchain.pem',
+    'utf8'
+  );
+  const credentials = {
+    key: privateKey,
+    cert: certificate
+  };
 
-app.listen(PORT, () =>
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
-      .yellow.bold
-  )
-);
+  https
+    .createServer(credentials, app)
+    .listen(PORT, () =>
+      console.log(
+        `HTTPS server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
+          .yellow.bold
+      )
+    );
+} else {
+  app.listen(PORT, () =>
+    console.log(
+      `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
+        .yellow.bold
+    )
+  );
+}
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
