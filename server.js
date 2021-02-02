@@ -39,7 +39,7 @@ const PORT = process.env.PORT || 5000;
 app.use(compression());
 
 // Body parser
-app.use(express.json({ extended: false }));
+app.use(express.json({ extended: true }));
 
 // cookie parse
 app.use(cookieParser());
@@ -98,37 +98,37 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/public')));
 }
 
-// SSL in production
-if (process.env.NODE_ENV === 'production') {
-  const privateKey = fs.readFileSync(
-    '/etc/letsencrypt/live/perspektivrva.com/privkey.pem',
-    'utf8'
-  );
-  const certificate = fs.readFileSync(
-    '/etc/letsencrypt/live/perspektivrva.com/fullchain.pem',
-    'utf8'
-  );
-  const credentials = {
-    key: privateKey,
-    cert: certificate
-  };
+// // SSL in production
+// if (process.env.NODE_ENV === 'production') {
+//   const privateKey = fs.readFileSync(
+//     '/etc/letsencrypt/live/perspektivrva.com/privkey.pem',
+//     'utf8'
+//   );
+//   const certificate = fs.readFileSync(
+//     '/etc/letsencrypt/live/perspektivrva.com/fullchain.pem',
+//     'utf8'
+//   );
+//   const credentials = {
+//     key: privateKey,
+//     cert: certificate
+//   };
 
-  https
-    .createServer(credentials, app)
-    .listen(PORT, () =>
-      console.log(
-        `HTTPS server running in ${process.env.NODE_ENV} mode on port ${PORT}`
-          .yellow.bold
-      )
-    );
-} else {
-  app.listen(PORT, () =>
-    console.log(
-      `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
-        .yellow.bold
-    )
-  );
-}
+//   https
+//     .createServer(credentials, app)
+//     .listen(PORT, () =>
+//       console.log(
+//         `HTTPS server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+//           .yellow.bold
+//       )
+//     );
+// } else {
+app.listen(PORT, () =>
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port http://localhost:${PORT}`
+      .yellow.bold
+  )
+);
+// }
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
