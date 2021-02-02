@@ -50,37 +50,26 @@ const App = () => {
 
 	return (
 		<>
-			{loading === false ? (
-				<MuralContext.Provider value={muralState}>
-					<LocationContext.Provider value={position}>
-						<Router history={history}>
-							<Container fluid>
-								<Route path='/' component={Home} />
-							</Container>
-						</Router>
-					</LocationContext.Provider>
-				</MuralContext.Provider>
-			) : (
-				<LoadingScreen />
-			)}
+			{/* <AuthState>
+				<AlertState> */}
+					{loading === false ? (
+						<MuralContext.Provider value={muralState}>
+							<LocationContext.Provider value={position}>
+								<Router history={history}>
+									<Container fluid>
+										<Route path='/' component={Home} />
+										{/* <Route exact path="/register" component={Register} />
+		            			<Route exact path="/login" component={Login} /> */}
+									</Container>
+								</Router>
+							</LocationContext.Provider>
+						</MuralContext.Provider>
+					) : (
+						<LoadingScreen />
+					)}
+				{/* </AlertState>
+			</AuthState> */}
 		</>
-		// <AuthState>
-		//   <AlertState>
-		//     {/* <AuthProvider> */}
-		//     <MuralContext.Provider value={muralState}>
-		//       <LocationContext.Provider value={position}>
-		//         <Router history={history}>
-		//           <Container fluid>
-		//             <Route exact path="/" component={Home} />
-		//             <Route exact path="/register" component={Register} />
-		//             <Route exact path="/login" component={Login} />
-		//           </Container>
-		//         </Router>
-		//       </LocationContext.Provider>
-		//     </MuralContext.Provider>
-		//     {/* </AuthProvider> */}
-		//   </AlertState>
-		// </AuthState>
 	);
 };
 
