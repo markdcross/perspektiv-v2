@@ -20,7 +20,7 @@
 //         `http://localhost:5000/api/v1/murals/${response[i]._id}`,
 //         {
 //           // set the qr key and value pair on that document in the database
-//           qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://perspektivrva.com/api/v1/murals/${response[i]._id}?visited=true`
+//           qrCode: `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://perspektivrva.com/murals/${response[i]._id}?visited=true`
 //         }
 //       );
 //       res.data.json;
