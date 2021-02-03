@@ -96,16 +96,21 @@ export default function UserLogin(props) {
                 required
               />
             </Form.Group>
-            <Button variant="warning" type="submit" className="w-100">
+            <Button
+              variant="warning"
+              type="submit"
+              className="w-100"
+              disabled={loading}
+            >
               Submit
             </Button>
           </Form>
           <a className="clearfix" href="/">
             Forgot your password?
           </a>
-          <Link to="/createacct">
+          <Link to="/register">
             <Button variant="secondary" type="submit" className="w-75 mt-4">
-              Create Account
+              Don't have an account? Sign up.
             </Button>
           </Link>
         </Col>

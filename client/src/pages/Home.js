@@ -91,7 +91,7 @@ function Home() {
                   <Route path="/register-test">
                     <Register />
                   </Route>
-                  <Route path="/createacct">
+                  <Route path="/register">
                     <UserCreateAcct />
                   </Route>
                   <Route exact path={path}>
@@ -121,7 +121,7 @@ function Home() {
             <Route path="/register-test">
               <Register />
             </Route>
-            <Route path="/createacct">
+            <Route path="/register">
               <UserCreateAcct />
             </Route>
             <Route exact path={path}>

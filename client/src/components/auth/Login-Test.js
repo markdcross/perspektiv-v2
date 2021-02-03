@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Form, Button, Card, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import AlertContext from '../../context/alert/alertContext';
 import AuthContext from '../../context/auth-v2/authContext';
 import Alerts from '../Alerts';
-import { useHistory } from 'react-router-dom';
 
 const Login = (props) => {
   const alertContext = useContext(AlertContext);

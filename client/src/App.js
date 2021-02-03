@@ -61,7 +61,11 @@ const App = () => {
                 <Router history={history}>
                   <Container fluid>
                     <Route path="/" component={Home} />
-                    <Route exact path="/register" component={Register} />
+                    <Route
+                      exact
+                      path="/create-an-account"
+                      component={Register}
+                    />
                     <Route exact path="/login" component={Login} />
                   </Container>
                 </Router>
