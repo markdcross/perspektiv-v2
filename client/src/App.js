@@ -12,8 +12,6 @@ import setAuthToken from './utils/setAuthToken';
 
 // page components
 import Home from './pages/Home';
-import Register from './components/auth/Register-Test';
-import Login from './components/auth/Login-Test';
 
 // mural API
 import muralsAPI from './utils/murals-API';
@@ -61,12 +59,12 @@ const App = () => {
                 <Router history={history}>
                   <Container fluid>
                     <Route path="/" component={Home} />
-                    <Route
+                    {/* <Route
                       exact
                       path="/create-an-account"
                       component={Register}
                     />
-                    <Route exact path="/login" component={Login} />
+                    <Route exact path="/login" component={Login} /> */}
                   </Container>
                 </Router>
               </LocationContext.Provider>

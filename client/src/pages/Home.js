@@ -3,8 +3,6 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import Mapbucket from '../components/Mapbucket';
 import UserLogin from '../components/UserLogin';
-import Login from '../components/auth/Login-Test';
-import Register from '../components/auth/Register-Test';
 import UserCreateAcct from '../components/UserCreateAcct';
 import ScrollContent from '../components/ScrollContent';
 import MuralContent from '../components/MuralContent';
@@ -83,14 +81,6 @@ function Home() {
                   <Route path="/login">
                     <UserLogin />
                   </Route>
-                  {/* Login Test Component */}
-                  <Route path="/login-test">
-                    <Login />
-                  </Route>
-                  {/* Register Test Component */}
-                  <Route path="/register-test">
-                    <Register />
-                  </Route>
                   <Route path="/register">
                     <UserCreateAcct />
                   </Route>
@@ -112,14 +102,6 @@ function Home() {
           <Switch>
             <Route path="/login">
               <UserLogin />
-            </Route>
-            {/* Login Test Component */}
-            <Route path="/login-test">
-              <Login />
-            </Route>
-            {/* Register Test Component */}
-            <Route path="/register-test">
-              <Register />
             </Route>
             <Route path="/register">
               <UserCreateAcct />
