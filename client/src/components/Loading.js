@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Row, Col, Image, Container } from "react-bootstrap";
 
 export default function Loading() {

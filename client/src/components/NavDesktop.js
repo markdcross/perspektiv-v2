@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactRoundedImage from 'react-rounded-image';
+// import ReactRoundedImage from 'react-rounded-image';
 import { Row, Col, Image } from 'react-bootstrap';
-import { Button, Progress } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import UserStatus from "./UserStatus"
 
 export default function NavDesktop() {
   return (
@@ -19,7 +20,8 @@ export default function NavDesktop() {
           </Link>
         </Col>
       </Row>
-      <Row className="respLogin">
+      <UserStatus />
+      {/* <Row className="respLogin">
         <Col className="d-flex justify-content-center my-2">
           <ReactRoundedImage
             image="/assets/images/avatars/matthew.png"
@@ -39,6 +41,8 @@ export default function NavDesktop() {
       <Row className="pb-2">
         <Col>
           <Progress
+            success={false}
+            disabled={false}
             progress="value"
             value={3}
             total={10}
@@ -47,7 +51,7 @@ export default function NavDesktop() {
             size="small"
           />
         </Col>
-      </Row>
+      </Row> */}
     </div>
   );
 }

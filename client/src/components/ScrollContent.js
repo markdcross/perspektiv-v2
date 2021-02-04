@@ -37,6 +37,7 @@ export default function ScrollContent(props) {
                       <Link to={'/murals/' + mural.id}>
                         <Image
                           className='img-fluid w-100 inner'
+                          loading="lazy"
                           src={`../../muralImages/${mural.imageFile}`}
                         />
                       </Link>

@@ -3,6 +3,8 @@ import ReactRoundedImage from "react-rounded-image";
 import { Row, Col, Image } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import UserStatus from "./UserStatus"
+
 
 export default function NavDesktopM() {
 	return (
