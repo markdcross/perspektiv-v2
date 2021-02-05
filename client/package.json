@@ -31,7 +31,8 @@
     "use-position": "0.0.8",
     "use-supercluster": "^0.2.9",
     "uuid": "^8.3.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "worker-loader": "^3.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
