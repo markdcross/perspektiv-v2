@@ -38,7 +38,7 @@ const DistanceButton = ({ location, id }) => {
       <Button
         size='mini'
         color='yellow'
-        content='Distance'
+        content='  '
         icon='location arrow'
         label={{
           basic: true,

@@ -5,6 +5,9 @@ import NavDesktopM from "./NavDesktopM";
 import { useMediaQuery } from "react-responsive";
 
 export default function UserLogin(props) {
+	const setTop = props.setTopSnap;
+	setTop(0);
+
 	const Desktop = ({ children }) => {
 		const isDesktop = useMediaQuery({ minWidth: 768 });
 		return isDesktop ? children : null;

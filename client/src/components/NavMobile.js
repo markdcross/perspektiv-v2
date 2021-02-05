@@ -9,18 +9,18 @@ export default function NavMobile() {
 		<Row className='fixed-bottom fbNav'>
 			<Col>
 				<Row>
-					<Col className='pt-2'>
+					<Col className='pt-3 pr-0'>
 						<Link to={"/"}>
 							<Image className='w-100' src='/assets/images/logo/plogo.png' />
 						</Link>
 					</Col>
-					<Col className='my-2 respLoginBreak fluid'>
+					<Col xs={5}className='my-2 respLoginBreak fluid pl-2 pr-0'>
 						<Button
 							content='Tesdfgsdfg'
 							className='achievementMark px-6 w-100 clearfix'
 							color='yellow'
 						>
-							Explorer
+							Mural Elite
 							<div className='achievementMarkCount'>
 								<p className='achievementMarkText'>42</p>
 							</div>
@@ -35,7 +35,7 @@ export default function NavMobile() {
 							</div>
 						</Button>
 					</Col>
-					<Col className='text-right pt-2'>
+					<Col className='text-right pt-2 pl-0'>
 						<Link to='/login'>
 							<Button content='LOGIN' basic />
 						</Link>

@@ -25,6 +25,7 @@ function Home() {
   };
 
   const [isOpen, setOpen] = useState(false);
+  const [topSnap, setTopSnap] = useState(1);
 
   let { path } = useRouteMatch();
 
@@ -63,35 +64,36 @@ function Home() {
       </Col>
       <Col md={5}>
         <Mobile>
+          <NavMobile />
           <Sheet
             isOpen={true}
             onClose={() => setOpen(false)}
             snapPoints={[windowDimensions.height, 250, 108]}
-            initialSnap={1}
+            initialSnap={topSnap}
             onSnap={(snapIndex) =>
               console.log('> Current snap point index:', snapIndex)
             }
             className="sheetZfix"
           >
-            <NavMobile />
             <Sheet.Container>
               <Sheet.Header></Sheet.Header>
               <Sheet.Content>
+                {/* <MobileRoute setTopSnap={setTopSnap} /> */}
                 <Switch>
                   <Route path="/login">
-                    <UserLogin />
+                    <UserLogin setTopSnap={setTopSnap}/>
                   </Route>
                   <Route path="/createacct">
-                    <UserCreateAcct />
+                    <UserCreateAcct setTopSnap={setTopSnap}/>
                   </Route>
                   <Route exact path={path}>
-                    <ScrollContent />
+                    <ScrollContent setTopSnap={setTopSnap}/>
                   </Route>
                   <Route path="/murals/:artId">
-                    <MuralContent />
+                    <MuralContent setTopSnap={setTopSnap}/>
                   </Route>
                   <Route path="/restaurants/:restId">
-                    <RestaurantContent />
+                    <RestaurantContent setTopSnap={setTopSnap}/>
                   </Route>
                 </Switch>
               </Sheet.Content>
@@ -101,19 +103,19 @@ function Home() {
         <Desktop>
           <Switch>
             <Route path="/login">
-              <UserLogin />
+              <UserLogin setTopSnap={setTopSnap}/>
             </Route>
             <Route path="/createacct">
-              <UserCreateAcct />
+              <UserCreateAcct setTopSnap={setTopSnap}/>
             </Route>
             <Route exact path={path}>
-              <ScrollContent />
+              <ScrollContent setTopSnap={setTopSnap}/>
             </Route>
             <Route path="/murals/:artId">
-              <MuralContent />
+              <MuralContent topSnap={topSnap} setTopSnap={setTopSnap}/>
             </Route>
             <Route path="/restaurants/:restId">
-              <RestaurantContent />
+              <RestaurantContent setTopSnap={setTopSnap}/>
             </Route>
           </Switch>
         </Desktop>

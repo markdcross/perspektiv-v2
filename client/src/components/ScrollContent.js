@@ -8,6 +8,9 @@ import NavDesktop from './NavDesktop';
 import { useMediaQuery } from 'react-responsive';
 
 export default function ScrollContent(props) {
+  const setTop = props.setTopSnap;
+  setTop(1);
+
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
     return isDesktop ? children : null;
@@ -54,7 +57,7 @@ export default function ScrollContent(props) {
                       <Col xs={4} className='text-right'>
                         <Button
                           size='mini'
-                          content='Visits'
+                          content='  '
                           icon='street view'
                           label={{
                             as: 'a',

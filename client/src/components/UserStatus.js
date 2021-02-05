@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import ReactRoundedImage from "react-rounded-image";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
 import RankUpModal from "./RankUpModal";
 // import authAPI from "../utils/auth-API";
 
-export default function UserStatus() {
+export default function UserStatus(props) {
 	const [currentUserState, setCurrentUserState] = useState({
-		muralsVisited: 49,
+		muralsVisited: 79,
 		avatar: "//www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
 		USERAUTHENTICATED: true,
 	});
@@ -44,14 +44,14 @@ export default function UserStatus() {
 	};
 
 	const timerXP = async () => {
-        resetXP = 0;
-		await timeout(2000);
-        console.log("resetXP after Timer" + resetXP);
-        setModalShow(true);
+		resetXP = 0;
+		await timeout(1500);
+		console.log("resetXP after Timer" + resetXP);
+		setModalShow(true);
 		setBoostState(1);
 		setResetState(resetXP);
 	};
-	let levelMark = 0;
+	// let levelMark = 0;
 	const selectLevel = (visited) => {
 		switch (true) {
 			case visited >= 0 && visited <= 10:
@@ -202,12 +202,26 @@ export default function UserStatus() {
 							/>
 						</Col>
 						<Col xs={1} className='text-left pl-0'>
-							<div className='xpMarkCount'>
-								<p className='xpMarkText'>{userXP[userLevel + boostState]}</p>
-							</div>
+							<OverlayTrigger
+								placement='top'
+								overlay={
+									<Tooltip id={`tooltip-top`}>
+										Visits needed for next rank!
+									</Tooltip>
+								}
+							>
+								<div className='xpMarkCount'>
+									<p className='xpMarkText'>{userXP[userLevel + boostState]}</p>
+								</div>
+							</OverlayTrigger>
 						</Col>
 					</Row>
-					<RankUpModal show={modalShow} onHide={() => setModalShow(false)} title={userRank[userLevel + boostState]} xp={userXP[userLevel + boostState]}/>
+					<RankUpModal
+						show={modalShow}
+						onHide={() => setModalShow(false)}
+						title={userRank[userLevel + boostState]}
+						xp={userXP[userLevel + boostState]}
+					/>
 				</>
 			)}
 		</React.Fragment>

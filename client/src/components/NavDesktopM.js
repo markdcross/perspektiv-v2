@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import UserStatus from "./UserStatus"
 
 
-export default function NavDesktopM() {
+export default function NavDesktopM(props) {
+	console.log(props.snapState);
 	return (
 		<>
 			<Row className='fbNav'>
@@ -15,7 +16,7 @@ export default function NavDesktopM() {
 						<Image className='w-100' src='/assets/images/logo/plogo.png' />
 					</Link>
 				</Col>
-				<Col className='my-2 respLoginBreakDN fluid'>
+				<Col isHidden className='my-2 respLoginBreakDN fluid'>
 					<Button
 						className='achievementMark px-6 w-100 clearfix'
 						color='yellow'
