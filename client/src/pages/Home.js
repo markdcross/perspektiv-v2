@@ -24,6 +24,8 @@ function Home() {
     return isMobile ? children : null;
   };
 
+  const [progressControl, setProgressControl] = useState(1);
+
   const [isOpen, setOpen] = useState(false);
   const [topSnap, setTopSnap] = useState(1);
 
@@ -112,7 +114,7 @@ function Home() {
               <ScrollContent setTopSnap={setTopSnap}/>
             </Route>
             <Route path="/murals/:artId">
-              <MuralContent topSnap={topSnap} setTopSnap={setTopSnap}/>
+              <MuralContent topSnap={topSnap} setTopSnap={setTopSnap} progressControl={progressControl} setProgressControl={setProgressControl}/>
             </Route>
             <Route path="/restaurants/:restId">
               <RestaurantContent setTopSnap={setTopSnap}/>
