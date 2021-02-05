@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Row, Col, Image, Carousel } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Checkbox, Icon } from 'semantic-ui-react';
@@ -9,10 +9,17 @@ import RestaurantList from './RestaurantList';
 import muralsAPI from '../utils/murals-API';
 import PhotoModal from './PhotoModal';
 import { useMediaQuery } from 'react-responsive';
-import { SRLWrapper } from "simple-react-lightbox";
+import { SRLWrapper } from 'simple-react-lightbox';
+import { useHistory } from 'react-router-dom';
 
+// auth context
+import AuthContext from '../context/auth-v2/authContext.js';
 
 export default function MuralContent(props) {
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated } = authContext;
+  const history = useHistory();
+
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
     return isDesktop ? children : null;
@@ -54,12 +61,12 @@ export default function MuralContent(props) {
 
   const options = {
     settings: {
-      overlayColor: "rgba(255, 105, 180, 0.8)",
+      overlayColor: 'rgba(255, 105, 180, 0.8)',
       autoplaySpeed: 0,
       transitionSpeed: 900,
       disableKeyboardControls: true,
       disablePanzoom: false,
-      disableWheelControls: true,
+      disableWheelControls: true
     },
     buttons: {
       showAutoplayButton: false,
@@ -68,16 +75,16 @@ export default function MuralContent(props) {
       showFullscreenButton: false,
       showNextButton: false,
       showPrevButton: false,
-      showThumbnailsButton: false,
+      showThumbnailsButton: false
     },
     caption: {
-      captionColor: "#000000",
-      captionFontFamily: "Raleway, sans-serif",
-      captionFontWeight: "300",
-      captionTextTransform: "uppercase",
+      captionColor: '#000000',
+      captionFontFamily: 'Raleway, sans-serif',
+      captionFontWeight: '300',
+      captionTextTransform: 'uppercase'
     },
     thumbnails: {
-      showThumbnails: false,
+      showThumbnails: false
     }
   };
 
@@ -113,7 +120,15 @@ export default function MuralContent(props) {
                   </Link>
                 </Col>
                 <Col className="text-right pb-2">
-                  <Button color="yellow" onClick={() => setModalShow(true)}>
+                  {/* if the user is not logged in, then clicking on the post photo button below SHOULD take them to the /login page */}
+                  <Button
+                    color="yellow"
+                    onClick={() => {
+                      isAuthenticated
+                        ? setModalShow(true)
+                        : history.push('/login');
+                    }}
+                  >
                     Post Photo
                   </Button>
                   <PhotoModal
@@ -132,7 +147,14 @@ export default function MuralContent(props) {
                   </Link>
                 </Col>
                 <Col className="text-right pb-2">
-                  <Button color="yellow" onClick={() => setModalShow(true)}>
+                  <Button
+                    color="yellow"
+                    onClick={() => {
+                      isAuthenticated
+                        ? setModalShow(true)
+                        : history.push('/login');
+                    }}
+                  >
                     Post Photo
                   </Button>
                   <PhotoModal
@@ -142,17 +164,15 @@ export default function MuralContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className='sideImgBox'>
-              <Col className='p-0'>
-              <SRLWrapper options={options}>
-
-                <Image
-                  className="img-fluid w-100"
-                  src={`../../muralImages/${singleMuralState.data.data.imageFile}`}
-                  alt={singleMuralState.data.data.description}
-                />
-                              </SRLWrapper>
-
+            <Row className="sideImgBox">
+              <Col className="p-0">
+                <SRLWrapper options={options}>
+                  <Image
+                    className="img-fluid w-100"
+                    src={`../../muralImages/${singleMuralState.data.data.imageFile}`}
+                    alt={singleMuralState.data.data.description}
+                  />
+                </SRLWrapper>
               </Col>
             </Row>
             <Mobile>
@@ -258,19 +278,19 @@ export default function MuralContent(props) {
                   <Col className="pr-1 text-right">
                     {pageInd ? (
                       <Button
-                        size='small'
-                        color='yellow'
+                        size="small"
+                        color="yellow"
                         compact
-                        floated='right'
+                        floated="right"
                         className="w-75"
                         content="Locals!"
                       />
                     ) : (
                       <Button
-                        size='small'
-                        color='grey'
+                        size="small"
+                        color="grey"
                         compact
-                        floated='right'
+                        floated="right"
                         className="w-75"
                         content="Locals!"
                         onClick={localSelect}
@@ -280,20 +300,20 @@ export default function MuralContent(props) {
                   <Col className="pl-1 text-left">
                     {pageInd ? (
                       <Button
-                        size='small'
-                        color='grey'
+                        size="small"
+                        color="grey"
                         compact
-                        floated='left'
+                        floated="left"
                         className="w-75"
                         content="Get Food!"
                         onClick={foodSelect}
                       />
                     ) : (
                       <Button
-                        size='small'
-                        color='yellow'
+                        size="small"
+                        color="yellow"
                         compact
-                        floated='left'
+                        floated="left"
                         content="Get Food!"
                         className="w-75"
                       />
@@ -307,12 +327,8 @@ export default function MuralContent(props) {
                   interval={10000000}
                   wrap={false}
                   onSlide={pageIndicate}
-                  nextIcon={
-                    <Icon name='angle right' size='huge' />
-                  }
-                  prevIcon={
-                    <Icon name='angle left' size='huge' />
-                  }
+                  nextIcon={<Icon name="angle right" size="huge" />}
+                  prevIcon={<Icon name="angle left" size="huge" />}
                 >
                   <Carousel.Item>
                     <MuralUserContent />
