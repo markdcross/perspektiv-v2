@@ -56,21 +56,21 @@ app.use(fileupload());
 app.use(mongoSanitize());
 
 // Set security headers
-// app.use(helmet());
+app.use(helmet());
 
 // Prevent XSS attacks
-// app.use(xss());
+app.use(xss());
 
 // Rate limiting
-// const limiter = rateLimit({
-//   windowMs: 10 * 60 * 1000, // 10 minutes
-//   max: 1000
-// });
+const limiter = rateLimit({
+  windowMs: 10 * 60 * 1000, // 10 minutes
+  max: 1000
+});
 
-// app.use(limiter);
+app.use(limiter);
 
 // Prevent http param pollution
-// app.use(hpp());
+app.use(hpp());
 
 // Enable CORS
 app.use(cors());
