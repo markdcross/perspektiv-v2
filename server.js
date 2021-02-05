@@ -59,7 +59,7 @@ app.use(mongoSanitize());
 // app.use(helmet());
 
 // Prevent XSS attacks
-// app.use(xss());
+app.use(xss());
 
 // Rate limiting
 // const limiter = rateLimit({
@@ -70,7 +70,7 @@ app.use(mongoSanitize());
 // app.use(limiter);
 
 // Prevent http param pollution
-// app.use(hpp());
+app.use(hpp());
 
 // Enable CORS
 app.use(cors());

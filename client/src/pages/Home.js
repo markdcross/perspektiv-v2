@@ -85,7 +85,7 @@ function Home() {
                   <Route path="/login">
                     <UserLogin setTopSnap={setTopSnap}/>
                   </Route>
-                  <Route path="/createacct">
+                  <Route path="/register">
                     <UserCreateAcct setTopSnap={setTopSnap}/>
                   </Route>
                   <Route exact path={path}>
@@ -107,7 +107,7 @@ function Home() {
             <Route path="/login">
               <UserLogin setTopSnap={setTopSnap}/>
             </Route>
-            <Route path="/createacct">
+            <Route path="/register">
               <UserCreateAcct setTopSnap={setTopSnap}/>
             </Route>
             <Route exact path={path}>

@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import { Row, Col, Image } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import UserStatus from "./UserStatus"
+import LogoutBtn from "./LogoutBtn";
+import UserStatus from "./UserStatus";
 
+// auth context
+import AuthContext from "../context/auth-v2/authContext.js";
 
 export default function NavDesktopM(props) {
 	console.log(props.snapState);
+
+	const authContext = useContext(AuthContext);
+
+	const { isAuthenticated } = authContext;
+
 	return (
 		<>
 			<Row className='fbNav'>
@@ -16,7 +24,7 @@ export default function NavDesktopM(props) {
 						<Image className='w-100' src='/assets/images/logo/plogo.png' />
 					</Link>
 				</Col>
-				<Col isHidden className='my-2 respLoginBreakDN fluid'>
+				<Col className='my-2 respLoginBreakDN fluid'>
 					<Button
 						className='achievementMark px-6 w-100 clearfix'
 						color='yellow'
@@ -36,11 +44,15 @@ export default function NavDesktopM(props) {
 						</div>
 					</Button>
 				</Col>
-				<Col className='text-right pt-2'>
-					<Link to='/login'>
-						<Button content='LOGIN' basic />
-					</Link>
-				</Col>
+				{isAuthenticated ? (
+					<LogoutBtn />
+				) : (
+					<Col className='text-right pt-2'>
+						<Link to='/login'>
+							<Button content='LOGIN' basic />
+						</Link>
+					</Col>
+				)}
 			</Row>
 			<Row className='pt-2 '>
 				<Col>

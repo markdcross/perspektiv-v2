@@ -5,6 +5,13 @@ import ReactRoundedImage from 'react-rounded-image';
 import { AutoSizer } from 'react-virtualized';
 import MuralContext from '../context/MuralContext';
 
+// react-map-gl production deployment fix
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl';
+// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
+
 export default function Mapbucket() {
   const muralState = useContext(MuralContext);
 

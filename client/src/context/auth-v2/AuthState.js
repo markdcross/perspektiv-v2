@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import AuthAPI from '../../utils/auth-API';
 import axios from 'axios';
 import AuthContext from './authContext';
@@ -98,6 +98,8 @@ const AuthState = (props) => {
   // logout user
   const logout = () => {
     console.log('logout user');
+    axios.get('/api/v1/auth/logout');
+    dispatch({ type: LOGOUT });
   };
 
   // clear errors
