@@ -2,7 +2,9 @@ import React from "react";
 import { Modal, Image } from "react-bootstrap";
 
 
+
 export default function RankUpModal(props) {
+
 	return (
 		<Modal
 			{...props}

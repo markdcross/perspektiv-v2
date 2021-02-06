@@ -1,5 +1,3 @@
-import React from 'react';
-// import ReactRoundedImage from 'react-rounded-image';
 import React, { useContext } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import { Button } from 'semantic-ui-react';

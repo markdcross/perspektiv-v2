@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import { Row, Col, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
 import RankUpModal from "./RankUpModal";
+import ProgressContext from "../context/ProgressContext";
 // import authAPI from "../utils/auth-API";
 
 export default function UserStatus(props) {
+
+	//Temporary data for testing the userstatus tool
 	const [currentUserState, setCurrentUserState] = useState({
-		muralsVisited: 79,
+		muralsVisited:10,
 		avatar: "//www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
 		USERAUTHENTICATED: true,
 	});
@@ -19,6 +22,24 @@ export default function UserStatus(props) {
 	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	// }, []);
 
+	//These are brought in to control aspects of the user Progress
+	const { progressValue, modalValue, resetValue, boostValue, timerValue, levelValue } = useContext(ProgressContext);
+	const [ progressControl, setProgressControl ] = progressValue;
+	const [ modalShow, setModalShow ] = modalValue;
+	const [ resetState, setResetState ] = resetValue;
+	const [ boostState, setBoostState ] = boostValue;
+	const [ timerXP ] = timerValue;
+	const [ levelReset ] = levelValue;
+	console.log(progressControl + "Progress value from context");
+	console.log(resetState + "Reset value from context");
+
+	// const modalProg = () => {
+	// 	setProgressControl(0);
+	// 	setCurrentUserState(currentUserState);
+	// 	console.log("modal has closed");
+	// }
+
+	//Set ranks for user
 	const userRank = [
 		"Pioneer",
 		"Scout",
@@ -31,40 +52,46 @@ export default function UserStatus(props) {
 		"Tourist",
 	];
 
-	let resetXP = 1;
+	// let resetXP = 1;
 	const userXP = [10, 10, 10, 20, 30, 30, 40, 12, 0];
 	const userXPMin = [0, 10, 20, 30, 50, 80, 110, 150, 0];
 
-	const [modalShow, setModalShow] = useState(false);
-	const [resetState, setResetState] = useState(1);
-	const [boostState, setBoostState] = useState(0);
+	// const [modalShow, setModalShow] = useState(false);
+	// const [resetState, setResetState] = useState(1);
+	// const [boostState, setBoostState] = useState(0);
 
-	const timeout = (delay) => {
-		return new Promise((res) => setTimeout(res, delay));
-	};
+	// const timeout = (delay) => {
+	// 	return new Promise((res) => setTimeout(res, delay));
+	// };
 
-	const timerXP = async () => {
-		resetXP = 0;
-		await timeout(1500);
-		console.log("resetXP after Timer" + resetXP);
-		setModalShow(true);
-		setBoostState(1);
-		setResetState(resetXP);
-	};
+	// const timerXP = async () => {
+	// 	resetXP = 0;
+	// 	await timeout(1500);
+	// 	console.log("resetXP after Timer" + resetXP);
+	// 	setModalShow(true);
+	// 	setBoostState(1);
+	// 	setResetState(resetXP);
+	// };
 	// let levelMark = 0;
 	const selectLevel = (visited) => {
 		switch (true) {
 			case visited >= 0 && visited <= 10:
-				if (visited === 9) {
-					resetXP = 1;
+
+				if (visited <= 9) {
+					levelReset();
+					// setProgressControl(1);
+					// setResetState(1);
+					// setBoostState(0);
+					// resetXP = 1;
 				}
+
 				if (visited === 10 && resetState === 1) {
 					timerXP();
 				}
 				return 0;
 			case visited >= 11 && visited <= 20:
 				if (visited === 11) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 20 && resetState === 1) {
 					timerXP();
@@ -72,7 +99,7 @@ export default function UserStatus(props) {
 				return 1;
 			case visited >= 21 && visited <= 30:
 				if (visited === 21) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 30 && resetState === 1) {
 					timerXP();
@@ -80,7 +107,7 @@ export default function UserStatus(props) {
 				return 2;
 			case visited >= 31 && visited <= 50:
 				if (visited === 31) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 50 && resetState === 1) {
 					timerXP();
@@ -88,15 +115,16 @@ export default function UserStatus(props) {
 				return 3;
 			case visited >= 51 && visited <= 80:
 				if (visited === 51) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 80 && resetState === 1) {
+					setProgressControl(0);
 					timerXP();
 				}
 				return 4;
 			case visited >= 81 && visited <= 110:
 				if (visited === 81) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 110 && resetState === 1) {
 					timerXP();
@@ -104,7 +132,7 @@ export default function UserStatus(props) {
 				return 5;
 			case visited >= 111 && visited <= 150:
 				if (visited === 111) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 150 && resetState === 1) {
 					timerXP();
@@ -112,7 +140,7 @@ export default function UserStatus(props) {
 				return 6;
 			case visited >= 151 && visited <= 162:
 				if (visited === 151) {
-					resetXP = 1;
+					// resetXP = 1;
 				}
 				if (visited === 162 && resetState === 1) {
 					timerXP();
@@ -126,7 +154,7 @@ export default function UserStatus(props) {
 	// let userLevel = selectLevel(currentUserState.user.data.muralsVisited.length());
 	let userLevel = selectLevel(currentUserState.muralsVisited);
 
-	console.log(boostState + "after timer" + resetState);
+	// console.log(boostState + "after timer" + resetState);
 	return (
 		<React.Fragment>
 			{!currentUserState.USERAUTHENTICATED ? (
@@ -192,7 +220,7 @@ export default function UserStatus(props) {
 								progress='value'
 								value={
 									(currentUserState.muralsVisited - userXPMin[userLevel]) *
-									resetState
+									progressControl
 								}
 								total={userXP[userLevel]}
 								active
@@ -221,6 +249,7 @@ export default function UserStatus(props) {
 						onHide={() => setModalShow(false)}
 						title={userRank[userLevel + boostState]}
 						xp={userXP[userLevel + boostState]}
+						// modalProg={modalProg}
 					/>
 				</>
 			)}
