@@ -4,6 +4,8 @@ import ReactMapGL, { Marker } from 'react-map-gl';
 import ReactRoundedImage from 'react-rounded-image';
 import { AutoSizer } from 'react-virtualized';
 import MuralContext from '../context/MuralContext';
+import PolylineOverlay from './PolyLineOverlay';
+import DirectionsContext from '../context/DirectionsContext';
 
 // react-map-gl production deployment fix
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -13,6 +15,12 @@ import mapboxgl from 'mapbox-gl';
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 export default function Mapbucket() {
+  //plot point data for walking directions
+  // const { directionsValue } = useContext(DirectionsContext);
+  // const [ directionsState, setDirectionsState ] = directionsValue;
+  // let [ plotPoints ] = plotValue;
+  // console.log(plotPoints);
+
   const muralState = useContext(MuralContext);
 
   const [viewport, setViewport] = useState({
@@ -71,6 +79,8 @@ export default function Mapbucket() {
               })}
             </div>
           )}
+        <PolylineOverlay points={[[-76.432938, 37.538876], [-77.4347, 37.539917], [-77.452538, 37.550621]]}/>
+        {/* <PolylineOverlay points={[plotPoints]}/> */}
         </ReactMapGL>
       )}
     </AutoSizer>

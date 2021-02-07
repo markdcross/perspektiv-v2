@@ -38,6 +38,9 @@ export default function UserLogin(props) {
   const [loading, setLoading] = useState(false);
   // destructure the user object
   const { email, password } = user;
+  
+  const setTop = props.setTopSnap;
+	setTop(0);
 
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
