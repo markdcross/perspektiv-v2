@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
+import { Button } from "semantic-ui-react";
 import Mapbucket from "../components/Mapbucket";
 import UserLogin from "../components/UserLogin";
 import UserCreateAcct from "../components/UserCreateAcct";
@@ -12,6 +13,8 @@ import { useMediaQuery } from "react-responsive";
 import Sheet from "react-modal-sheet";
 import AuthContext from "../context/auth-v2/authContext";
 import ProgressContext from "../context/ProgressContext";
+import DirectionsContext from '../context/DirectionsContext';
+
 
 function Home() {
 	const authContext = useContext(AuthContext);
@@ -39,10 +42,10 @@ function Home() {
 		return new Promise((res) => setTimeout(res, delay));
 	};
 
-  const timerXP = () => {
-    setBoostState(1);
-    setResetState(0);
-    timeout(1000).then(modalProg).then(modalPop);
+	const timerXP = () => {
+		setBoostState(1);
+		setResetState(0);
+		timeout(1000).then(modalProg).then(modalPop);
 		console.log("Timer has run");
 	};
 
@@ -50,15 +53,15 @@ function Home() {
 		setProgressControl(1);
 		setResetState(1);
 		setBoostState(0);
-	}
+	};
 
-  const modalProg = () => {
+	const modalProg = () => {
 		setProgressControl(0);
-  }
+	};
 
-  const modalPop = () => {
-    setModalShow(true);
-  }
+	const modalPop = () => {
+		setModalShow(true);
+	};
 
 	//Used for Mobile view page control
 	const [isOpen, setOpen] = useState(false);
@@ -66,7 +69,7 @@ function Home() {
 
 	const topCall = (top) => {
 		setTopSnap(top);
-	}
+	};
 
 	// Screensize detection for mobile view
 	const getWindowDimensions = () => {
@@ -95,21 +98,35 @@ function Home() {
 		// eslint-disable-next-line
 	}, []);
 
+    const { plotValue } = useContext(DirectionsContext);
+    const [ plotCall ] = plotValue;
+	const onClick = () => {
+		plotCall([[0,0]]);
+	}
+
 	return (
 		<ProgressContext.Provider
 			value={{
 				progressValue: [progressControl, setProgressControl],
 				modalValue: [modalShow, setModalShow],
 				resetValue: [resetState, setResetState],
-        boostValue: [boostState, setBoostState],
-        timerValue: [timerXP],
-        levelValue: [levelReset],
-        // modalProgValue: [modalProg]
+				boostValue: [boostState, setBoostState],
+				timerValue: [timerXP],
+				levelValue: [levelReset],
+				// modalProgValue: [modalProg]
 			}}
 		>
 			<Row>
 				<Col md={7} className='mapSpace p-0'>
 					<Mapbucket />
+					<Button
+						circular
+						color="pink"
+						icon='remove'
+						className='fixed-top ml-2 mt-2 markerZ'
+						onClick={onClick}
+						size="mini"
+					/>
 				</Col>
 				<Col md={5}>
 					<Mobile>
@@ -136,7 +153,7 @@ function Home() {
 											<UserCreateAcct topCall={topCall} />
 										</Route>
 										<Route exact path={path}>
-											<ScrollContent topCall={topCall}/>
+											<ScrollContent topCall={topCall} />
 										</Route>
 										<Route path='/murals/:artId'>
 											<MuralContent topCall={topCall} />
