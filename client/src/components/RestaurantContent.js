@@ -8,7 +8,7 @@ import NavDesktopM from './NavDesktopM';
 import PhotoModal from './PhotoModal';
 import history from './History';
 import { useMediaQuery } from 'react-responsive';
-// import DistanceButton from "./DistanceButton";
+import DistanceButton from "./DistanceButton";
 import { useHistory } from 'react-router-dom';
 
 // auth context
@@ -114,7 +114,9 @@ export default function RestaurantContent(props) {
             <Mobile>
               <Row className="mb-4 pt-1 px-3">
                 <Col xs={6} className="text-left">
-                  <Button
+                <DistanceButton location={restaurantState.data.data.location.coordinates} />
+
+                  {/* <Button
                     size="mini"
                     color="yellow"
                     content="Distance"
@@ -125,7 +127,7 @@ export default function RestaurantContent(props) {
                       pointing: 'left',
                       content: '2,048'
                     }}
-                  />
+                  /> */}
                 </Col>
                 <Col xs={6} className="text-right">
                   <Rating
@@ -139,7 +141,9 @@ export default function RestaurantContent(props) {
             <Desktop>
               <Row className="mb-4 pt-1">
                 <Col xs={6} className="text-left">
-                  <Button
+                <DistanceButton location={restaurantState.data.data.location.coordinates} />
+
+                  {/* <Button
                     size="mini"
                     color="yellow"
                     content="Distance"
@@ -150,7 +154,7 @@ export default function RestaurantContent(props) {
                       pointing: 'left',
                       content: '2,048'
                     }}
-                  />
+                  /> */}
                 </Col>
                 <Col xs={6} className="text-right">
                   <Rating

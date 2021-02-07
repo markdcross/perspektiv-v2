@@ -11,6 +11,8 @@ import PhotoModal from "./PhotoModal";
 import { useMediaQuery } from "react-responsive";
 import { SRLWrapper } from "simple-react-lightbox";
 import { useHistory } from "react-router-dom";
+import DistanceButton from './DistanceButton';
+
 
 // auth context
 import AuthContext from "../context/auth-v2/authContext.js";
@@ -183,7 +185,8 @@ export default function MuralContent(props) {
 									<Checkbox label='VISITED' />
 								</Col>
 								<Col xs={5} className='text-right'>
-									<Button
+								<DistanceButton location={singleMuralState.data.data.location.coordinates} />
+									{/* <Button
 										size='mini'
 										color='yellow'
 										content='Distance'
@@ -194,7 +197,7 @@ export default function MuralContent(props) {
 											pointing: "left",
 											content: "2,048",
 										}}
-									/>
+									/> */}
 								</Col>
 								<Col xs={5} className='text-right'>
 									<Button
@@ -218,18 +221,7 @@ export default function MuralContent(props) {
 									<Checkbox label='VISITED' />
 								</Col>
 								<Col xs={5} className='text-right'>
-									<Button
-										size='mini'
-										color='yellow'
-										content='Distance'
-										icon='location arrow'
-										label={{
-											basic: true,
-											color: "yellow",
-											pointing: "left",
-											content: "2,048",
-										}}
-									/>
+								<DistanceButton location={singleMuralState.data.data.location.coordinates} />
 								</Col>
 								<Col xs={5} className='text-right'>
 									<Button
