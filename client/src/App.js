@@ -39,7 +39,7 @@ const App = () => {
 	}, []);
 
 	const [muralState, setMuralState] = useState([]);
-  let plotPoints = [2,5];
+  const plotPoints = [2,5];
 	// const [directionsState, setDirectionsState] = useState({});
 	// const [userState, setUserState] = useState();
 

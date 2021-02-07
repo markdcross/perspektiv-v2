@@ -25,7 +25,7 @@ const DistanceButton = ({ location, id }) => {
 
     //setting the plot points
     const { plotValue } = useContext(DirectionsContext);
-    let [ plotPoints ] = plotValue;
+    const [ plotPoints ] = plotValue;
 
   const onClick = () => {
     getDirections

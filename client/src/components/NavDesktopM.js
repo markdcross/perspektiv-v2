@@ -10,7 +10,6 @@ import UserStatus from "./UserStatus";
 import AuthContext from "../context/auth-v2/authContext.js";
 
 export default function NavDesktopM(props) {
-	console.log(props.snapState);
 
 	const authContext = useContext(AuthContext);
 

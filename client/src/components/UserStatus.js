@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import { Row, Col, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
@@ -7,11 +7,23 @@ import ProgressContext from "../context/ProgressContext";
 import UserStatusDView from "./UserStatusDView";
 import UserStatusDMView from "./UserStatusDMView";
 import UserStatusMobileView from "./UserStatusMobileView";
-
+import AuthContext from "../context/auth-v2/authContext";
 
 // import authAPI from "../utils/auth-API";
 
 export default function UserStatus(props) {
+	const authContext = useContext(AuthContext);
+	const { user } = authContext;
+	// let userLevel = 0;
+	// useEffect(() => {
+	// userLevel = selectLevel(user.data.muralsVisited.length());
+	// }, []);
+	// !user ? ("loading" ) : ( 
+	// useEffect(() => {
+		// console.log(user.data.data);
+	// }, []);
+	// )
+
 	//Temporary data for testing the userstatus tool
 	const [currentUserState, setCurrentUserState] = useState({
 		muralsVisited: 79,
@@ -19,6 +31,14 @@ export default function UserStatus(props) {
 		USERAUTHENTICATED: true,
 	});
 
+	let userLevel = null;
+	let userAvatar = null;
+	let userVisited = null;
+
+		// if (user) {
+		// 	userLevel = selectLevel(user.data.muralsVisited.length);
+		// 	console.log(user);
+		// }
 	// useEffect(() => {
 	// 	authAPI.getCurrentUser(USERID).then((data) => {
 	// 		setCurrentUserState(data);
@@ -140,39 +160,47 @@ export default function UserStatus(props) {
 		}
 	};
 
+	if (user) {
+		userLevel = selectLevel(user.data.muralsVisited.length);
+		userAvatar = user.data.avatar;
+		userVisited = user.data.muralsVisited.length
+		console.log(userLevel, userAvatar, userVisited);
+	}
 	// let userLevel = selectLevel(currentUserState.user.data.muralsVisited.length());
-	let userLevel = selectLevel(currentUserState.muralsVisited);
+	
+	// let userLevel = selectLevel(currentUserState.muralsVisited);
+	
 
 	return (
 		<>
-		{props.nav === "mobile" ? (  
-							<UserStatusMobileView
-							currentUserState={currentUserState}
-							userRank={userRank}
-							userLevel={userLevel}
-							userXPMin={userXPMin}
-							userXP={userXP}
-						/>
-		
-		) : ( 
-			props.nav === "desktopM" ? (
+			{props.nav === "mobile" ? (
+				<UserStatusMobileView
+				userVisited={userVisited}
+				userAvatar={userAvatar}
+				userRank={userRank}
+				userLevel={userLevel}
+				userXPMin={userXPMin}
+				userXP={userXP}
+				/>
+			) : props.nav === "desktopM" ? (
 				<UserStatusDMView
-					currentUserState={currentUserState}
-					userRank={userRank}
-					userLevel={userLevel}
-					userXPMin={userXPMin}
-					userXP={userXP}
+				userVisited={userVisited}
+				userAvatar={userAvatar}
+				userRank={userRank}
+				userLevel={userLevel}
+				userXPMin={userXPMin}
+				userXP={userXP}
 				/>
 			) : (
 				<UserStatusDView
-					currentUserState={currentUserState}
+					userVisited={userVisited}
+					userAvatar={userAvatar}
 					userRank={userRank}
 					userLevel={userLevel}
 					userXPMin={userXPMin}
 					userXP={userXP}
 				/>
-			)
-		)}
+			)}
 		</>
 	);
 }

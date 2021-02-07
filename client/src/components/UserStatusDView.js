@@ -13,24 +13,26 @@ export default function UserStatusDView(props) {
 	const [progressControl] = progressValue;
 	const [modalShow, setModalShow] = modalValue;
 	const [boostState] = boostValue;
-	const currentUserState = props.currentUserState;
-    const userRank=props.userRank;
-    const userLevel=props.userLevel;
-    const userXPMin=props.userXPMin;
-    const userXP=props.userXP;
+	// const currentUserState = props.currentUserState;
+	const userAvatar = props.userAvatar;
+	const userVisited = props.userVisited;
+	const userRank = props.userRank;
+	const userLevel = props.userLevel;
+	const userXPMin = props.userXPMin;
+	const userXP = props.userXP;
 
-    const authContext = useContext(AuthContext);
+	const authContext = useContext(AuthContext);
 
-	const { isAuthenticated } = authContext;
+	const { isAuthenticated, user } = authContext;
 
-	return(
+	return (
 		<React.Fragment>
 			{!isAuthenticated ? (
 				<>
 					<Row className='respLogin'>
 						<Col className='d-flex justify-content-center my-2'>
 							<ReactRoundedImage
-								image={currentUserState.avatar}
+								image='/assets/images/avatars/matthew.png'
 								roundedColor='#ffffff'
 								roundedSize='2'
 								imageWidth='100'
@@ -63,19 +65,20 @@ export default function UserStatusDView(props) {
 				<>
 					<Row className='respLogin'>
 						<Col className='d-flex justify-content-center my-2'>
+							{/* {user &&  */}
 							<ReactRoundedImage
-								image='/assets/images/avatars/matthew.png'
+								image={userAvatar}
+								// image='/assets/images/avatars/matthew.png'
 								roundedColor='#ffffff'
 								roundedSize='2'
 								imageWidth='100'
 								imageHeight='100'
 							/>
+							{/* } */}
 							<Button className='achievementMark my-auto ml-1' color='yellow'>
 								<p>{userRank[userLevel + boostState]}</p>
 								<div className='achievementMarkCount'>
-									<p className='achievementMarkText'>
-										{currentUserState.muralsVisited}
-									</p>
+									<p className='achievementMarkText'>{userVisited}</p>
 								</div>
 							</Button>
 						</Col>
@@ -86,10 +89,7 @@ export default function UserStatusDView(props) {
 								success={false}
 								disabled={false}
 								progress='value'
-								value={
-									(currentUserState.muralsVisited - userXPMin[userLevel]) *
-									progressControl
-								}
+								value={(userVisited - userXPMin[userLevel]) * progressControl}
 								total={userXP[userLevel]}
 								active
 								color='pink'

@@ -15,7 +15,8 @@ export default function UserStatusDVMiew(props) {
 	const [progressControl] = progressValue;
 	const [modalShow, setModalShow] = modalValue;
 	const [boostState] = boostValue;
-	const currentUserState = props.currentUserState;
+	const userAvatar = props.userAvatar;
+	const userVisited = props.userVisited;
 	const userRank = props.userRank;
 	const userLevel = props.userLevel;
 	const userXPMin = props.userXPMin;
@@ -43,12 +44,12 @@ export default function UserStatusDVMiew(props) {
 								<p>{userRank[userLevel + boostState]}</p>
 								<div className='achievementMarkCountDN'>
 									<p className='achievementMarkTextDN'>
-										{currentUserState.muralsVisited}
+										{userVisited}
 									</p>
 								</div>
 								<div className='achievementMarkAvatarDN'>
 									<ReactRoundedImage
-										image='/assets/images/avatars/matthew.png'
+										image={userAvatar}
 										roundedColor='#ffffff'
 										roundedSize='0'
 										imageWidth='40'
@@ -66,7 +67,7 @@ export default function UserStatusDVMiew(props) {
 								disabled={false}
 								progress='value'
 								value={
-									(currentUserState.muralsVisited - userXPMin[userLevel]) *
+									(userVisited - userXPMin[userLevel]) *
 									progressControl
 								}
 								total={userXP[userLevel]}
@@ -118,7 +119,7 @@ export default function UserStatusDVMiew(props) {
 								</div>
 								<div className='achievementMarkAvatarDN'>
 									<ReactRoundedImage
-										image={currentUserState.avatar}
+										image='/assets/images/avatars/matthew.png'
 										roundedColor='#ffffff'
 										roundedSize='0'
 										imageWidth='40'
