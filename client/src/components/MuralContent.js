@@ -21,7 +21,6 @@ export default function MuralContent(props) {
 	const history = useHistory();
 
 	const setTop = props.setTopSnap;
-	const snapState = props.topSnap;
 	setTop(0);
 
 	const Desktop = ({ children }) => {

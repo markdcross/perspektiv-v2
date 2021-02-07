@@ -4,13 +4,17 @@ import { Row, Col, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
 import RankUpModal from "./RankUpModal";
 import ProgressContext from "../context/ProgressContext";
+import UserStatusDView from "./UserStatusDView";
+import UserStatusDMView from "./UserStatusDMView";
+import UserStatusMobileView from "./UserStatusMobileView";
+
+
 // import authAPI from "../utils/auth-API";
 
 export default function UserStatus(props) {
-
 	//Temporary data for testing the userstatus tool
 	const [currentUserState, setCurrentUserState] = useState({
-		muralsVisited:10,
+		muralsVisited: 79,
 		avatar: "//www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg",
 		USERAUTHENTICATED: true,
 	});
@@ -23,21 +27,22 @@ export default function UserStatus(props) {
 	// }, []);
 
 	//These are brought in to control aspects of the user Progress
-	const { progressValue, modalValue, resetValue, boostValue, timerValue, levelValue } = useContext(ProgressContext);
-	const [ progressControl, setProgressControl ] = progressValue;
-	const [ modalShow, setModalShow ] = modalValue;
-	const [ resetState, setResetState ] = resetValue;
-	const [ boostState, setBoostState ] = boostValue;
-	const [ timerXP ] = timerValue;
-	const [ levelReset ] = levelValue;
+	const {
+		progressValue,
+		modalValue,
+		resetValue,
+		boostValue,
+		timerValue,
+		levelValue,
+	} = useContext(ProgressContext);
+	const [progressControl, setProgressControl] = progressValue;
+	const [modalShow, setModalShow] = modalValue;
+	const [resetState, setResetState] = resetValue;
+	const [boostState, setBoostState] = boostValue;
+	const [timerXP] = timerValue;
+	const [levelReset] = levelValue;
 	console.log(progressControl + "Progress value from context");
 	console.log(resetState + "Reset value from context");
-
-	// const modalProg = () => {
-	// 	setProgressControl(0);
-	// 	setCurrentUserState(currentUserState);
-	// 	console.log("modal has closed");
-	// }
 
 	//Set ranks for user
 	const userRank = [
@@ -56,33 +61,11 @@ export default function UserStatus(props) {
 	const userXP = [10, 10, 10, 20, 30, 30, 40, 12, 0];
 	const userXPMin = [0, 10, 20, 30, 50, 80, 110, 150, 0];
 
-	// const [modalShow, setModalShow] = useState(false);
-	// const [resetState, setResetState] = useState(1);
-	// const [boostState, setBoostState] = useState(0);
-
-	// const timeout = (delay) => {
-	// 	return new Promise((res) => setTimeout(res, delay));
-	// };
-
-	// const timerXP = async () => {
-	// 	resetXP = 0;
-	// 	await timeout(1500);
-	// 	console.log("resetXP after Timer" + resetXP);
-	// 	setModalShow(true);
-	// 	setBoostState(1);
-	// 	setResetState(resetXP);
-	// };
-	// let levelMark = 0;
 	const selectLevel = (visited) => {
 		switch (true) {
 			case visited >= 0 && visited <= 10:
-
 				if (visited <= 9) {
 					levelReset();
-					// setProgressControl(1);
-					// setResetState(1);
-					// setBoostState(0);
-					// resetXP = 1;
 				}
 
 				if (visited === 10 && resetState === 1) {
@@ -90,60 +73,66 @@ export default function UserStatus(props) {
 				}
 				return 0;
 			case visited >= 11 && visited <= 20:
-				if (visited === 11) {
-					// resetXP = 1;
+				if (visited <= 19) {
+					levelReset();
 				}
+
 				if (visited === 20 && resetState === 1) {
 					timerXP();
 				}
 				return 1;
 			case visited >= 21 && visited <= 30:
-				if (visited === 21) {
-					// resetXP = 1;
+				if (visited <= 29) {
+					levelReset();
 				}
+
 				if (visited === 30 && resetState === 1) {
 					timerXP();
 				}
 				return 2;
 			case visited >= 31 && visited <= 50:
-				if (visited === 31) {
-					// resetXP = 1;
+				if (visited <= 49) {
+					levelReset();
 				}
+
 				if (visited === 50 && resetState === 1) {
 					timerXP();
 				}
 				return 3;
 			case visited >= 51 && visited <= 80:
-				if (visited === 51) {
-					// resetXP = 1;
+				if (visited <= 79) {
+					levelReset();
 				}
+
 				if (visited === 80 && resetState === 1) {
-					setProgressControl(0);
 					timerXP();
 				}
 				return 4;
 			case visited >= 81 && visited <= 110:
-				if (visited === 81) {
-					// resetXP = 1;
+				if (visited <= 109) {
+					levelReset();
 				}
+
 				if (visited === 110 && resetState === 1) {
 					timerXP();
 				}
 				return 5;
 			case visited >= 111 && visited <= 150:
-				if (visited === 111) {
-					// resetXP = 1;
+				if (visited <= 149) {
+					levelReset();
 				}
+
 				if (visited === 150 && resetState === 1) {
 					timerXP();
 				}
 				return 6;
 			case visited >= 151 && visited <= 162:
-				if (visited === 151) {
-					// resetXP = 1;
+				if (visited <= 161) {
+					levelReset();
 				}
+
 				if (visited === 162 && resetState === 1) {
-					timerXP();
+					// timerXP();
 				}
 				return 7;
 			default:
@@ -154,122 +143,36 @@ export default function UserStatus(props) {
 	// let userLevel = selectLevel(currentUserState.user.data.muralsVisited.length());
 	let userLevel = selectLevel(currentUserState.muralsVisited);
 
-	// console.log(boostState + "after timer" + resetState);
 	return (
-		<React.Fragment>
-			{!currentUserState.USERAUTHENTICATED ? (
-				<>
-					<Row className='respLogin'>
-						<Col className='d-flex justify-content-center my-2'>
-							<ReactRoundedImage
-								image={currentUserState.avatar}
-								roundedColor='#ffffff'
-								roundedSize='2'
-								imageWidth='100'
-								imageHeight='100'
-							/>
-							<Button className='achievementMark my-auto ml-1' color='yellow'>
-								<p>{userRank[8]}</p>
-								<div className='achievementMarkCount'>
-									<p className='achievementMarkText'>0</p>
-								</div>
-							</Button>
-						</Col>
-					</Row>
-					<Row className='pb-2'>
-						<Col>
-							<Progress
-								success={false}
-								disabled={true}
-								progress='value'
-								value={0}
-								total={0}
-								active
-								color='pink'
-								size='small'
-							/>
-						</Col>
-					</Row>
-				</>
+		<>
+		{props.nav === "mobile" ? (  
+							<UserStatusMobileView
+							currentUserState={currentUserState}
+							userRank={userRank}
+							userLevel={userLevel}
+							userXPMin={userXPMin}
+							userXP={userXP}
+						/>
+		
+		) : ( 
+			props.nav === "desktopM" ? (
+				<UserStatusDMView
+					currentUserState={currentUserState}
+					userRank={userRank}
+					userLevel={userLevel}
+					userXPMin={userXPMin}
+					userXP={userXP}
+				/>
 			) : (
-				<>
-					<Row className='respLogin'>
-						<Col className='d-flex justify-content-center my-2'>
-							<ReactRoundedImage
-								image='/assets/images/avatars/matthew.png'
-								roundedColor='#ffffff'
-								roundedSize='2'
-								imageWidth='100'
-								imageHeight='100'
-							/>
-							<Button className='achievementMark my-auto ml-1' color='yellow'>
-								<p>{userRank[userLevel + boostState]}</p>
-								<div className='achievementMarkCount'>
-									<p className='achievementMarkText'>
-										{currentUserState.muralsVisited}
-									</p>
-								</div>
-							</Button>
-						</Col>
-					</Row>
-					<Row className='pb-2'>
-						<Col>
-							<Progress
-								success={false}
-								disabled={false}
-								progress='value'
-								value={
-									(currentUserState.muralsVisited - userXPMin[userLevel]) *
-									progressControl
-								}
-								total={userXP[userLevel]}
-								active
-								color='pink'
-								size='small'
-								className='mt-1'
-							/>
-						</Col>
-						<Col xs={1} className='text-left pl-0'>
-							<OverlayTrigger
-								placement='top'
-								overlay={
-									<Tooltip id={`tooltip-top`}>
-										Visits needed for next rank!
-									</Tooltip>
-								}
-							>
-								<div className='xpMarkCount'>
-									<p className='xpMarkText'>{userXP[userLevel + boostState]}</p>
-								</div>
-							</OverlayTrigger>
-						</Col>
-					</Row>
-					<RankUpModal
-						show={modalShow}
-						onHide={() => setModalShow(false)}
-						title={userRank[userLevel + boostState]}
-						xp={userXP[userLevel + boostState]}
-						// modalProg={modalProg}
-					/>
-				</>
-			)}
-		</React.Fragment>
+				<UserStatusDView
+					currentUserState={currentUserState}
+					userRank={userRank}
+					userLevel={userLevel}
+					userXPMin={userXPMin}
+					userXP={userXP}
+				/>
+			)
+		)}
+		</>
 	);
 }
-
-// useEffect(() => {
-//     setResetState(1);
-// }, []);
-
-// const timer = () => {
-//     setTimeout(function(){
-//         resetXP = 0;
-//     }, 2000);
-// }
-
-// const reset = () => {
-//     setResetState(1);
-//     console.log(resetState);
-// }
-// const userXPMax = [10, 20, 30, 50, 80, 110, 150, 162, 0];
-// const normalise = (value) => ((value - userXPMin[userXP]) * 100) / (userXPMax[userXP] - userXPMin[userXP]);

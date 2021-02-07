@@ -39,13 +39,7 @@ function Home() {
 		return new Promise((res) => setTimeout(res, delay));
 	};
 
-	// const timerXP = () => {
-	// 	timeout(1500).then(setModalShow(true)).then(setBoostState(1)).then(setResetState(0));
-	// 	console.log("Timer has run");
-	// };
-
   const timerXP = () => {
-		// setModalShow(true);
     setBoostState(1);
     setResetState(0);
     timeout(1000).then(modalProg).then(modalPop);
@@ -163,7 +157,7 @@ function Home() {
 								<ScrollContent setTopSnap={setTopSnap} />
 							</Route>
 							<Route path='/murals/:artId'>
-								<MuralContent topSnap={topSnap} setTopSnap={setTopSnap} />
+								<MuralContent setTopSnap={setTopSnap} />
 							</Route>
 							<Route path='/restaurants/:restId'>
 								<RestaurantContent setTopSnap={setTopSnap} />
