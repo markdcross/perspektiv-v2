@@ -39,8 +39,8 @@ const App = () => {
 	}, []);
 
 	const [muralState, setMuralState] = useState([]);
-  const plotPoints = [2,5];
-	// const [directionsState, setDirectionsState] = useState({});
+	const plotPoints = [2,5];
+	// const [directionsState, setDirectionsState] = useState([]);
 	// const [userState, setUserState] = useState();
 
 	useEffect(() => {
@@ -62,7 +62,7 @@ const App = () => {
 								<DirectionsContext.Provider
 									value={{
 										// directionsValue: [directionsState, setDirectionsState],
-                    plotValue: [plotPoints] 
+										plotValue: [plotPoints]
 									}}
 								>
 									<Router history={history}>

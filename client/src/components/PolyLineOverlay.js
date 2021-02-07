@@ -6,15 +6,15 @@ import DirectionsContext from "../context/DirectionsContext";
 
 export default function PolyLineOverlay(props) {
 
-    const { plotValue } = useContext(DirectionsContext);
-    let [ plotPoints ] = plotValue;
-    console.log(plotPoints);
+    // const { plotValue } = useContext(DirectionsContext);
+    // let [ plotPoints ] = plotValue;
+    // console.log(plotPoints);
 
-    const [plots, setPlots] = useState(plotPoints);
+    // const [plots, setPlots] = useState(plotPoints);
 
-    useEffect(() => {
-        console.log(plotPoints)
-    }, [plotValue]);
+    // useEffect(() => {
+    //     console.log(plotPoints)
+    // }, [plotValue]);
 
 
 	// export default class PolylineOverlay extends PureComponent {

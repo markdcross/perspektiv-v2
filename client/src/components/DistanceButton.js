@@ -24,8 +24,11 @@ const DistanceButton = ({ location, id }) => {
   }
 
     //setting the plot points
+    // const { directionsValue } = useContext(DirectionsContext);
+    // const [ directionsState, setDirectionsState ] = directionsValue;
+    // let plotPoints = null;
     const { plotValue } = useContext(DirectionsContext);
-    const [ plotPoints ] = plotValue;
+    let [ plotPoints ] = plotValue;
 
   const onClick = () => {
     getDirections
@@ -35,10 +38,19 @@ const DistanceButton = ({ location, id }) => {
           '🚀 ~ file: DistanceButton.js ~ line 29 ~ muralsAPI.getDirections ~ directions',
           directions.data
         );
-        plotPoints = directions.data.route.legs[0].maneuvers.map(points => 
+
+        if (directions.data) {
+          plotPoints = directions.data.route.legs[0].maneuvers.map(points => 
           [points.startPoint.lng,points.startPoint.lat]
-        )
-        console.log(plotPoints);
+          )
+          console.log(plotPoints);
+          // setDirectionsState(plotPoints);
+          // console.log(directionsState);
+        }
+        // plotPoints = directions.data.route.legs[0].maneuvers.map(points => 
+        //   [points.startPoint.lng,points.startPoint.lat]
+        // )
+        // console.log(plotPoints);
       });
   };
 
