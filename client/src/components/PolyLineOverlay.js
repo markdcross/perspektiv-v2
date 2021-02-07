@@ -20,7 +20,7 @@ export default function PolyLineOverlay(props) {
 	// export default class PolylineOverlay extends PureComponent {
 	const _redraw = ({ width, height, ctx, isDragging, project, unproject }) => {
 		let { points } = props;
-		console.log(points);
+		// console.log(points);
 		const {
 			color = "goldenrod",
 			lineWidth = 3,

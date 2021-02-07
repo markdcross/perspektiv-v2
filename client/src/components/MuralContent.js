@@ -11,8 +11,7 @@ import PhotoModal from "./PhotoModal";
 import { useMediaQuery } from "react-responsive";
 import { SRLWrapper } from "simple-react-lightbox";
 import { useHistory } from "react-router-dom";
-import DistanceButton from './DistanceButton';
-
+import DistanceButton from "./DistanceButton";
 
 // auth context
 import AuthContext from "../context/auth-v2/authContext.js";
@@ -22,8 +21,12 @@ export default function MuralContent(props) {
 	const { isAuthenticated } = authContext;
 	const history = useHistory();
 
-	const setTop = props.setTopSnap;
-	setTop(0);
+	//set position of page slide when in mobile view
+	useEffect(() => {
+		let top = 0;
+		const topCall = props.topCall;
+		topCall(top);
+	}, []);
 
 	const Desktop = ({ children }) => {
 		const isDesktop = useMediaQuery({ minWidth: 768 });
@@ -185,7 +188,9 @@ export default function MuralContent(props) {
 									<Checkbox label='VISITED' />
 								</Col>
 								<Col xs={5} className='text-right'>
-								<DistanceButton location={singleMuralState.data.data.location.coordinates} />
+									<DistanceButton
+										location={singleMuralState.data.data.location.coordinates}
+									/>
 									{/* <Button
 										size='mini'
 										color='yellow'
@@ -221,7 +226,9 @@ export default function MuralContent(props) {
 									<Checkbox label='VISITED' />
 								</Col>
 								<Col xs={5} className='text-right'>
-								<DistanceButton location={singleMuralState.data.data.location.coordinates} />
+									<DistanceButton
+										location={singleMuralState.data.data.location.coordinates}
+									/>
 								</Col>
 								<Col xs={5} className='text-right'>
 									<Button

@@ -28,13 +28,22 @@ export default function RestaurantContent(props) {
     return isMobile ? children : null;
   };
 
+  	//set position of page slide when in mobile view
+	useEffect(() => {
+		let top = 0;
+		const topCall = props.topCall;
+		topCall(top);
+	}, []);
+
   const { restId } = useParams();
 
   const [restaurantState, setRestaurantState] = useState([]);
 
   useEffect(() => {
     restaurantsAPI.getRestaurant(restId).then((data) => {
+      if (data) {
       setRestaurantState(data);
+      }
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

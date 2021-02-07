@@ -39,8 +39,12 @@ export default function UserLogin(props) {
   // destructure the user object
   const { email, password } = user;
   
-  const setTop = props.setTopSnap;
-	setTop(0);
+	//set position of page slide when in mobile view
+	useEffect(() => {
+		let top = 0;
+		const topCall = props.topCall;
+		topCall(top);
+	}, []);
 
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 768 });

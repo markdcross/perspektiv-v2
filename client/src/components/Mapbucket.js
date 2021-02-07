@@ -37,7 +37,7 @@ export default function Mapbucket() {
           width={width}
           height={height}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle='mapbox://styles/bertodemus/ckk646sei0ckx18rsoakbi03j'
+          mapStyle='mapbox://styles/bertodemus/ckkvdq41s255c17phfrsay0t1'
           onViewportChange={viewport => {
             setViewport(viewport);
           }}
