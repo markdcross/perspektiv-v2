@@ -7,6 +7,9 @@ import DistanceButton from "./DistanceButton";
 import NavDesktop from "./NavDesktop";
 import { useMediaQuery } from "react-responsive";
 
+// auth context
+import AuthContext from '../context/auth-v2/authContext.js';
+
 export default function ScrollContent(props) {
 	//set position of page slide when in mobile view
 	useEffect(() => {
@@ -14,6 +17,9 @@ export default function ScrollContent(props) {
 		const topCall = props.topCall;
 		topCall(top);
 	}, []);
+
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated } = authContext;
 
 	const Desktop = ({ children }) => {
 		const isDesktop = useMediaQuery({ minWidth: 768 });
@@ -52,9 +58,18 @@ export default function ScrollContent(props) {
 									</Row>
 									<Mobile>
 										<Row className='mb-4 pt-1 px-3'>
-											<Col xs={2} className='my-auto'>
-												<Checkbox label='VISITED' />
-											</Col>
+                      <Col xs={2} className="my-auto">
+                        {isAuthenticated ? (
+                          <Checkbox label="VISITED" />
+                        ) : (
+                          <div
+                            data-tooltip="Login to track visits"
+                            data-position="right center"
+                          >
+                            <Checkbox label="VISITED" disabled />
+                          </div>
+                        )}
+                      </Col>
 											<Col xs={6} className='text-right'>
 												<DistanceButton location={mural.location.coordinates} />
 											</Col>
@@ -75,9 +90,18 @@ export default function ScrollContent(props) {
 									</Mobile>
 									<Desktop>
 										<Row className='mb-4 pt-1'>
-											<Col xs={2} className='my-auto'>
-												<Checkbox label='VISITED' />
-											</Col>
+                    <Col xs={2} className="my-auto">
+                        {isAuthenticated ? (
+                          <Checkbox label="VISITED" />
+                        ) : (
+                          <div
+                            data-tooltip="Login to track visits"
+                            data-position="right center"
+                          >
+                            <Checkbox label="VISITED" disabled />
+                          </div>
+                        )}
+                      </Col>
 											<Col xs={6} className='text-right'>
 												<DistanceButton location={mural.location.coordinates} />
 											</Col>

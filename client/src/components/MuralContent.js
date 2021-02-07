@@ -185,7 +185,16 @@ export default function MuralContent(props) {
 						<Mobile>
 							<Row className='mb-4 pt-1 px-3'>
 								<Col xs={2} className='my-auto'>
-									<Checkbox label='VISITED' />
+									{isAuthenticated ? (
+										<Checkbox label='VISITED' />
+									) : (
+										<div
+											data-tooltip='Login to track visits'
+											data-position='right center'
+										>
+											<Checkbox label='VISITED' disabled />
+										</div>
+									)}
 								</Col>
 								<Col xs={5} className='text-right'>
 									<DistanceButton
@@ -219,11 +228,19 @@ export default function MuralContent(props) {
 								</Col>
 							</Row>
 						</Mobile>
-
 						<Desktop>
 							<Row className='mb-4 pt-1'>
 								<Col xs={2} className='my-auto'>
-									<Checkbox label='VISITED' />
+									{isAuthenticated ? (
+										<Checkbox label='VISITED' />
+									) : (
+										<div
+											data-tooltip='Login to track visits'
+											data-position='right center'
+										>
+											<Checkbox label='VISITED' disabled />
+										</div>
+									)}
 								</Col>
 								<Col xs={5} className='text-right'>
 									<DistanceButton
