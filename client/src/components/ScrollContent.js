@@ -82,7 +82,7 @@ export default function ScrollContent(props) {
 														as: "a",
 														basic: true,
 														pointing: "left",
-														content: mural.__v,
+														content: mural.visits.length,
 													}}
 												/>
 											</Col>
@@ -114,7 +114,7 @@ export default function ScrollContent(props) {
 														as: "a",
 														basic: true,
 														pointing: "left",
-														content: mural.__v,
+														content: mural.visits.length,
 													}}
 												/>
 											</Col>

@@ -222,7 +222,7 @@ export default function MuralContent(props) {
 											as: "a",
 											basic: true,
 											pointing: "left",
-											content: singleMuralState.data.data.__v,
+											content: singleMuralState.data.data.visits.length
 										}}
 									/>
 								</Col>
@@ -256,7 +256,7 @@ export default function MuralContent(props) {
 											as: "a",
 											basic: true,
 											pointing: "left",
-											content: singleMuralState.data.data.__v,
+											content: singleMuralState.data.data.visits.length,
 										}}
 									/>
 								</Col>
