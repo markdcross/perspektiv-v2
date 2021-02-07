@@ -26,9 +26,9 @@ const DistanceButton = ({ location, id }) => {
     //setting the plot points
     // const { directionsValue } = useContext(DirectionsContext);
     // const [ directionsState, setDirectionsState ] = directionsValue;
-    // let plotPoints = null;
+    let plotPoints = null;
     const { plotValue } = useContext(DirectionsContext);
-    let [ plotPoints ] = plotValue;
+    const [ plotCall ] = plotValue;
 
   const onClick = () => {
     getDirections
@@ -43,6 +43,7 @@ const DistanceButton = ({ location, id }) => {
           plotPoints = directions.data.route.legs[0].maneuvers.map(points => 
           [points.startPoint.lng,points.startPoint.lat]
           )
+          plotCall(plotPoints);
           console.log(plotPoints);
           // setDirectionsState(plotPoints);
           // console.log(directionsState);

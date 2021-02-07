@@ -16,8 +16,8 @@ mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 export default function Mapbucket() {
   //plot point data for walking directions
-  // const { directionsValue } = useContext(DirectionsContext);
-  // const [ directionsState, setDirectionsState ] = directionsValue;
+  const { directionsValue } = useContext(DirectionsContext);
+  const [ directionsState ] = directionsValue;
   // let [ plotPoints ] = plotValue;
   // console.log(plotPoints);
 
@@ -37,7 +37,7 @@ export default function Mapbucket() {
           width={width}
           height={height}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-          mapStyle='mapbox://styles/bertodemus/ckk646sei0ckx18rsoakbi03j'
+          mapStyle='mapbox://styles/bertodemus/ckkvdq41s255c17phfrsay0t1'
           onViewportChange={viewport => {
             setViewport(viewport);
           }}
@@ -79,8 +79,8 @@ export default function Mapbucket() {
               })}
             </div>
           )}
-        <PolylineOverlay points={[[-76.432938, 37.538876], [-77.4347, 37.539917], [-77.452538, 37.550621]]}/>
-        {/* <PolylineOverlay points={[plotPoints]}/> */}
+        {/* <PolylineOverlay points={[[-76.432938, 37.538876], [-77.4347, 37.539917], [-77.452538, 37.550621]]}/> */}
+        <PolylineOverlay points={directionsState}/>
         </ReactMapGL>
       )}
     </AutoSizer>

@@ -64,6 +64,10 @@ function Home() {
 	const [isOpen, setOpen] = useState(false);
 	const [topSnap, setTopSnap] = useState(1);
 
+	const topCall = (top) => {
+		setTopSnap(top);
+	}
+
 	// Screensize detection for mobile view
 	const getWindowDimensions = () => {
 		const { innerWidth: width, innerHeight: height } = window;
@@ -126,19 +130,19 @@ function Home() {
 									{/* <MobileRoute setTopSnap={setTopSnap} /> */}
 									<Switch>
 										<Route path='/login'>
-											<UserLogin setTopSnap={setTopSnap} />
+											<UserLogin topCall={topCall} />
 										</Route>
 										<Route path='/register'>
-											<UserCreateAcct setTopSnap={setTopSnap} />
+											<UserCreateAcct topCall={topCall} />
 										</Route>
 										<Route exact path={path}>
-											<ScrollContent setTopSnap={setTopSnap} />
+											<ScrollContent topCall={topCall}/>
 										</Route>
 										<Route path='/murals/:artId'>
-											<MuralContent setTopSnap={setTopSnap} />
+											<MuralContent topCall={topCall} />
 										</Route>
 										<Route path='/restaurants/:restId'>
-											<RestaurantContent setTopSnap={setTopSnap} />
+											<RestaurantContent topCall={topCall} />
 										</Route>
 									</Switch>
 								</Sheet.Content>
@@ -148,19 +152,19 @@ function Home() {
 					<Desktop>
 						<Switch>
 							<Route path='/login'>
-								<UserLogin setTopSnap={setTopSnap} />
+								<UserLogin topCall={topCall} />
 							</Route>
 							<Route path='/register'>
-								<UserCreateAcct setTopSnap={setTopSnap} />
+								<UserCreateAcct topCall={topCall} />
 							</Route>
 							<Route exact path={path}>
-								<ScrollContent setTopSnap={setTopSnap} />
+								<ScrollContent topCall={topCall} />
 							</Route>
 							<Route path='/murals/:artId'>
-								<MuralContent setTopSnap={setTopSnap} />
+								<MuralContent topCall={topCall} />
 							</Route>
 							<Route path='/restaurants/:restId'>
-								<RestaurantContent setTopSnap={setTopSnap} />
+								<RestaurantContent topCall={topCall} />
 							</Route>
 						</Switch>
 					</Desktop>

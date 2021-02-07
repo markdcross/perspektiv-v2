@@ -39,9 +39,14 @@ const App = () => {
 	}, []);
 
 	const [muralState, setMuralState] = useState([]);
-	const plotPoints = [2,5];
-	// const [directionsState, setDirectionsState] = useState([]);
+	// const plotPoints = [2,5];
+	const [directionsState, setDirectionsState] = useState([]);
 	// const [userState, setUserState] = useState();
+	
+	const plotCall = (points) => {
+		setDirectionsState(points);
+		console.log(directionsState);
+	}
 
 	useEffect(() => {
 		// get the murals from the api
@@ -61,19 +66,13 @@ const App = () => {
 							<LocationContext.Provider value={position}>
 								<DirectionsContext.Provider
 									value={{
-										// directionsValue: [directionsState, setDirectionsState],
-										plotValue: [plotPoints]
+										directionsValue: [directionsState],
+										plotValue: [plotCall]
 									}}
 								>
 									<Router history={history}>
 										<Container fluid>
 											<Route path='/' component={Home} />
-											{/* <Route
-                      exact
-                      path="/create-an-account"
-                      component={Register}
-                    />
-                    <Route exact path="/login" component={Login} /> */}
 										</Container>
 									</Router>
 								</DirectionsContext.Provider>
