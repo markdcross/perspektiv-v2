@@ -12,6 +12,7 @@ import { useMediaQuery } from 'react-responsive';
 import { SRLWrapper } from 'simple-react-lightbox';
 import { useHistory } from 'react-router-dom';
 import DistanceButton from './DistanceButton';
+import VisitedCheckbox from './VisitedCheckbox';
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
@@ -23,6 +24,9 @@ export default function MuralContent(props) {
 
   //set position of page slide when in mobile view
   useEffect(() => {
+    muralsAPI.getMural(artId).then((data) => {
+      setSingleMuralState(data);
+    });
     let top = 0;
     const topCall = props.topCall;
     topCall(top);
@@ -41,12 +45,12 @@ export default function MuralContent(props) {
 
   const [singleMuralState, setSingleMuralState] = useState([]);
 
-  useEffect(() => {
-    muralsAPI.getMural(artId).then((data) => {
-      setSingleMuralState(data);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   useEffect(() => {
+  //     muralsAPI.getMural(artId).then((data) => {
+  //       setSingleMuralState(data);
+  //     });
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, []);
 
   const [pageInd, setPageInd] = useState(true);
 
@@ -108,15 +112,6 @@ export default function MuralContent(props) {
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
   };
-
-  const [visitedState, setVisitedState] = useState(false);
-
-  // function that handles when a user clicks the visited checkbox for a mural
-  const visitMural = async () => {
-    muralsAPI.visitMural(artId, user.data._id);
-    return setVisitedState(true);
-  };
-  console.log(visitedState);
 
   return (
     <>
@@ -196,11 +191,7 @@ export default function MuralContent(props) {
               <Row className="mb-4 pt-1 px-3">
                 <Col xs={2} className="my-auto">
                   {isAuthenticated ? (
-                    <Checkbox
-                      label="VISITED"
-                      onChange={visitMural}
-                      checked={visitedState}
-                    />
+                    <VisitedCheckbox artId={artId} user={user} />
                   ) : (
                     <div
                       data-tooltip="Login to track visits"
@@ -246,11 +237,7 @@ export default function MuralContent(props) {
               <Row className="mb-4 pt-1">
                 <Col xs={2} className="my-auto">
                   {isAuthenticated ? (
-                    <Checkbox
-                      label="VISITED"
-                      onChange={visitMural}
-                      checked={visitedState}
-                    />
+                    <VisitedCheckbox artId={artId} user={user} />
                   ) : (
                     <div
                       data-tooltip="Login to track visits"

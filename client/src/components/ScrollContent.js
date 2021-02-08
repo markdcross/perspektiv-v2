@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Row, Col, Image } from 'react-bootstrap';
 import { Button, Checkbox } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -6,21 +6,20 @@ import MuralContext from '../context/MuralContext';
 import DistanceButton from './DistanceButton';
 import NavDesktop from './NavDesktop';
 import { useMediaQuery } from 'react-responsive';
-import muralsAPI from '../utils/murals-API';
+import VisitedCheckbox from './VisitedCheckbox';
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
 
 export default function ScrollContent(props) {
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, user } = authContext;
   //set position of page slide when in mobile view
   useEffect(() => {
     let top = 1;
     const topCall = props.topCall;
     topCall(top);
   }, []);
-
-  const authContext = useContext(AuthContext);
-  const { isAuthenticated, user } = authContext;
 
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
@@ -33,8 +32,6 @@ export default function ScrollContent(props) {
 
   const muralState = useContext(MuralContext);
 
-  const [visitedState, setVisitedState] = useState(false);
-
   return (
     <>
       <Desktop>
@@ -46,12 +43,6 @@ export default function ScrollContent(props) {
         ) : (
           <Col className="scrollButt">
             {muralState.data.data.map((mural) => {
-              // define the visitMural function here so that we have access to the artId for each mural
-              const visitMural = async () => {
-                let artId = mural.id;
-                muralsAPI.visitMural(artId, user.data._id);
-                return setVisitedState(true);
-              };
               return (
                 <div key={mural.id}>
                   <Row className="sideImgBox">
@@ -69,11 +60,7 @@ export default function ScrollContent(props) {
                     <Row className="mb-4 pt-1 px-3">
                       <Col xs={2} className="my-auto">
                         {isAuthenticated ? (
-                          <Checkbox
-                            label="VISITED"
-                            onChange={visitMural}
-                            checked={visitedState}
-                          />
+                          <VisitedCheckbox artId={mural.id} user={user} />
                         ) : (
                           <div
                             data-tooltip="Login to track visits"
@@ -105,11 +92,7 @@ export default function ScrollContent(props) {
                     <Row className="mb-4 pt-1">
                       <Col xs={2} className="my-auto">
                         {isAuthenticated ? (
-                          <Checkbox
-                            label="VISITED"
-                            onChange={visitMural}
-                            checked={visitedState}
-                          />
+                          <VisitedCheckbox artId={mural.id} user={user} />
                         ) : (
                           <div
                             data-tooltip="Login to track visits"
