@@ -29,8 +29,15 @@ const VisitedCheckbox = (props) => {
 
   // function that handles when a user clicks the visited checkbox for a mural
   const visitMural = async () => {
-    muralsAPI.visitMural(props.artId, user.data._id);
-    return setVisitedState(true);
+    if (visitedState === false) {
+      muralsAPI
+        .visitMural(props.artId, user.data._id)
+        .then(() => setVisitedState(true));
+    } else if (visitedState === true) {
+      muralsAPI
+        .unvisitMural(props.artId, user.data._id)
+        .then(() => setVisitedState(false));
+    }
   };
 
   return (
