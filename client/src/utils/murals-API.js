@@ -31,6 +31,12 @@ export default {
   getMuralsInRadius: function (zip, distance) {
     return axios.get(`/api/v1/murals/radius/${zip}/${distance}`);
   },
+  visitMural: function (muralId, userId) {
+    return axios.put(`/api/v1/murals/visit/${muralId}/${userId}`);
+  },
+  unvisitMural: function (muralId, userId) {
+    return axios.put(`/api/v1/murals/unvisit/${muralId}/${userId}`);
+  },
 
   // ==============================
   // API CALLS FOR POSTS ON MURALS

@@ -36,7 +36,7 @@ router
   .put(protectedRoute, authorize('artist', 'admin'), updateMural)
   .delete(protectedRoute, authorize('artist', 'admin'), deleteMural);
 
-router.route('/visit/:id').put(protectedRoute, visitMural);
-router.route('/unvisit/:id').put(protectedRoute, unvisitMural);
+router.route('/visit/:muralId/:userId').put(protectedRoute, visitMural);
+router.route('/unvisit/:muralId/:userId').put(protectedRoute, unvisitMural);
 
 module.exports = router;

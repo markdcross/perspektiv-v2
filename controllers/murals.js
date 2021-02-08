@@ -134,13 +134,13 @@ exports.getMuralsInRadius = asyncHandler(async (req, res, next) => {
 });
 
 //* ==============================
-//* @route   PUT api/v1/murals/visit/:id
+//* @route   PUT api/v1/murals/visit/:muralId/:userId
 //! @desc    Mark a mural as visited
 //* @access  Private
 //* ==============================
 exports.visitMural = asyncHandler(async (req, res, next) => {
-  let mural = await Mural.findById(req.params.id);
-  let user = await User.findById(req.user.id);
+  let mural = await Mural.findById(req.params.muralId);
+  let user = await User.findById(req.params.userId);
 
   if (!mural) {
     return next(
@@ -150,14 +150,14 @@ exports.visitMural = asyncHandler(async (req, res, next) => {
   // Check if the user has already visited the mural
   if (
     user.muralsVisited.filter(
-      muralVisited => muralVisited.mural.toString() === req.params.id
+      (muralVisited) => muralVisited.mural.toString() === req.params.muralId
     ).length > 0
   ) {
     return res.status(400).json({ msg: 'Mural already visited' });
   }
 
-  mural.visits.unshift({ user: req.user.id });
-  user.muralsVisited.unshift({ mural: req.params.id, date: Date.now() });
+  mural.visits.unshift({ user: req.params.userId });
+  user.muralsVisited.unshift({ mural: req.params.muralId, date: Date.now() });
 
   await mural.save();
   await user.save();
@@ -172,24 +172,24 @@ exports.visitMural = asyncHandler(async (req, res, next) => {
 });
 
 //* ==============================
-//* @route   PUT api/posts/unvisit/:id
+//* @route   PUT api/v1/murals/unvisit/:muralId/:userId
 //! @desc    Unvisit a mural
 //* @access  Private
 //* ==============================
 exports.unvisitMural = asyncHandler(async (req, res, next) => {
-  let mural = await Mural.findById(req.params.id);
-  let user = await User.findById(req.user.id);
+  let mural = await Mural.findById(req.params.muralId);
+  let user = await User.findById(req.params.userId);
 
   if (!mural) {
     return next(
-      new ErrorResponse(`Mural not found with id of ${req.params.id}`, 404)
+      new ErrorResponse(`Mural not found with id of ${req.params.muralId}`, 404)
     );
   }
 
   // Check if the mural has already been visited by the user
   if (
     user.muralsVisited.filter(
-      muralVisited => muralVisited.mural.toString() === req.params.id
+      (muralVisited) => muralVisited.mural.toString() === req.params.muralId
     ).length === 0
   ) {
     return res.status(400).json({ msg: 'Mural not yet visited' });
@@ -197,14 +197,14 @@ exports.unvisitMural = asyncHandler(async (req, res, next) => {
 
   // Get remove index
   const removeMuralIndex = mural.visits
-    .map(visit => visit.user.toString())
-    .indexOf(req.user.id);
+    .map((visit) => visit.user.toString())
+    .indexOf(req.params.userId);
   mural.visits.splice(removeMuralIndex, 1);
 
   // Get remove index
   const removeUserIndex = user.muralsVisited
-    .map(mural => mural.mural.toString())
-    .indexOf(req.params.id);
+    .map((mural) => mural.mural.toString())
+    .indexOf(req.params.muralId);
   user.muralsVisited.splice(removeUserIndex, 1);
 
   await mural.save();
