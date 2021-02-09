@@ -60,7 +60,7 @@ export default function RestaurantContent(props) {
 
   const [modalShow, setModalShow] = useState(false);
 
-console.log(restaurantState.data.data.imageFile);
+// console.log(restaurantState.data.data.imageFile);
 
   return (
     <>
