@@ -21,7 +21,7 @@ export default function RestaurantList(props) {
   };
 
   useEffect(() => {
-    restaurantsAPI.getRestaurants().then((data) => {
+    restaurantsAPI.getRestaurants().then(data => {
       setRestaurantListState(data);
       if (data) {
         console.log(restaurantListState);
@@ -35,12 +35,12 @@ export default function RestaurantList(props) {
   // console.log(radiusCheck(-77.47872,37.552485,centerPoint,km));
 
   return (
-    <Row className="pt-2">
+    <Row className='pt-2'>
       {!restaurantListState.data ? (
         <div>Loading...</div>
       ) : (
-        <Col className="scrollButt">
-          {restaurantListState.data.data.map((restaurant) => {
+        <Col className='scrollButt'>
+          {restaurantListState.data.data.map(restaurant => {
             if (
               radiusCheck(
                 restaurant.location.coordinates[0],
@@ -52,21 +52,21 @@ export default function RestaurantList(props) {
               return (
                 <div key={restaurant._id}>
                   <Row>
-                    <Col className="parentRestaurant">
+                    <Col className='parentRestaurant'>
                       <Link to={'/restaurants/' + restaurant._id}>
                         <Image
-                          className="innerRestaurant"
-                          src={restaurant.image}
+                          className='innerRestaurant'
+                          src={`../../restaurantImages/${restaurant.imageFile}`}
                         />
                       </Link>
                     </Col>
                   </Row>
-                  <Row className="pb-3">
-                    <Col className="text-left">
+                  <Row className='pb-3'>
+                    <Col className='text-left'>
                       <p>{restaurant.name}</p>
                     </Col>
-                    <Col className="text-right">
-                      <Rating icon="star" defaultRating={3} maxRating={4} />
+                    <Col className='text-right'>
+                      <Rating icon='star' defaultRating={3} maxRating={4} />
                     </Col>
                   </Row>
                 </div>

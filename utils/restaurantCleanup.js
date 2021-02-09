@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-let rawData = fs.readFileSync('./_data/restaurants.json');
+let rawData = fs.readFileSync('./_data/cleanRestaurants.json');
 
 let uglyData = JSON.parse(rawData);
 
@@ -16,11 +16,12 @@ const getCleanData = data => {
   for (let i = 0; i < data.length; i++) {
     let cleanRestaurant = {
       name: data[i].name,
-      address: `${data[i].location.display_address[0]} ${data[i].location.display_address[1]}`,
+      address: data[i].address,
       image: data[i].image_url,
+      imageFile: data[i].imageFile,
       price: data[i].price,
       rating: data[i].rating,
-      category: data[i].categories[0].title,
+      category: data[i].category,
       phone: data[i].display_phone
     };
     cleanData.push(cleanRestaurant);
@@ -40,4 +41,4 @@ const writeToFile = (data, path) => {
 };
 
 getCleanData(uniqueRestaurants);
-writeToFile(cleanData, './_data/cleanRestaurants.json');
+writeToFile(cleanData, './_data/cleanerRestaurants.json');

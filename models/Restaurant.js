@@ -18,6 +18,10 @@ const RestaurantSchema = new Schema({
     type: [String]
   },
   image: String,
+  imageFile: {
+    type: String,
+    default: 'no-photo.jpg'
+  },
   rating: Number,
   price: String,
   // contact information

@@ -33,7 +33,7 @@ export default function RestaurantContent(props) {
     let top = 0;
     const topCall = props.topCall;
     topCall(top);
-    restaurantsAPI.getRestaurant(restId).then((data) => {
+    restaurantsAPI.getRestaurant(restId).then(data => {
       if (data) {
         setRestaurantState(data);
       }
@@ -60,25 +60,27 @@ export default function RestaurantContent(props) {
 
   const [modalShow, setModalShow] = useState(false);
 
+console.log(restaurantState.data.data.imageFile);
+
   return (
     <>
       <Desktop>
         <NavDesktopM />
       </Desktop>
-      <Row className="pt-2 bigScroll">
+      <Row className='pt-2 bigScroll'>
         {!restaurantState.data ? (
           <div>Loading...</div>
         ) : (
           <Col>
             <Mobile>
-              <Row className="px-3">
-                <Col className="pb-2">
-                  <Button content="Back" onClick={handleClick} />
+              <Row className='px-3'>
+                <Col className='pb-2'>
+                  <Button content='Back' onClick={handleClick} />
                 </Col>
-                <Col className="text-right pb-2">
+                <Col className='text-right pb-2'>
                   {/* if the user is not logged in, then clicking on the post photo button below SHOULD take them to the /login page */}
                   <Button
-                    color="yellow"
+                    color='yellow'
                     onClick={() => {
                       isAuthenticated
                         ? setModalShow(true)
@@ -96,13 +98,13 @@ export default function RestaurantContent(props) {
             </Mobile>
             <Desktop>
               <Row>
-                <Col className="pb-2">
-                  <Button content="Back" onClick={handleClick} />
+                <Col className='pb-2'>
+                  <Button content='Back' onClick={handleClick} />
                 </Col>
-                <Col className="text-right pb-2">
+                <Col className='text-right pb-2'>
                   {/* if the user is not logged in, then clicking on the post photo button below SHOULD take them to the /login page */}
                   <Button
-                    color="yellow"
+                    color='yellow'
                     onClick={() => {
                       isAuthenticated
                         ? setModalShow(true)
@@ -118,16 +120,16 @@ export default function RestaurantContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className="sideImgBox">
-              <Col className="p-0">
+            <Row className='sideImgBox'>
+              <Col className='p-0'>
                 <Image
-                  className="img-fluid w-100"
-                  src={restaurantState.data.data.image}
+                  className='img-fluid w-100'
+                  src={`../../restaurantImages/${restaurantState.data.data.imageFile}`}
                 />
               </Col>
             </Row>
             <Mobile>
-              <Row className="mb-4 pt-1 pl-1">
+              <Row className='mb-4 pt-1 pl-1'>
                 <Col>
                   <DistanceButton
                     location={restaurantState.data.data.location.coordinates}
@@ -148,16 +150,16 @@ export default function RestaurantContent(props) {
                   {/* </Col>
                 <Col xs={6} className="text-right"> */}
                   <Rating
-                    icon="star"
+                    icon='star'
                     defaultRating={restaurantState.data.data.rating}
                     maxRating={5}
-                    className="ml-1"
+                    className='ml-1'
                   />
                 </Col>
               </Row>
             </Mobile>
             <Desktop>
-              <Row className="mb-4 pt-1 pl-1">
+              <Row className='mb-4 pt-1 pl-1'>
                 <Col>
                   <DistanceButton
                     location={restaurantState.data.data.location.coordinates}
@@ -178,16 +180,16 @@ export default function RestaurantContent(props) {
                   {/* </Col>
                 <Col xs={6} className="text-right"> */}
                   <Rating
-                    icon="star"
+                    icon='star'
                     defaultRating={restaurantState.data.data.rating}
                     maxRating={5}
-                    className="ml-1"
+                    className='ml-1'
                   />
                 </Col>
               </Row>
             </Desktop>
             <Mobile>
-              <Row className="px-3">
+              <Row className='px-3'>
                 <Col>
                   <p>RESTAURANT: {restaurantState.data.data.name}</p>
                   <p>CATEGORY: {restaurantState.data.data.category}</p>
@@ -216,8 +218,8 @@ export default function RestaurantContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className="h-100 w-100 mx-0">
-              <Col className="p-0">
+            <Row className='h-100 w-100 mx-0'>
+              <Col className='p-0'>
                 <RestaurantUserContent />
               </Col>
             </Row>

@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // Load models
-const Mural = require('./models/Mural');
+// const Mural = require('./models/Mural');
 const Restaurant = require('./models/Restaurant');
 
 // Connect to DB
@@ -19,9 +19,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 });
 
 // Read JSON files
-const murals = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/cleanMurals.json`, 'utf-8')
-);
+// const murals = JSON.parse(
+//   fs.readFileSync(`${__dirname}/_data/cleanMurals.json`, 'utf-8')
+// );
 
 const restaurants = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/cleanRestaurants.json`, 'utf-8')
@@ -30,7 +30,7 @@ const restaurants = JSON.parse(
 // Import into DB
 const importData = async () => {
   try {
-    await Mural.create(murals);
+    // await Mural.create(murals);
     await Restaurant.create(restaurants);
 
     console.log('Data Imported...'.green.inverse);
@@ -43,7 +43,7 @@ const importData = async () => {
 // Delete Data
 const deleteData = async () => {
   try {
-    await Mural.deleteMany();
+    // await Mural.deleteMany();
     await Restaurant.deleteMany();
 
     console.log('Data Destroyed...'.red.inverse);
