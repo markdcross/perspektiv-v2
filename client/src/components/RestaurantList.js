@@ -24,15 +24,10 @@ export default function RestaurantList(props) {
     restaurantsAPI.getRestaurants().then(data => {
       setRestaurantListState(data);
       if (data) {
-        console.log(restaurantListState);
       }
     });
     // eslint-disable-next-line
   }, []);
-  console.log(props.muralPoint.data.location.coordinates[0]);
-  console.log(props.muralPoint.data.location.coordinates[1]);
-  //  console.log(centerPoint);
-  // console.log(radiusCheck(-77.47872,37.552485,centerPoint,km));
 
   return (
     <Row className='pt-2'>
