@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
-import ReactRoundedImage from 'react-rounded-image';
-import { Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
-import { Button, Progress } from 'semantic-ui-react';
-import RankUpModal from './RankUpModal';
+import React, { useContext } from 'react';
+// import React, { useState, useContext, useEffect } from 'react';
+// import ReactRoundedImage from 'react-rounded-image';
+// import { Row, Col, Tooltip, OverlayTrigger } from 'react-bootstrap';
+// import { Button, Progress } from 'semantic-ui-react';
+// import RankUpModal from './RankUpModal';
 import ProgressContext from '../context/ProgressContext';
 import UserStatusDView from './UserStatusDView';
 import UserStatusDMView from './UserStatusDMView';
@@ -25,11 +26,11 @@ export default function UserStatus(props) {
   // )
 
   //Temporary data for testing the userstatus tool
-  const [currentUserState, setCurrentUserState] = useState({
-    muralsVisited: 79,
-    avatar: '//www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg',
-    USERAUTHENTICATED: true
-  });
+  // const [currentUserState, setCurrentUserState] = useState({
+  //   muralsVisited: 79,
+  //   avatar: '//www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50.jpg',
+  //   USERAUTHENTICATED: true
+  // });
 
   let userLevel = null;
   let userAvatar = null;
@@ -61,8 +62,8 @@ export default function UserStatus(props) {
   const [boostState, setBoostState] = boostValue;
   const [timerXP] = timerValue;
   const [levelReset] = levelValue;
-  console.log(progressControl + 'Progress value from context');
-  console.log(resetState + 'Reset value from context');
+  // console.log(progressControl + 'Progress value from context');
+  // console.log(resetState + 'Reset value from context');
 
   //Set ranks for user
   const userRank = [
@@ -164,7 +165,7 @@ export default function UserStatus(props) {
     userLevel = selectLevel(user.data.muralsVisited.length);
     userAvatar = user.data.avatar;
     userVisited = user.data.muralsVisited.length;
-    console.log(userLevel, userAvatar, userVisited);
+    // console.log(userLevel, userAvatar, userVisited);
   }
   // let userLevel = selectLevel(currentUserState.user.data.muralsVisited.length());
 
