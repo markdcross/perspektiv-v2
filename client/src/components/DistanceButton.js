@@ -72,6 +72,7 @@ const DistanceButton = ({ location, id }) => {
           content: `${distance}m`
         }}
         onClick={onClick}
+        className="ml-1 pl-2 pr-2"
       />
     </Fragment>
   );

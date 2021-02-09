@@ -121,8 +121,8 @@ export default function RestaurantContent(props) {
               </Col>
             </Row>
             <Mobile>
-              <Row className="mb-4 pt-1 px-3">
-                <Col xs={6} className="text-left">
+              <Row className="mb-4 pt-1 pl-1">
+                <Col>
                 <DistanceButton location={restaurantState.data.data.location.coordinates} />
 
                   {/* <Button
@@ -137,19 +137,20 @@ export default function RestaurantContent(props) {
                       content: '2,048'
                     }}
                   /> */}
-                </Col>
-                <Col xs={6} className="text-right">
+                {/* </Col>
+                <Col xs={6} className="text-right"> */}
                   <Rating
                     icon="star"
                     defaultRating={restaurantState.data.data.rating}
                     maxRating={5}
+                    className="ml-1"
                   />
                 </Col>
               </Row>
             </Mobile>
             <Desktop>
-              <Row className="mb-4 pt-1">
-                <Col xs={6} className="text-left">
+              <Row className="mb-4 pt-1 pl-1">
+                <Col>
                 <DistanceButton location={restaurantState.data.data.location.coordinates} />
 
                   {/* <Button
@@ -164,12 +165,13 @@ export default function RestaurantContent(props) {
                       content: '2,048'
                     }}
                   /> */}
-                </Col>
-                <Col xs={6} className="text-right">
+                {/* </Col>
+                <Col xs={6} className="text-right"> */}
                   <Rating
                     icon="star"
                     defaultRating={restaurantState.data.data.rating}
                     maxRating={5}
+                    className="ml-1"
                   />
                 </Col>
               </Row>
