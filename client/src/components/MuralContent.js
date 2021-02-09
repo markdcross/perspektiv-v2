@@ -30,6 +30,7 @@ export default function MuralContent(props) {
     let top = 0;
     const topCall = props.topCall;
     topCall(top);
+    // eslint-disable-next-line
   }, []);
 
   const Desktop = ({ children }) => {
@@ -199,7 +200,7 @@ export default function MuralContent(props) {
                       <Checkbox label="VISITED" disabled />
                     </div>
                   )}
-                {/* </Col>
+                  {/* </Col>
                 <Col xs={5} className="text-right"> */}
                   <DistanceButton
                     location={singleMuralState.data.data.location.coordinates}
@@ -216,7 +217,7 @@ export default function MuralContent(props) {
 											content: "2,048",
 										}}
 									/> */}
-                {/* </Col>
+                  {/* </Col>
                 <Col xs={5} className="text-right"> */}
                   <Button
                     size="mini"
@@ -247,12 +248,12 @@ export default function MuralContent(props) {
                       <Checkbox label="VISITED" disabled />
                     </div>
                   )}
-                {/* </Col>
+                  {/* </Col>
                 <Col xs={5} className="text-right"> */}
                   <DistanceButton
                     location={singleMuralState.data.data.location.coordinates}
                   />
-                {/* </Col>
+                  {/* </Col>
                 <Col xs={5} className="text-right"> */}
                   <Button
                     size="mini"
@@ -361,9 +362,9 @@ export default function MuralContent(props) {
                   <Carousel.Item>
                     {!singleMuralState.data ? (
                       <div>Loading...</div>
-                        ) : (
-                    <RestaurantList muralPoint={singleMuralState.data}/>
-                        )}
+                    ) : (
+                      <RestaurantList muralPoint={singleMuralState.data} />
+                    )}
                   </Carousel.Item>
                 </Carousel>
               </Col>

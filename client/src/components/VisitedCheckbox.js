@@ -12,6 +12,7 @@ const VisitedCheckbox = (props) => {
   useEffect(() => {
     // get the user and store it in a variable that we will use for qr code scans
     populateCheckmark();
+    // eslint-disable-next-line
   }, []);
 
   const populateCheckmark = () => {

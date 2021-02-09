@@ -38,22 +38,23 @@ export default function UserLogin(props) {
   const [loading, setLoading] = useState(false);
   // destructure the user object
   const { email, password } = user;
-  
-	//set position of page slide when in mobile view
-	useEffect(() => {
-		let top = 0;
-		const topCall = props.topCall;
-		topCall(top);
-	}, []);
+
+  //set position of page slide when in mobile view
+  useEffect(() => {
+    let top = 0;
+    const topCall = props.topCall;
+    topCall(top);
+    // eslint-disable-next-line
+  }, []);
 
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 768 });
     return isDesktop ? children : null;
   };
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    return isMobile ? children : null;
-  };
+  // const Mobile = ({ children }) => {
+  //   const isMobile = useMediaQuery({ maxWidth: 767 });
+  //   return isMobile ? children : null;
+  // };
 
   // handle form field changes whenever a user types
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
@@ -66,6 +67,7 @@ export default function UserLogin(props) {
     } else {
       console.log('login submit');
       login({ email, password });
+      setLoading(true);
     }
   };
 
