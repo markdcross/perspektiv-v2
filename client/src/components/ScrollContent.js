@@ -98,6 +98,7 @@ export default function ScrollContent(props) {
 													<div
 														data-tooltip='Login to track visits'
 														data-position='right center'
+														className="float-left"
 													>
 														<Checkbox label='VISITED' disabled />
 													</div>
