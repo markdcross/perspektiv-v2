@@ -1,27 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ReactRoundedImage from 'react-rounded-image';
 import { Row, Col, Image } from 'react-bootstrap';
 import { Button } from 'semantic-ui-react';
 import MuralContext from '../context/MuralContext';
+import muralsAPI from '../utils/murals-API';
 
-export default function MuralUserContent() {
+export default function MuralUserContent({ singleMuralState }) {
   const muralState = useContext(MuralContext);
+  const [muralPostState, setMuralPostState] = useState([]);
+
+  useEffect(() => {
+    muralsAPI.getMuralPosts(singleMuralState.data.data._id).then(data => {
+      setMuralPostState(data);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [singleMuralState]);
 
   return (
     <Row className='pt-2'>
-      {!muralState.data ? (
+      {!muralPostState.data ? (
         <div>Loading...</div>
       ) : (
         <Col className='scrollButt'>
-          {muralState.data.data.map(mural => {
+          {muralPostState.data.data.map(post => {
             return (
-              <div key={mural.id}>
+              <div key={post.id}>
                 <Row>
                   <Col className='parentMural'>
                     <Image
                       className='innerMural'
-                      src={`../../muralImages/${mural.imageFile}`}
-                      alt={mural.description}
+                      src={`../../uploads/${post.image}`}
+                      alt={post.text}
                     />
                     <Button
                       className='achievementMarkMural px-6 py-0'
@@ -45,10 +54,7 @@ export default function MuralUserContent() {
                 </Row>
                 <Row className='pb-3'>
                   <Col>
-                    <p>
-                      This is a story of a man named Jed. Poor mountaineer
-                      hardly kept his family fed. Jelly halvah croissant.
-                    </p>
+                    <p>{post.text}</p>
                   </Col>
                 </Row>
               </div>
