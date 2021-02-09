@@ -126,7 +126,6 @@ export default function MuralContent(props) {
             <Mobile>
               <Row className="px-3">
                 <Col className="pb-2">
-                  {/* <Link to='/' onClick={resetNav}> */}
                   <Link to="/">
                     <Button content="Back" />
                   </Link>
@@ -153,7 +152,6 @@ export default function MuralContent(props) {
             <Desktop>
               <Row>
                 <Col className="pb-2">
-                  {/* <Link to='/' onClick={resetNav}> */}
                   <Link to="/">
                     <Button content="Back" />
                   </Link>
@@ -188,8 +186,8 @@ export default function MuralContent(props) {
               </Col>
             </Row>
             <Mobile>
-              <Row className="mb-4 pt-1 px-3">
-                <Col xs={2} className="my-auto">
+              <Row className="mb-4 pt-1 pl-1">
+                <Col className="my-auto">
                   {isAuthenticated ? (
                     <VisitedCheckbox artId={artId} user={user} />
                   ) : (
@@ -200,8 +198,8 @@ export default function MuralContent(props) {
                       <Checkbox label="VISITED" disabled />
                     </div>
                   )}
-                </Col>
-                <Col xs={5} className="text-right">
+                {/* </Col>
+                <Col xs={5} className="text-right"> */}
                   <DistanceButton
                     location={singleMuralState.data.data.location.coordinates}
                   />
@@ -217,8 +215,8 @@ export default function MuralContent(props) {
 											content: "2,048",
 										}}
 									/> */}
-                </Col>
-                <Col xs={5} className="text-right">
+                {/* </Col>
+                <Col xs={5} className="text-right"> */}
                   <Button
                     size="mini"
                     content="Visits"
@@ -229,13 +227,14 @@ export default function MuralContent(props) {
                       pointing: 'left',
                       content: singleMuralState.data.data.visits.length
                     }}
+                    className="pl-2 pr-3"
                   />
                 </Col>
               </Row>
             </Mobile>
             <Desktop>
-              <Row className="mb-4 pt-1">
-                <Col xs={2} className="my-auto">
+              <Row className="mb-4 pt-1 pl-0">
+                <Col className="ml-0">
                   {isAuthenticated ? (
                     <VisitedCheckbox artId={artId} user={user} />
                   ) : (
@@ -246,13 +245,13 @@ export default function MuralContent(props) {
                       <Checkbox label="VISITED" disabled />
                     </div>
                   )}
-                </Col>
-                <Col xs={5} className="text-right">
+                {/* </Col>
+                <Col xs={5} className="text-right"> */}
                   <DistanceButton
                     location={singleMuralState.data.data.location.coordinates}
                   />
-                </Col>
-                <Col xs={5} className="text-right">
+                {/* </Col>
+                <Col xs={5} className="text-right"> */}
                   <Button
                     size="mini"
                     content="Visits"
@@ -263,6 +262,7 @@ export default function MuralContent(props) {
                       pointing: 'left',
                       content: singleMuralState.data.data.visits.length
                     }}
+                    className="pl-2 pr-3"
                   />
                 </Col>
               </Row>
@@ -357,7 +357,11 @@ export default function MuralContent(props) {
                     <MuralUserContent />
                   </Carousel.Item>
                   <Carousel.Item>
-                    <RestaurantList />
+                    {!singleMuralState.data ? (
+                      <div>Loading...</div>
+                        ) : (
+                    <RestaurantList muralPoint={singleMuralState.data}/>
+                        )}
                   </Carousel.Item>
                 </Carousel>
               </Col>
