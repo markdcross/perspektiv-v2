@@ -7,7 +7,7 @@ import AuthContext from '../context/auth-v2/authContext.js';
 
 const VisitedCheckbox = (props) => {
   const authContext = useContext(AuthContext);
-  const { user } = authContext;
+  const { user, loadUser } = authContext;
 
   useEffect(() => {
     // get the user and store it in a variable that we will use for qr code scans
@@ -33,11 +33,13 @@ const VisitedCheckbox = (props) => {
     if (visitedState === false) {
       muralsAPI
         .visitMural(props.artId, user.data._id)
-        .then(() => setVisitedState(true));
+        .then(() => setVisitedState(true))
+        .then(() => loadUser());
     } else if (visitedState === true) {
       muralsAPI
         .unvisitMural(props.artId, user.data._id)
-        .then(() => setVisitedState(false));
+        .then(() => setVisitedState(false))
+        .then(() => loadUser());
     }
   };
 
