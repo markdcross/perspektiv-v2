@@ -1,5 +1,6 @@
-import React, { useReducer, useEffect } from 'react';
-import AuthAPI from '../../utils/auth-API';
+import React, { useReducer } from 'react';
+// import React, { useReducer, useEffect } from 'react';
+// import AuthAPI from '../../utils/auth-API';
 import axios from 'axios';
 import AuthContext from './authContext';
 import authReducer from './authReducer';

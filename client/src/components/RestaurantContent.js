@@ -6,9 +6,9 @@ import restaurantsAPI from '../utils/restaurants-API';
 import RestaurantUserContent from './RestaurantUserContent';
 import NavDesktopM from './NavDesktopM';
 import PhotoModal from './PhotoModal';
-import history from './History';
+// import history from './History';
 import { useMediaQuery } from 'react-responsive';
-import DistanceButton from "./DistanceButton";
+import DistanceButton from './DistanceButton';
 import { useHistory } from 'react-router-dom';
 
 // auth context
@@ -28,25 +28,31 @@ export default function RestaurantContent(props) {
     return isMobile ? children : null;
   };
 
-  	//set position of page slide when in mobile view
-	useEffect(() => {
-		let top = 0;
-		const topCall = props.topCall;
-		topCall(top);
-	}, []);
+  //set position of page slide when in mobile view
+  useEffect(() => {
+    let top = 0;
+    const topCall = props.topCall;
+    topCall(top);
+    restaurantsAPI.getRestaurant(restId).then((data) => {
+      if (data) {
+        setRestaurantState(data);
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const { restId } = useParams();
 
   const [restaurantState, setRestaurantState] = useState([]);
 
-  useEffect(() => {
-    restaurantsAPI.getRestaurant(restId).then((data) => {
-      if (data) {
-      setRestaurantState(data);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   restaurantsAPI.getRestaurant(restId).then((data) => {
+  //     if (data) {
+  //       setRestaurantState(data);
+  //     }
+  //   });
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   function handleClick() {
     history.goBack();
@@ -123,7 +129,9 @@ export default function RestaurantContent(props) {
             <Mobile>
               <Row className="mb-4 pt-1 pl-1">
                 <Col>
-                <DistanceButton location={restaurantState.data.data.location.coordinates} />
+                  <DistanceButton
+                    location={restaurantState.data.data.location.coordinates}
+                  />
 
                   {/* <Button
                     size="mini"
@@ -137,7 +145,7 @@ export default function RestaurantContent(props) {
                       content: '2,048'
                     }}
                   /> */}
-                {/* </Col>
+                  {/* </Col>
                 <Col xs={6} className="text-right"> */}
                   <Rating
                     icon="star"
@@ -151,7 +159,9 @@ export default function RestaurantContent(props) {
             <Desktop>
               <Row className="mb-4 pt-1 pl-1">
                 <Col>
-                <DistanceButton location={restaurantState.data.data.location.coordinates} />
+                  <DistanceButton
+                    location={restaurantState.data.data.location.coordinates}
+                  />
 
                   {/* <Button
                     size="mini"
@@ -165,7 +175,7 @@ export default function RestaurantContent(props) {
                       content: '2,048'
                     }}
                   /> */}
-                {/* </Col>
+                  {/* </Col>
                 <Col xs={6} className="text-right"> */}
                   <Rating
                     icon="star"
