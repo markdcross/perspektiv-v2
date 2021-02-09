@@ -1,5 +1,4 @@
 const path = require('path');
-
 const ErrorResponse = require('../utils/errorResponse');
 const MuralPost = require('../models/MuralPost');
 const asyncHandler = require('../middleware/async');
@@ -48,6 +47,7 @@ exports.getPost = asyncHandler(async (req, res, next) => {
 exports.createPost = asyncHandler(async (req, res, next) => {
   req.body.mural = req.params.muralId;
   req.body.user = req.user.id;
+  req.body.image = req.file.filename;
 
   const mural = await Mural.findById(req.params.muralId);
 
@@ -56,6 +56,18 @@ exports.createPost = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`No mural with the id of ${req.params.muralId}`, 404)
     );
   }
+
+  console.log(req.file.filename);
+
+  // Create custom filename
+  // fileName = `photo_${Date.now()}`;
+  // console.log(fileName);
+
+  // file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+  //   if (err) {
+  //     console.error(err);
+  //     return next(new ErrorResponse(`Problem with file upload`, 500));
+  //   }
 
   const post = await MuralPost.create(req.body);
 
@@ -174,7 +186,7 @@ exports.postPhotoUpload = asyncHandler(async (req, res, next) => {
   // Create custom filename
   file.name = `photo_${post._id}${path.parse(file.name).ext}`;
 
-  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (err) => {
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
     if (err) {
       console.error(err);
       return next(new ErrorResponse(`Problem with file upload`, 500));
