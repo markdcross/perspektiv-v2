@@ -20,6 +20,7 @@ export default function PhotoModal(props) {
     })
       .then(response => {
         setResponse(response.data);
+        props.refreshState();
       })
       .catch(error => {
         setResponse('error');
@@ -36,8 +37,9 @@ export default function PhotoModal(props) {
       'multipart/form-data',
       formData,
       msg => console.log(msg)
-    );
+    )
 
+    ;
     props.onHide();
   }
 

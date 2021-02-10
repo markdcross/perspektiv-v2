@@ -57,18 +57,6 @@ exports.createPost = asyncHandler(async (req, res, next) => {
     );
   }
 
-  console.log(req.file.filename);
-
-  // Create custom filename
-  // fileName = `photo_${Date.now()}`;
-  // console.log(fileName);
-
-  // file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
-  //   if (err) {
-  //     console.error(err);
-  //     return next(new ErrorResponse(`Problem with file upload`, 500));
-  //   }
-
   const post = await MuralPost.create(req.body);
 
   res.status(200).json({

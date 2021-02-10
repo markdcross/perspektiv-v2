@@ -1,21 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React from 'react';
 import ReactRoundedImage from 'react-rounded-image';
 import { Row, Col, Image } from 'react-bootstrap';
 import { Button } from 'semantic-ui-react';
-import MuralContext from '../context/MuralContext';
-import muralsAPI from '../utils/murals-API';
 
-export default function MuralUserContent({ singleMuralState }) {
-  const muralState = useContext(MuralContext);
-  const [muralPostState, setMuralPostState] = useState([]);
-
-  useEffect(() => {
-    muralsAPI.getMuralPosts(singleMuralState.data.data._id).then(data => {
-      setMuralPostState(data);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [singleMuralState]);
-
+export default function MuralUserContent({ muralPostState }) {
   return (
     <Row className='pt-2'>
       {!muralPostState.data ? (
@@ -32,7 +20,7 @@ export default function MuralUserContent({ singleMuralState }) {
                       src={`../../uploads/${post.image}`}
                       alt={post.text}
                     />
-                    <Button
+                    {/* <Button
                       className='achievementMarkMural px-6 py-0'
                       color='yellow'
                     >
@@ -49,7 +37,7 @@ export default function MuralUserContent({ singleMuralState }) {
                           imageHeight='25'
                         />
                       </div>
-                    </Button>
+                    </Button> */}
                   </Col>
                 </Row>
                 <Row className='pb-3'>
