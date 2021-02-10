@@ -23,12 +23,12 @@ const DistanceButton = ({ location, id }) => {
     );
   }
 
-  //setting the plot points
-  // const { directionsValue } = useContext(DirectionsContext);
-  // const [ directionsState, setDirectionsState ] = directionsValue;
-  let plotPoints = null;
-  const { plotValue } = useContext(DirectionsContext);
-  const [plotCall] = plotValue;
+    //setting the plot points
+    // const { directionsValue } = useContext(DirectionsContext);
+    // const [ directionsState, setDirectionsState ] = directionsValue;
+    let plotPoints = null;
+    const { plotValue } = useContext(DirectionsContext);
+    const [ plotCall ] = plotValue;
 
   const onClick = () => {
     getDirections
@@ -40,22 +40,21 @@ const DistanceButton = ({ location, id }) => {
         );
 
         if (directions.data) {
-          plotPoints = directions.data.route.legs[0].maneuvers.map(points => [
-            points.startPoint.lng,
-            points.startPoint.lat
-          ]);
+          plotPoints = directions.data.route.legs[0].maneuvers.map(points => 
+          [points.startPoint.lng,points.startPoint.lat]
+          )
           plotCall(plotPoints);
           console.log(plotPoints);
           // setDirectionsState(plotPoints);
           // console.log(directionsState);
         }
-        // plotPoints = directions.data.route.legs[0].maneuvers.map(points =>
+        // plotPoints = directions.data.route.legs[0].maneuvers.map(points => 
         //   [points.startPoint.lng,points.startPoint.lat]
         // )
         // console.log(plotPoints);
       });
   };
-
+  
   return (
     <Fragment>
       <Button
@@ -70,7 +69,7 @@ const DistanceButton = ({ location, id }) => {
           content: `${distance}m`
         }}
         onClick={onClick}
-        className='ml-1 pl-2 pr-2'
+        className="ml-1 pl-2 pr-2"
       />
     </Fragment>
   );
