@@ -29,6 +29,9 @@ export default function MuralContent(props) {
     muralsAPI.getMural(artId).then((data) => {
       setSingleMuralState(data);
     });
+    muralsAPI.getMuralPosts(artId).then((data) => {
+      setMuralPostState(data);
+    });
     let top = 0;
     const topCall = props.topCall;
     topCall(top);
@@ -48,6 +51,33 @@ export default function MuralContent(props) {
   const { artId } = useParams();
 
   const [singleMuralState, setSingleMuralState] = useState([]);
+  const [muralPostState, setMuralPostState] = useState([]);
+  console.log(
+    '🚀 ~ file: MuralContent.js ~ line 49 ~ MuralContent ~ muralPostState',
+    muralPostState
+  );
+
+  // useEffect(() => {
+  //   muralsAPI.getMuralPosts(artId).then((data) => {
+  //     setMuralPostState(data);
+  //   });
+  //   // eslint-disable-next-line
+  // }, []);
+
+  const refreshState = () => {
+    muralsAPI.getMuralPosts(artId).then((data) => {
+      setMuralPostState(data);
+    });
+  };
+  // const refreshState = () => {
+  //   const itself = singleMuralState.data.data._id;
+  //   muralsAPI.getMuralPosts(singleMuralState.data.data._id).then(data => {
+  //     setMuralPostState(data);
+  //   });
+  //   setSingleMuralState('');
+  //   setSingleMuralState(itself);
+  //   console.log(singleMuralState);
+  // };
 
   const [pageInd, setPageInd] = useState(true);
 
@@ -154,6 +184,7 @@ export default function MuralContent(props) {
                     onHide={() => setModalShow(false)}
                     singleMuralState={singleMuralState}
                     setSingleMuralState={setSingleMuralState}
+                    refreshState={refreshState}
                   />
                 </Col>
               </Row>
@@ -181,6 +212,7 @@ export default function MuralContent(props) {
                     onHide={() => setModalShow(false)}
                     singleMuralState={singleMuralState}
                     setSingleMuralState={setSingleMuralState}
+                    refreshState={refreshState}
                   />
                 </Col>
               </Row>
@@ -367,7 +399,11 @@ export default function MuralContent(props) {
                   prevIcon={<Icon name="angle left" size="huge" />}
                 >
                   <Carousel.Item>
-                    <MuralUserContent singleMuralState={singleMuralState} />
+                    <MuralUserContent
+                      setSingleMuralState={setSingleMuralState}
+                      singleMuralState={singleMuralState}
+                      muralPostState={muralPostState}
+                    />
                   </Carousel.Item>
                   <Carousel.Item>
                     {!singleMuralState.data ? (
