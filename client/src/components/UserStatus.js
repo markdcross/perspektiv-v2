@@ -56,9 +56,14 @@ export default function UserStatus(props) {
     timerValue,
     levelValue
   } = useContext(ProgressContext);
+
+  // eslint-disable-next-line
   const [progressControl, setProgressControl] = progressValue;
+  // eslint-disable-next-line
   const [modalShow, setModalShow] = modalValue;
+  // eslint-disable-next-line
   const [resetState, setResetState] = resetValue;
+  // eslint-disable-next-line
   const [boostState, setBoostState] = boostValue;
   const [timerXP] = timerValue;
   const [levelReset] = levelValue;
@@ -82,7 +87,7 @@ export default function UserStatus(props) {
   const userXP = [10, 10, 10, 20, 30, 30, 40, 12, 0];
   const userXPMin = [0, 10, 20, 30, 50, 80, 110, 150, 0];
 
-  const selectLevel = (visited) => {
+  const selectLevel = visited => {
     switch (true) {
       case visited >= 0 && visited <= 10:
         if (visited <= 9) {

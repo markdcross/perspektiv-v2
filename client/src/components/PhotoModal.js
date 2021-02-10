@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
-import ImageUp from './ImageUp';
 import { Icon } from 'semantic-ui-react';
 import axios from 'axios';
 
@@ -37,9 +36,7 @@ export default function PhotoModal(props) {
       'multipart/form-data',
       formData,
       msg => console.log(msg)
-    )
-
-    ;
+    );
     props.onHide();
   }
 

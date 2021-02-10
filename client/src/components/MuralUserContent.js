@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactRoundedImage from 'react-rounded-image';
+// import ReactRoundedImage from 'react-rounded-image';
 import { Row, Col, Image } from 'react-bootstrap';
-import { Button } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 
 export default function MuralUserContent({ muralPostState }) {
   return (
