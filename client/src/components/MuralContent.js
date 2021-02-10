@@ -21,7 +21,7 @@ import AuthContext from '../context/auth-v2/authContext.js';
 
 export default function MuralContent(props) {
   const authContext = useContext(AuthContext);
-  const { isAuthenticated, user } = authContext;
+  const { isAuthenticated, user, loadUser } = authContext;
   const history = useHistory();
 
   //set position of page slide when in mobile view
@@ -48,13 +48,6 @@ export default function MuralContent(props) {
   const { artId } = useParams();
 
   const [singleMuralState, setSingleMuralState] = useState([]);
-
-  //   useEffect(() => {
-  //     muralsAPI.getMural(artId).then((data) => {
-  //       setSingleMuralState(data);
-  //     });
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, []);
 
   const [pageInd, setPageInd] = useState(true);
 
@@ -117,34 +110,12 @@ export default function MuralContent(props) {
     setIndex(selectedIndex);
   };
 
-  // use the query keyword for checking if the url contains ?visited=true
-  // this is called in the useEffect hook
-
-  // const queryCheck = async (res) => {
-  //   if (res && query === '?visited=true') {
-  //     console.log('user is logged in and the mural can be checked off');
-
-  //     // pull out the user id from the res that was passed in
-  //     const { user } = res.data.data._id;
-  //     console.log('user: ' + res.data.data._id);
-
-  //     // hit the visit mural route on the backend
-  //     // await axios.put(`/api/v1/murals/visit/${artId}`, { user });
-
-  //     console.log('mural visited');
-  //   }
-  // };
-
   let query = useQuery();
 
-  const qrCodeScan = async () => {
-    authAPI.getCurrentUser().then((res) => {
-      if (res && query === '?visited=true') {
-        console.log('user is logged in and the mural can be checked off');
-        const { userId } = res.data.data._id;
-        muralsAPI.visitMural(artId, userId);
-      } else {
-        return;
+  const qrCodeScan = () => {
+    authAPI.getCurrentUser().then((res, err) => {
+      if (isAuthenticated && query === '?visited=true') {
+        muralsAPI.visitMural(artId, res.data.data._id).then(() => loadUser());
       }
     });
   };
