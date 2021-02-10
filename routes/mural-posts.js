@@ -1,4 +1,6 @@
 const express = require('express');
+const multer = require('multer');
+const uuidv4 = require('uuid/v4');
 const {
   getPosts,
   getPost,
@@ -17,6 +19,23 @@ const { protectedRoute } = require('../middleware/auth');
 
 router.use(protectedRoute);
 
+// File uploading
+const DIR = './client/public/uploads/';
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, DIR);
+  },
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(' ').join('-');
+    cb(null, uuidv4() + '-' + fileName);
+  }
+});
+
+var upload = multer({
+  storage: storage
+});
+
 router.route('/:id/photo').put(postPhotoUpload);
 
 router
@@ -28,7 +47,7 @@ router
     }),
     getPosts
   )
-  .post(createPost);
+  .post(upload.single('file'), createPost);
 
 router.route('/:id').get(getPost).put(updatePost).delete(deletePost);
 
