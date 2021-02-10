@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import ImageUploader from "react-images-upload";
 
 const ImageUp = props => {
-const [pictures, setPictures] = useState([]);
+
 
 const onDrop = picture => {
-    setPictures([...pictures, picture]);
+    props.setPictures([...props.pictures, picture]);
     };
-    console.log(pictures);
     return (
         <ImageUploader
             {...props}
