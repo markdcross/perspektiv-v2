@@ -20,7 +20,7 @@ const { protectedRoute } = require('../middleware/auth');
 router.use(protectedRoute);
 
 // File uploading
-const DIR = 'postImages/';
+const DIR = './client/build/postImages/';
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
