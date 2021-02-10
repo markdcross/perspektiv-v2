@@ -19,7 +19,7 @@ export default function RankUpModal(props) {
 			</Modal.Header>
 			<Modal.Body className='text-center'>
             <Image
-						src={`../../assets/images/gif/rocket.gif`}
+						src={`../../assets/images/gif/LevelUpScript.gif`}
 						alt={"spinning gif"}
 						width={200}
 					/>
