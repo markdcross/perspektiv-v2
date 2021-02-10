@@ -11,7 +11,7 @@ const LoadingScrollContent = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    <rect x="0" y="10" rx="0" ry="0" width="559" height="150" />
+    <rect x="0" y="10" rx="0" ry="0" width="800" height="150" />
     <rect x="0" y="171" rx="0" ry="0" width="279" height="17" />
   </ContentLoader>
 );

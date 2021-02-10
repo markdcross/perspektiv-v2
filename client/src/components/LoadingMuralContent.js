@@ -11,7 +11,7 @@ const LoadingMuralContent = (props) => (
     foregroundColor="#ecebeb"
     {...props}
   >
-    <rect x="0" y="10" rx="0" ry="0" width="600" height="450" />
+    <rect x="0" y="10" rx="0" ry="0" width="1000" height="450" />
     <rect x="0" y="480" rx="0" ry="0" width="279" height="20" />
     <rect x="0" y="515" rx="0" ry="0" width="192" height="20" />
     <rect x="0" y="550" rx="0" ry="0" width="209" height="20" />
