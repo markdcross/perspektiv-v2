@@ -5,12 +5,14 @@
 ## **Table of Contents**
 
 1. [Description](#Description)
-2. [Packages & Libraries](#Packages-&-Libraries)
-3. [Technologies](#Technologies)
-4. [Installation](#Installation)
-5. [License](#License)
-6. [Contributions](#Contributions)
-7. [Authors](#Authors)
+2. [Feature List](#Feature-List)
+3. [Packages & Libraries](#Packages-&-Libraries)
+4. [Tech Stack](#Tech-Stack)
+5. [Installation](#Installation)
+6. [License](#License)
+7. [Security](#Security)
+8. [Contributions](#Contributions)
+9. [Authors](#Authors)
 
 ---
 
@@ -20,27 +22,41 @@ Discover the art of Richmond.
 
 ---
 
+## **Feature List**
+
+- Geocoder for exact location and dynamic directions
+- RESTful API documentation via Postman
+- Protected routes and user authentication
+- Gamification logic that levels up users as they visit more POIs
+- Error handling and error message displays
+- Photo uploads and comments on murals
+
+---
+
 ## **Packages & Libraries**
 
 Perspektiv leverages a number of libraries and packages to create a fast, responsive, and modern web application. Below are some of the top packages that help our application run smoothly:
 
-| Name              | Usage                                                                 | Installation              |
-| ----------------- | --------------------------------------------------------------------- | ------------------------- |
-| axios             | Handles CRUD operations for both frontend and backend API calls       | `npm i axios`             |
-| bcryptjs          | Hashes user credentials before passing to and storing in the database | `npm i bcryptjs`          |
-| cookie-parser     | Middleware which parses cookies attached to the client request object | `npm i cookie-parser`     |
-| framer-motion     | An open source and production-ready motion library for React.         | `npm i framer-motion`     |
-| jsonwebtoken      | Safely and securly transmits user credentials via JSON object         | `npm i jsonwebtoken`      |
-| mongoose          | Enables object modeling for our MongoDB database                      | `npm i mongoose`          |
-| multer            | Middleware for handling photo uploads on mural posts                  | `npm i multer`            |
-| node-geocoder     | Used to get user location and lookup nearby points of interest        | `npm i node-geocoder`     |
-| react-bootstrap   | Bootstrap 4 components built with (and for) React (used for styling)  | `npm i react-bootstrap`   |
-| react-responsive  | Media queries in react for responsive design                          | `npm i react-responsive`  |
-| semantic-ui-react | The official Semantic-UI-React integration (used for styling)         | `npm i semantic-ui-react` |
+| Name (a-z)             | Usage                                                                 | Installation                   |
+| ---------------------- | --------------------------------------------------------------------- | ------------------------------ |
+| axios                  | Handles CRUD operations for both frontend and backend API calls       | `npm i axios`                  |
+| bcryptjs               | Hashes user credentials before passing to and storing in the database | `npm i bcryptjs`               |
+| cookie-parser          | Middleware which parses cookies attached to the client request object | `npm i cookie-parser`          |
+| express-mongo-sanitize | Middleware which sanitizes data to prevent MongoDB operator injection | `npm i express-mongo-sanitize` |
+| framer-motion          | An open source and production-ready motion library for React          | `npm i helmet`                 |
+| helmet                 | Used to add an additional layer of security to the Express backend    | `npm i framer-motion`          |
+| jsonwebtoken           | Safely and securly transmits user credentials via JSON object         | `npm i jsonwebtoken`           |
+| mongoose               | Enables object modeling for our MongoDB database                      | `npm i mongoose`               |
+| multer                 | Middleware for handling photo uploads on mural posts                  | `npm i multer`                 |
+| node-geocoder          | Used to get user location and lookup nearby points of interest        | `npm i node-geocoder`          |
+| react-bootstrap        | Bootstrap 4 components built with (and for) React (used for styling)  | `npm i react-bootstrap`        |
+| react-map-gl           | Renders Perspektiv's interactive map view                             | `npm i react-map-gl`           |
+| react-responsive       | Media queries in react for responsive design                          | `npm i react-responsive`       |
+| semantic-ui-react      | The official Semantic-UI-React integration (used for styling)         | `npm i semantic-ui-react`      |
 
 ---
 
-## **Technologies**
+## **Tech Stack**
 
 - MongoDB
 - Express.js
@@ -52,7 +68,8 @@ Perspektiv leverages a number of libraries and packages to create a fast, respon
 ## **Installation**
 
 1. Clone the repo: `git clone https://github.com/markdcross/perspektiv-v2.git`
-2. Install NPM packages: `npm i`
+2. Install server-side NPM packages: `npm i`
+3. Install client-side NPM packages: `cd client && npm i`
 
 ---
 
@@ -61,6 +78,20 @@ Perspektiv leverages a number of libraries and packages to create a fast, respon
 Distributed under the MIT License.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+---
+
+## **Security**
+
+Here are some of the added security measures that were taken to ensure Perspektiv not only could protect itself from unwarranted activity, but also the art that is represented on it:
+
+- Encrypt passwords and reset tokens
+- Prevent cross site scripting - XSS
+- Prevent NoSQL injections
+- Add a rate limit for requests of 100 requests per 10 minutes
+- Protect against HTTP parameter pollution
+- Add headers for security (helmet)
+- Use CORS to make API public (for now)
 
 ---
 
