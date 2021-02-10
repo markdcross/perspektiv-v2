@@ -17,7 +17,7 @@ export default function MuralUserContent({ muralPostState }) {
                   <Col className='parentMural'>
                     <Image
                       className='innerMural'
-                      src={`/uploads/${post.image}`}
+                      src={`/postImages/${post.image}`}
                       alt={post.text}
                     />
                     {/* <Button
