@@ -15,6 +15,7 @@ import { useHistory } from 'react-router-dom';
 import DistanceButton from './DistanceButton';
 import VisitedCheckbox from './VisitedCheckbox';
 import { useQuery } from '../utils/useQuery';
+import LoadingMuralContent from './LoadingMuralContent';
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
@@ -157,7 +158,7 @@ export default function MuralContent(props) {
       </Desktop>
       <Row className="pt-2 bigScroll">
         {!singleMuralState.data ? (
-          <div>Loading...</div>
+          <LoadingMuralContent />
         ) : (
           <Col>
             <Mobile>
@@ -407,7 +408,7 @@ export default function MuralContent(props) {
                   </Carousel.Item>
                   <Carousel.Item>
                     {!singleMuralState.data ? (
-                      <div>Loading...</div>
+                      <LoadingMuralContent />
                     ) : (
                       <RestaurantList muralPoint={singleMuralState.data} />
                     )}

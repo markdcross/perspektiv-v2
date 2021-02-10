@@ -2,19 +2,20 @@ import React from 'react';
 // import ReactRoundedImage from 'react-rounded-image';
 import { Row, Col, Image } from 'react-bootstrap';
 // import { Button } from 'semantic-ui-react';
+import LoadingScrollContent from './LoadingScrollContent';
 
 export default function MuralUserContent({ muralPostState }) {
   return (
-    <Row className='pt-2'>
+    <Row className="pt-2">
       {!muralPostState.data ? (
-        <div>Loading...</div>
+        <LoadingScrollContent />
       ) : (
-        <Col className='scrollButt'>
-          {muralPostState.data.data.map(post => {
+        <Col className="scrollButt">
+          {muralPostState.data.data.map((post) => {
             return (
               <div key={post.id}>
                 <Row>
-                  <Col className='parentMural'>
+                  <Col className="parentMural">
                     <Image
                       className='innerMural'
                       src={`/postImages/${post.image}`}
@@ -40,7 +41,7 @@ export default function MuralUserContent({ muralPostState }) {
                     </Button> */}
                   </Col>
                 </Row>
-                <Row className='pb-3'>
+                <Row className="pb-3">
                   <Col>
                     <p>{post.text}</p>
                   </Col>

@@ -7,6 +7,7 @@ import DistanceButton from './DistanceButton';
 import NavDesktop from './NavDesktop';
 import { useMediaQuery } from 'react-responsive';
 import VisitedCheckbox from './VisitedCheckbox';
+import LoadingScrollContent from './LoadingScrollContent';
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
@@ -40,7 +41,12 @@ export default function ScrollContent(props) {
       </Desktop>
       <Row>
         {!muralState.data ? (
-          <div>Loading...</div>
+          <div>
+            <LoadingScrollContent />
+            <LoadingScrollContent />
+            <LoadingScrollContent />
+            <LoadingScrollContent />
+          </div>
         ) : (
           <Col className="scrollButt">
             {muralState.data.data.map((mural) => {

@@ -1,7 +1,3 @@
-# **Perspektiv**
-
-Discover the art of Richmond
-
 ![Perspektiv Loading Image](client/public/assets/images/gif/PerspektivScript.gif)
 
 ---

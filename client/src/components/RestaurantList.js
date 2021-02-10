@@ -3,6 +3,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 import { Rating } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import restaurantsAPI from '../utils/restaurants-API';
+import LoadingScrollContent from './LoadingScrollContent';
 
 export default function RestaurantList(props) {
   const [restaurantListState, setRestaurantListState] = useState([]);
@@ -21,7 +22,7 @@ export default function RestaurantList(props) {
   };
 
   useEffect(() => {
-    restaurantsAPI.getRestaurants().then(data => {
+    restaurantsAPI.getRestaurants().then((data) => {
       setRestaurantListState(data);
       if (data) {
         console.log(restaurantListState);
@@ -35,13 +36,13 @@ export default function RestaurantList(props) {
   // console.log(radiusCheck(-77.47872,37.552485,centerPoint,km));
 
   return (
-    <Row className='pt-2'>
+    <Row className="pt-2">
       {!restaurantListState.data ? (
-        <div>Loading...</div>
+        <LoadingScrollContent />
       ) : (
-        <Col className='scrollButt'>
+        <Col className="scrollButt">
           {/* eslint-disable-next-line */}
-          {restaurantListState.data.data.map(restaurant => {
+          {restaurantListState.data.data.map((restaurant) => {
             if (
               radiusCheck(
                 restaurant.location.coordinates[0],
@@ -53,25 +54,25 @@ export default function RestaurantList(props) {
               return (
                 <div key={restaurant._id}>
                   <Row>
-                    <Col className='parentRestaurant'>
+                    <Col className="parentRestaurant">
                       <Link to={'/restaurants/' + restaurant._id}>
                         <Image
-                          className='innerRestaurant img-fluid w-100'
+                          className="innerRestaurant img-fluid w-100"
                           src={`../../restaurantImages/${restaurant.imageFile}`}
                         />
                       </Link>
                     </Col>
                   </Row>
-                  <Row className='pb-3'>
-                    <Col className='text-left'>
+                  <Row className="pb-3">
+                    <Col className="text-left">
                       <p>{restaurant.name}</p>
                     </Col>
-                    <Col className='text-right'>
+                    <Col className="text-right">
                       <Rating
-                        icon='star'
+                        icon="star"
                         defaultRating={restaurant.rating}
                         maxRating={5}
-                        className='ml-1'
+                        className="ml-1"
                       />
                     </Col>
                   </Row>
