@@ -6,6 +6,7 @@ import MuralUserContent from './MuralUserContent';
 import NavDesktopM from './NavDesktopM';
 import RestaurantList from './RestaurantList';
 // import DistanceButton from "./DistanceButton";
+import authAPI from '../utils/auth-API';
 import muralsAPI from '../utils/murals-API';
 import PhotoModal from './PhotoModal';
 import { useMediaQuery } from 'react-responsive';
@@ -13,6 +14,7 @@ import { SRLWrapper } from 'simple-react-lightbox';
 import { useHistory } from 'react-router-dom';
 import DistanceButton from './DistanceButton';
 import VisitedCheckbox from './VisitedCheckbox';
+import { useQuery } from '../utils/useQuery';
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
@@ -24,12 +26,13 @@ export default function MuralContent(props) {
 
   //set position of page slide when in mobile view
   useEffect(() => {
-    muralsAPI.getMural(artId).then(data => {
+    muralsAPI.getMural(artId).then((data) => {
       setSingleMuralState(data);
     });
     let top = 0;
     const topCall = props.topCall;
     topCall(top);
+    qrCodeScan();
     // eslint-disable-next-line
   }, []);
 
@@ -114,27 +117,59 @@ export default function MuralContent(props) {
     setIndex(selectedIndex);
   };
 
+  // use the query keyword for checking if the url contains ?visited=true
+  // this is called in the useEffect hook
+
+  // const queryCheck = async (res) => {
+  //   if (res && query === '?visited=true') {
+  //     console.log('user is logged in and the mural can be checked off');
+
+  //     // pull out the user id from the res that was passed in
+  //     const { user } = res.data.data._id;
+  //     console.log('user: ' + res.data.data._id);
+
+  //     // hit the visit mural route on the backend
+  //     // await axios.put(`/api/v1/murals/visit/${artId}`, { user });
+
+  //     console.log('mural visited');
+  //   }
+  // };
+
+  let query = useQuery();
+
+  const qrCodeScan = async () => {
+    authAPI.getCurrentUser().then((res) => {
+      if (res && query === '?visited=true') {
+        console.log('user is logged in and the mural can be checked off');
+        const { userId } = res.data.data._id;
+        muralsAPI.visitMural(artId, userId);
+      } else {
+        return;
+      }
+    });
+  };
+
   return (
     <>
       <Desktop>
         <NavDesktopM />
       </Desktop>
-      <Row className='pt-2 bigScroll'>
+      <Row className="pt-2 bigScroll">
         {!singleMuralState.data ? (
           <div>Loading...</div>
         ) : (
           <Col>
             <Mobile>
-              <Row className='px-3'>
-                <Col className='pb-2'>
-                  <Link to='/'>
-                    <Button content='Back' />
+              <Row className="px-3">
+                <Col className="pb-2">
+                  <Link to="/">
+                    <Button content="Back" />
                   </Link>
                 </Col>
-                <Col className='text-right pb-2'>
+                <Col className="text-right pb-2">
                   {/* if the user is not logged in, then clicking on the post photo button below SHOULD take them to the /login page */}
                   <Button
-                    color='yellow'
+                    color="yellow"
                     onClick={() => {
                       isAuthenticated
                         ? setModalShow(true)
@@ -154,14 +189,14 @@ export default function MuralContent(props) {
             </Mobile>
             <Desktop>
               <Row>
-                <Col className='pb-2'>
-                  <Link to='/'>
-                    <Button content='Back' />
+                <Col className="pb-2">
+                  <Link to="/">
+                    <Button content="Back" />
                   </Link>
                 </Col>
-                <Col className='text-right pb-2'>
+                <Col className="text-right pb-2">
                   <Button
-                    color='yellow'
+                    color="yellow"
                     onClick={() => {
                       isAuthenticated
                         ? setModalShow(true)
@@ -179,11 +214,11 @@ export default function MuralContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className='sideImgBox'>
-              <Col className='p-0'>
+            <Row className="sideImgBox">
+              <Col className="p-0">
                 <SRLWrapper options={options}>
                   <Image
-                    className='img-fluid w-100'
+                    className="img-fluid w-100"
                     src={`../../muralImages/${singleMuralState.data.data.imageFile}`}
                     alt={singleMuralState.data.data.description}
                   />
@@ -191,17 +226,17 @@ export default function MuralContent(props) {
               </Col>
             </Row>
             <Mobile>
-              <Row className='mb-4 pt-1 pl-1'>
-                <Col className='my-auto'>
+              <Row className="mb-4 pt-1 pl-1">
+                <Col className="my-auto">
                   {isAuthenticated ? (
                     <VisitedCheckbox artId={artId} user={user} />
                   ) : (
                     <div
-                      data-tooltip='Login to track visits'
-                      data-position='right center'
-                      className='float-left'
+                      data-tooltip="Login to track visits"
+                      data-position="right center"
+                      className="float-left"
                     >
-                      <Checkbox label='VISITED' disabled />
+                      <Checkbox label="VISITED" disabled />
                     </div>
                   )}
                   {/* </Col>
@@ -224,32 +259,32 @@ export default function MuralContent(props) {
                   {/* </Col>
                 <Col xs={5} className="text-right"> */}
                   <Button
-                    size='mini'
-                    content='Visits'
-                    icon='street view'
+                    size="mini"
+                    content="Visits"
+                    icon="street view"
                     label={{
                       as: 'a',
                       basic: true,
                       pointing: 'left',
                       content: singleMuralState.data.data.visits.length
                     }}
-                    className='pl-2 pr-3'
+                    className="pl-2 pr-3"
                   />
                 </Col>
               </Row>
             </Mobile>
             <Desktop>
-              <Row className='mb-4 pt-1 pl-0'>
-                <Col className='ml-0'>
+              <Row className="mb-4 pt-1 pl-0">
+                <Col className="ml-0">
                   {isAuthenticated ? (
                     <VisitedCheckbox artId={artId} user={user} />
                   ) : (
                     <div
-                      data-tooltip='Login to track visits'
-                      data-position='right center'
-                      className='float-left'
+                      data-tooltip="Login to track visits"
+                      data-position="right center"
+                      className="float-left"
                     >
-                      <Checkbox label='VISITED' disabled />
+                      <Checkbox label="VISITED" disabled />
                     </div>
                   )}
                   {/* </Col>
@@ -260,22 +295,22 @@ export default function MuralContent(props) {
                   {/* </Col>
                 <Col xs={5} className="text-right"> */}
                   <Button
-                    size='mini'
-                    content='Visits'
-                    icon='street view'
+                    size="mini"
+                    content="Visits"
+                    icon="street view"
                     label={{
                       as: 'a',
                       basic: true,
                       pointing: 'left',
                       content: singleMuralState.data.data.visits.length
                     }}
-                    className='pl-2 pr-3'
+                    className="pl-2 pr-3"
                   />
                 </Col>
               </Row>
             </Desktop>
             <Mobile>
-              <Row className='px-3'>
+              <Row className="px-3">
                 <Col>
                   <p>
                     ARTIST:{' '}
@@ -302,50 +337,50 @@ export default function MuralContent(props) {
                 </Col>
               </Row>
             </Desktop>
-            <Row className='h-100 w-100 mx-0'>
-              <Col className='p-0'>
-                <Row className='pt-2'>
-                  <Col className='pr-1 text-right'>
+            <Row className="h-100 w-100 mx-0">
+              <Col className="p-0">
+                <Row className="pt-2">
+                  <Col className="pr-1 text-right">
                     {pageInd ? (
                       <Button
-                        size='small'
-                        color='yellow'
+                        size="small"
+                        color="yellow"
                         compact
-                        floated='right'
-                        className='w-75'
-                        content='Locals!'
+                        floated="right"
+                        className="w-75"
+                        content="Locals!"
                       />
                     ) : (
                       <Button
-                        size='small'
-                        color='grey'
+                        size="small"
+                        color="grey"
                         compact
-                        floated='right'
-                        className='w-75'
-                        content='Locals!'
+                        floated="right"
+                        className="w-75"
+                        content="Locals!"
                         onClick={localSelect}
                       />
                     )}
                   </Col>
-                  <Col className='pl-1 text-left'>
+                  <Col className="pl-1 text-left">
                     {pageInd ? (
                       <Button
-                        size='small'
-                        color='grey'
+                        size="small"
+                        color="grey"
                         compact
-                        floated='left'
-                        className='w-75'
-                        content='Get Food!'
+                        floated="left"
+                        className="w-75"
+                        content="Get Food!"
                         onClick={foodSelect}
                       />
                     ) : (
                       <Button
-                        size='small'
-                        color='yellow'
+                        size="small"
+                        color="yellow"
                         compact
-                        floated='left'
-                        content='Get Food!'
-                        className='w-75'
+                        floated="left"
+                        content="Get Food!"
+                        className="w-75"
                       />
                     )}
                   </Col>
@@ -357,8 +392,8 @@ export default function MuralContent(props) {
                   interval={10000000}
                   wrap={false}
                   onSlide={pageIndicate}
-                  nextIcon={<Icon name='angle right' size='huge' />}
-                  prevIcon={<Icon name='angle left' size='huge' />}
+                  nextIcon={<Icon name="angle right" size="huge" />}
+                  prevIcon={<Icon name="angle left" size="huge" />}
                 >
                   <Carousel.Item>
                     <MuralUserContent singleMuralState={singleMuralState} />
