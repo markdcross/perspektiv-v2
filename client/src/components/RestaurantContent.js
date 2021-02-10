@@ -3,7 +3,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { Button, Rating } from 'semantic-ui-react';
 import restaurantsAPI from '../utils/restaurants-API';
-import RestaurantUserContent from './RestaurantUserContent';
+import RestaurantUserContentStatic from './RestaurantUserContentStatic';
 import NavDesktopM from './NavDesktopM';
 import PhotoModal from './PhotoModal';
 // import history from './History';
@@ -218,7 +218,7 @@ export default function RestaurantContent(props) {
             </Desktop>
             <Row className='h-100 w-100 mx-0'>
               <Col className='p-0'>
-                <RestaurantUserContent />
+                <RestaurantUserContentStatic />
               </Col>
             </Row>
           </Col>

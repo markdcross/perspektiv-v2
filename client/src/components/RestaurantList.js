@@ -56,7 +56,7 @@ export default function RestaurantList(props) {
                     <Col className='parentRestaurant'>
                       <Link to={'/restaurants/' + restaurant._id}>
                         <Image
-                          className='innerRestaurant'
+                          className='innerRestaurant img-fluid w-100'
                           src={`../../restaurantImages/${restaurant.imageFile}`}
                         />
                       </Link>

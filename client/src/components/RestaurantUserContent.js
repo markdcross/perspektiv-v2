@@ -4,7 +4,7 @@ import { Row, Col, Image } from 'react-bootstrap';
 import { Button } from 'semantic-ui-react';
 import MuralContext from '../context/MuralContext';
 
-export default function RestaurnatUserContent() {
+export default function RestaurantUserContent() {
   const muralState = useContext(MuralContext);
   return (
     <Row className='pt-2'>
