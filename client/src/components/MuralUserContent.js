@@ -15,9 +15,9 @@ export default function MuralUserContent({ muralPostState }) {
             return (
               <div key={post.id}>
                 <Row>
-                  <Col className="parentMural">
+                  <Col className="parentRestaurant">
                     <Image
-                      className='innerMural'
+                      className="innerRestaurant"
                       src={`/postImages/${post.image}`}
                       alt={post.text}
                     />
