@@ -47,33 +47,46 @@ _SO THAT_ I can have a deeper appreciation and love for this city and its cultur
 
 ## **Packages & Libraries**
 
-Perspektiv leverages a number of libraries and packages to create a fast, responsive, and modern web application. Below are some of the top packages that help our application run smoothly:
+Perspektiv leverages a number of libraries and packages to create a fast, responsive, and modern web application. Below are some of the packages that help our application run smoothly and efficiently:
 
-| Name (a-z)             | Usage                                                                 | Installation                   |
-| ---------------------- | --------------------------------------------------------------------- | ------------------------------ |
-| axios                  | Handles CRUD operations for both frontend and backend API calls       | `npm i axios`                  |
-| bcryptjs               | Hashes user credentials before passing to and storing in the database | `npm i bcryptjs`               |
-| cookie-parser          | Middleware which parses cookies attached to the client request object | `npm i cookie-parser`          |
-| express-mongo-sanitize | Middleware which sanitizes data to prevent MongoDB operator injection | `npm i express-mongo-sanitize` |
-| framer-motion          | An open source and production-ready motion library for React          | `npm i helmet`                 |
-| helmet                 | Used to add an additional layer of security to the Express backend    | `npm i framer-motion`          |
-| jsonwebtoken           | Safely and securly transmits user credentials via JSON object         | `npm i jsonwebtoken`           |
-| mongoose               | Enables object modeling for our MongoDB database                      | `npm i mongoose`               |
-| multer                 | Middleware for handling photo uploads on mural posts                  | `npm i multer`                 |
-| node-geocoder          | Used to get user location and lookup nearby points of interest        | `npm i node-geocoder`          |
-| react-bootstrap        | Bootstrap 4 components built with (and for) React (used for styling)  | `npm i react-bootstrap`        |
-| react-map-gl           | Renders Perspektiv's interactive map view                             | `npm i react-map-gl`           |
-| react-responsive       | Media queries in react for responsive design                          | `npm i react-responsive`       |
-| semantic-ui-react      | The official Semantic-UI-React integration (used for styling)         | `npm i semantic-ui-react`      |
+| Name (a-z)             | Usage                                                                    | Installation                   |
+| ---------------------- | ------------------------------------------------------------------------ | ------------------------------ |
+| axios                  | Handles CRUD operations for both frontend and backend API calls          | `npm i axios`                  |
+| bcryptjs               | Hashes user credentials before passing to and storing in the database    | `npm i bcryptjs`               |
+| cookie-parser          | Middleware which parses cookies attached to the client request object    | `npm i cookie-parser`          |
+| express-mongo-sanitize | Middleware which sanitizes data to prevent MongoDB operator injection    | `npm i express-mongo-sanitize` |
+| framer                 | Library that helps drive Perspektiv's interactive animations             | `npm i framer`                 |
+| framer-motion          | An open source and production-ready motion library for React             | `npm i helmet`                 |
+| helmet                 | Used to add an additional layer of security to the Express backend       | `npm i framer-motion`          |
+| jsonwebtoken           | Safely and securly transmits user credentials via JSON object            | `npm i jsonwebtoken`           |
+| mapbox                 | Leverages Mapbox services for Perspektiv's custom map view               | `npm i mapbox`                 |
+| morgan                 | Used to log HTTP requests in the node console                            | `npm i morgan`                 |
+| mongoose               | Enables object modeling for our MongoDB database                         | `npm i mongoose`               |
+| multer                 | Middleware for handling photo uploads on mural posts                     | `npm i multer`                 |
+| node-geocoder          | Used to get user location and lookup nearby points of interest           | `npm i node-geocoder`          |
+| react-bootstrap        | Bootstrap 4 components built with (and for) React (used for styling)     | `npm i react-bootstrap`        |
+| react-map-gl           | Renders Perspektiv's interactive map view                                | `npm i react-map-gl`           |
+| react-responsive       | Media queries in react for responsive design                             | `npm i react-responsive`       |
+| semantic-ui-react      | The official Semantic-UI-React integration (used for styling)            | `npm i semantic-ui-react`      |
+| slugify                | Used to create clean URL slugs that contain no foreign symbols           | `npm i slugify`                |
+| uuidv4                 | Used to create universally unique identifiers for Perspektiv's data sets | `npm i uuidv4`                 |
+| xss-clean              | Sanitize user input coming from POST body, GET queries, and url params   | `npm i xss-clean`              |
 
 ---
 
 ## **Tech Stack**
 
-- MongoDB
-- Express.js
-- React.js
-- Node.js
+- **M**ongoDB
+- **E**xpress.js
+- **R**eact.js
+- **N**ode.js
+
+#### Additional Technologies
+
+- Geolocation with Mapbox API
+- Nodemailer & SendGrid
+- Custom error handling middleware
+- Custom auth & protected route middleware
 
 ---
 
@@ -111,7 +124,10 @@ Here are some of the added security measures that were taken to ensure Perspekti
 
 **Current Contributors:**
 
-_Josh Allan, Mark Cross, Danny Fraley, Roberto Rupert_
+- Josh Allan
+- Mark Cross
+- Danny Fraley
+- Roberto Rupert
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
 
