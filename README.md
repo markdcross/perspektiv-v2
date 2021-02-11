@@ -5,20 +5,29 @@
 ## **Table of Contents**
 
 1. [Description](#Description)
-2. [Feature List](#Feature-List)
-3. [Packages & Libraries](#Packages-&-Libraries)
-4. [Tech Stack](#Tech-Stack)
-5. [Installation](#Installation)
-6. [License](#License)
-7. [Security](#Security)
-8. [Contributions](#Contributions)
-9. [Authors](#Authors)
+1. [User Story](#User-Story)
+1. [Feature List](#Feature-List)
+1. [Packages & Libraries](#Packages-&-Libraries)
+1. [Tech Stack](#Tech-Stack)
+1. [Installation](#Installation)
+1. [License](#License)
+1. [Security](#Security)
+1. [Contributions](#Contributions)
+1. [Authors](#Authors)
 
 ---
 
 ## **Description**
 
-Discover the art of Richmond.
+We are offering a unique opportunity to explore and discover Richmond through its arts and culture. By harnessing the data collected and maintained by the Richmond Mural Project, we will offer mural and artist information, and a quick glimpse of eateries and other amenities in the immediate area. Whether you are a seasoned Richmonder or new in town, you will find something fascinating to discover about this great and weird city.
+
+---
+
+## **User Story**
+
+_AS A_ Richmonder or visitor to Richmond, I appreciate the city and its creativity and artistic expression. <br />
+_I WANT_ to explore Richmond through its local art, and discover new art and food along the way<br />
+_SO THAT_ I can have a deeper appreciation for RVA culture.
 
 ---
 
@@ -30,6 +39,7 @@ Discover the art of Richmond.
 - Gamification logic that levels up users as they visit more POIs
 - Error handling and error message displays
 - Photo uploads and comments on murals
+- QR code integration automatically updates user progress ([see video](https://www.awesomescreenshot.com/video/2723980?key=d33624ce6d5103c6cd4bc6ed04faefcf))
 
 ---
 

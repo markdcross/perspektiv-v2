@@ -7,15 +7,7 @@
     "category": "Parks",
     "phone": "(804) 358-7166"
   },
-  {
-    "name": "Virginia Museum of Fine Arts",
-    "address": "200 N Arthur Ashe Blvd Richmond, VA 23220",
-    "image": "https://s3-media2.fl.yelpcdn.com/bphoto/QSR0B0jzyDUhbPLC7HkaFw/o.jpg",
-    "imageFile": "virginia-museum-of-fine-arts.jpg",
-    "rating": 5,
-    "category": "Museums",
-    "phone": "(804) 340-1400"
-  },
+
   {
     "name": "2M Mediterranean Market & Deli",
     "address": "7103 Staples Mill Rd Henrico, VA 23228",
