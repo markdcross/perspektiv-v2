@@ -1,5 +1,7 @@
 ![Perspektiv Loading Image](client/public/assets/images/gif/PerspektivScript.gif)
 
+#### **Explore and discover Richmond through its arts and culture.**
+
 ---
 
 ## **Table of Contents**
@@ -19,15 +21,15 @@
 
 ## **Description**
 
-We are offering a unique opportunity to explore and discover Richmond through its arts and culture. By harnessing the data collected and maintained by the Richmond Mural Project, we will offer mural and artist information, and a quick glimpse of eateries and other amenities in the immediate area. Whether you are a seasoned Richmonder or new in town, you will find something fascinating to discover about this great and weird city.
+Perpektiv provides a unique opportunity to explore and discover Richmond through its eclectic art and diverse culture. By harnessing the data originally collected by the Richmond Mural Project, Perspektiv provides mural and artist information with a social and gamified spin. Coupled with directions and nearby restaurant options, Perspektiv provides something for everyone. Whether you are a seasons Richmonder or new in town, you will find something fascinating to discover about this great and weird city.
 
 ---
 
 ## **User Story**
 
-_AS A_ Richmonder or visitor to Richmond, I appreciate the city and its creativity and artistic expression. <br />
-_I WANT_ to explore Richmond through its local art, and discover new art and food along the way<br />
-_SO THAT_ I can have a deeper appreciation for RVA culture.
+_AS A_ Richmonder or visitor <br />
+_I WANT_ to explore the city and experience things that I enjoy (who doesn’t love art and food??)<br />
+_SO THAT_ I can have a deeper appreciation and love for this city and its culture
 
 ---
 
