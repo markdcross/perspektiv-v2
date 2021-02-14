@@ -1,10 +1,4 @@
 import React from 'react';
-// import React, {useContext} from "react"
-// import ReactRoundedImage from "react-rounded-image";
-// import { Row, Col, Image } from "react-bootstrap";
-// import { Button, Progress } from "semantic-ui-react";
-// import { Link } from "react-router-dom";
-// import LogoutBtn from "./LogoutBtn";
 import UserStatus from './UserStatus';
 
 // auth context
@@ -12,7 +6,6 @@ import UserStatus from './UserStatus';
 
 export default function NavDesktopM(props) {
   //   const authContext = useContext(AuthContext);
-
   //   const { isAuthenticated } = authContext;
 
   const nav = 'desktopM';

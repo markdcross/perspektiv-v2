@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Checkbox } from 'semantic-ui-react';
 import muralsAPI from '../utils/murals-API';
-
+import ProgressContext from '../context/ProgressContext.js'
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
 
 const VisitedCheckbox = (props) => {
   const authContext = useContext(AuthContext);
   const { user, loadUser } = authContext;
+
+  const progressContext = useContext(ProgressContext);
+  const { loadUserMurals } = progressContext;
 
   useEffect(() => {
     // get the user and store it in a variable that we will use for qr code scans
@@ -34,12 +37,12 @@ const VisitedCheckbox = (props) => {
       muralsAPI
         .visitMural(props.artId, user.data._id)
         .then(() => setVisitedState(true))
-        .then(() => loadUser());
+        .then(() => loadUserMurals());
     } else if (visitedState === true) {
       muralsAPI
         .unvisitMural(props.artId, user.data._id)
         .then(() => setVisitedState(false))
-        .then(() => loadUser());
+        .then(() => loadUserMurals());
     }
   };
 

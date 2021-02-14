@@ -8,6 +8,7 @@ import NavDesktop from './NavDesktop';
 import { useMediaQuery } from 'react-responsive';
 import VisitedCheckbox from './VisitedCheckbox';
 import LoadingScrollContent from './LoadingScrollContent';
+import ProgressState from "../context/ProgressState"
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
@@ -67,7 +68,7 @@ export default function ScrollContent(props) {
                     <Row className="mb-4 pt-1 pl-1">
                       <Col className="ml-0">
                         {isAuthenticated ? (
-                          <VisitedCheckbox artId={mural.id} user={user} />
+                          <VisitedCheckbox artId={mural.id} />
                         ) : (
                           <div
                             data-tooltip="Login to track visits"
@@ -100,7 +101,7 @@ export default function ScrollContent(props) {
                     <Row className="mb-4 pt-1 pl-0">
                       <Col className="ml-0">
                         {isAuthenticated ? (
-                          <VisitedCheckbox artId={mural.id} user={user} />
+                          <VisitedCheckbox artId={mural.id} />
                         ) : (
                           <div
                             data-tooltip="Login to track visits"

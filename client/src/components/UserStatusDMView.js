@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ReactRoundedImage from "react-rounded-image";
 import { Row, Col, Image, Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Button, Progress } from "semantic-ui-react";
@@ -11,10 +11,32 @@ import ProgressContext from "../context/ProgressContext";
 import AuthContext from "../context/auth-v2/authContext.js";
 
 export default function UserStatusDVMiew(props) {
-	const { progressValue, modalValue, boostValue } = useContext(ProgressContext);
-	const [progressControl] = progressValue;
-	const [modalShow, setModalShow] = modalValue;
-	const [boostState] = boostValue;
+	const progressContext = useContext(ProgressContext);
+	const {
+		progressControl,
+		boostState,
+		modalShow,
+		modalDrop,
+		modalPop,
+		hitTen,
+		hitTwenty,
+		hitThirty,
+		hitFifty,
+		hitEighty,
+		hitOneTen,
+		hitOneFifty,
+		hitOneSixtyTwo,
+		markTen,
+		markTwenty,
+		markThirty,
+		markFifty,
+		markEighty,
+		markOneTen,
+		markOneFifty,
+		markOneSixtyTwo,
+	} = progressContext;
+
+
 	const userAvatar = props.userAvatar;
 	const userVisited = props.userVisited;
 	const userRank = props.userRank;
@@ -25,6 +47,34 @@ export default function UserStatusDVMiew(props) {
 	const authContext = useContext(AuthContext);
 
 	const { isAuthenticated } = authContext;
+
+	useEffect(() => {
+		if (userVisited === 10 && !hitTen) {
+			modalPop();
+			markTen();
+		} else if (userVisited === 20 && !hitTwenty) {
+			modalPop();
+			markTwenty();
+		} else if (userVisited === 30 && !hitThirty) {
+			modalPop();
+			markThirty();
+		} else if (userVisited === 50 && !hitFifty) {
+			modalPop();
+			markFifty();
+		} else if (userVisited === 80 && !hitEighty) {
+			modalPop();
+			markEighty();
+		} else if (userVisited === 110 && !hitOneTen) {
+			modalPop();
+			markOneTen();
+		} else if (userVisited === 150 && !hitOneFifty) {
+			modalPop();
+			markOneFifty();
+		} else if (userVisited === 162 && !hitOneSixtyTwo) {
+			modalPop();
+			markOneSixtyTwo();
+		}
+	}, [userVisited]);
 
 	return (
 		<>
@@ -43,9 +93,7 @@ export default function UserStatusDVMiew(props) {
 							>
 								<p>{userRank[userLevel + boostState]}</p>
 								<div className='achievementMarkCountDN'>
-									<p className='achievementMarkTextDN'>
-										{userVisited}
-									</p>
+									<p className='achievementMarkTextDN'>{userVisited}</p>
 								</div>
 								<div className='achievementMarkAvatarDN'>
 									<ReactRoundedImage
@@ -66,10 +114,7 @@ export default function UserStatusDVMiew(props) {
 								success={false}
 								disabled={false}
 								progress='value'
-								value={
-									(userVisited - userXPMin[userLevel]) *
-									progressControl
-								}
+								value={(userVisited - userXPMin[userLevel]) * progressControl}
 								total={userXP[userLevel]}
 								active
 								color='pink'
@@ -94,7 +139,7 @@ export default function UserStatusDVMiew(props) {
 					</Row>
 					<RankUpModal
 						show={modalShow}
-						onHide={() => setModalShow(false)}
+						onHide={() => modalDrop()}
 						title={userRank[userLevel + boostState]}
 						xp={userXP[userLevel + boostState]}
 						// modalProg={modalProg}

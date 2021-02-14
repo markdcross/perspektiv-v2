@@ -18,8 +18,8 @@ mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worke
 
 export default function Mapbucket() {
 	//plot point data for walking directions
-	const { directionsValue } = useContext(DirectionsContext);
-	const [directionsState] = directionsValue;
+	const directionsContext = useContext(DirectionsContext);
+	const { directions } = directionsContext;
 
 	const { latitude, longitude } = useContext(LocationContext);
 
@@ -65,13 +65,14 @@ export default function Mapbucket() {
 											>
 												<Link to={"/murals/" + mural.id}>
 													<div className='rounder'>
-														<ReactRoundedImage
+													<Image src={`../../muralImages/${mural.imageFile}`} roundedCircle />
+														{/* <ReactRoundedImage
 															image={`../../muralImages/${mural.imageFile}`}
 															roundedColor='#ffffff'
 															roundedSize='3'
 															imageWidth='40'
 															imageHeight='40'
-														/>
+														/> */}
 													</div>
 												</Link>
 											</button>
@@ -81,18 +82,13 @@ export default function Mapbucket() {
 							})}
 						</div>
 					)}
-          {latitude && 
-          <Marker 
-            latitude={latitude}
-            longitude={longitude}
-          >
-          
-            <Image src="/assets/images/logo/PinDrip3.png" width="25px"/>
-
-          </Marker>
-          }
+					{latitude && (
+						<Marker latitude={latitude} longitude={longitude}>
+							<Image src='/assets/images/logo/PinDrip3.png' width='25px' />
+						</Marker>
+					)}
 					{/* <PolylineOverlay points={[[-76.432938, 37.538876], [-77.4347, 37.539917], [-77.452538, 37.550621]]}/> */}
-					<PolylineOverlay points={directionsState} />
+					<PolylineOverlay points={directions} />
 				</ReactMapGL>
 			)}
 		</AutoSizer>

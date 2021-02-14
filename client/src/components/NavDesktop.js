@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import UserStatus from "./UserStatus"
 import LogoutBtn from './LogoutBtn';
 
+
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
 
@@ -32,37 +33,6 @@ export default function NavDesktop() {
         )}
       </Row>
       <UserStatus />
-      {/* <Row className="respLogin">
-        <Col className="d-flex justify-content-center my-2">
-          <ReactRoundedImage
-            image="/assets/images/avatars/matthew.png"
-            roundedColor="#ffffff"
-            roundedSize="2"
-            imageWidth="100"
-            imageHeight="100"
-          />
-          <Button className="achievementMark my-auto ml-1" color="yellow">
-            Explorer
-            <div className="achievementMarkCount">
-              <p className="achievementMarkText">42</p>
-            </div>
-          </Button>
-        </Col>
-      </Row>
-      <Row className="pb-2">
-        <Col>
-          <Progress
-            success={false}
-            disabled={false}
-            progress="value"
-            value={3}
-            total={10}
-            active
-            color="pink"
-            size="small"
-          />
-        </Col>
-      </Row> */}
     </div>
   );
 }
