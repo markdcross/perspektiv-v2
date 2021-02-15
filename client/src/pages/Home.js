@@ -165,7 +165,6 @@ function Home() {
 							</Sheet.Container>
 						</Sheet>
 					</Mobile>
-
 					<Desktop>
 						<Switch>
 							<Route path='/login'>
