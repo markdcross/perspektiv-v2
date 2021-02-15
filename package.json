@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "description": "Perspektiv v2.0",
   "main": "server.js",
-  "engines": {
-    "node": "12.x"
-  },
   "scripts": {
-    "build": "cd client && npm run build",
     "start": "node server",
     "server": "nodemon server",
     "dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
