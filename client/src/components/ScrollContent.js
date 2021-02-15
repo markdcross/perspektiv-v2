@@ -8,7 +8,6 @@ import NavDesktop from './NavDesktop';
 import { useMediaQuery } from 'react-responsive';
 import VisitedCheckbox from './VisitedCheckbox';
 import LoadingScrollContent from './LoadingScrollContent';
-import ProgressState from "../context/ProgressState"
 
 // auth context
 import AuthContext from '../context/auth-v2/authContext.js';
