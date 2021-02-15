@@ -10,16 +10,14 @@ const DistanceResetButton = () => {
 		plotCall([[0, 0]]);
 	};
 	return (
-		<directionsContext>
-			<Button
-				circular
-				color='pink'
-				icon='remove'
-				className='fixed-top ml-2 mt-2 mapClear'
-				onClick={onClick}
-				size='mini'
-			/>
-		</directionsContext>
+		<Button
+			circular
+			color='pink'
+			icon='remove'
+			className='fixed-top ml-2 mt-2 mapClear'
+			onClick={onClick}
+			size='mini'
+		/>
 	);
 };
 

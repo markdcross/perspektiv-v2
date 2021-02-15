@@ -169,19 +169,19 @@ function Home() {
 					<Desktop>
 						<Switch>
 							<Route path='/login'>
-								<UserLogin />
+								<UserLogin topCall={topCall}/>
 							</Route>
 							<Route path='/register'>
-								<UserCreateAcct />
+								<UserCreateAcct topCall={topCall}/>
 							</Route>
 							<Route exact path={path}>
-								<ScrollContent />
+								<ScrollContent topCall={topCall}/>
 							</Route>
 							<Route path='/murals/:artId'>
-								<MuralContent />
+								<MuralContent topCall={topCall}/>
 							</Route>
 							<Route path='/restaurants/:restId'>
-								<RestaurantContent />
+								<RestaurantContent topCall={topCall}/>
 							</Route>
 						</Switch>
 					</Desktop>
