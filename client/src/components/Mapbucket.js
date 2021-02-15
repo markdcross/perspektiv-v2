@@ -65,7 +65,7 @@ export default function Mapbucket() {
 											>
 												<Link to={"/murals/" + mural.id}>
 													<div roundedCircle className='rounder roundedCircle' >
-													<Image src={`../../muralImagesRound/ROUND_${mural.imageFile}`} roundedCircle />
+													<Image src={`../../muralImagesRound/ROUND_${mural.imageFile.toLowerCase()}`} roundedCircle />
 														{/* <ReactRoundedImage
 															image={`../../muralImages/${mural.imageFile}`}
 															roundedColor='#ffffff'
