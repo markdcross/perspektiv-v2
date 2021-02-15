@@ -57,15 +57,15 @@ export default function Mapbucket() {
 											longitude={mural.location.coordinates[0]}
 											className='markerZ'
 										>
-											<button
+											<button roundedCircle
 												className='marker-btn zoom'
 												onClick={(e) => {
 													e.preventDefault();
 												}}
 											>
 												<Link to={"/murals/" + mural.id}>
-													<div className='rounder'>
-													<Image src={`../../muralImages/${mural.imageFile}`} roundedCircle />
+													<div roundedCircle className='rounder roundedCircle' >
+													<Image src={`../../muralImagesRound/ROUND_${mural.imageFile}`} roundedCircle />
 														{/* <ReactRoundedImage
 															image={`../../muralImages/${mural.imageFile}`}
 															roundedColor='#ffffff'
