@@ -45,10 +45,12 @@ code {
 }
 
 .zoom {
-  transition: transform .2s; /* Animation */
-  width: 35px;
-  height: 35px;
+  transition: transform .2s;
+  width: 40px;
+  height: 40px;
   margin: 0 auto;
+  padding: 0;
+  display: inline-block;
 }
 
 .zoom:hover {
