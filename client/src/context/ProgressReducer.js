@@ -9,6 +9,11 @@ export default (state, action) => {
 				resetState: 1,
 				boostState: 0,
 			};
+		case "game/visits":
+			return {
+				...state,
+				totalVisits: action.payload,
+			};
 		case "game/murals":
 			return {
 				...state,

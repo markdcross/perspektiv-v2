@@ -80,9 +80,9 @@ const ProgressState = (props) => {
 		dispatch({ type: "game/hitonesixtytwo" });
 	};
 
-	const timeout = (delay) => {
-		return new Promise((res) => setTimeout(res, delay));
-	};
+	// const timeout = (delay) => {
+	// 	return new Promise((res) => setTimeout(res, delay));
+	// };
 
 	const modalProg = () => {
 		console.log("modal/progress");
@@ -140,7 +140,7 @@ const ProgressState = (props) => {
 				markEighty,
 				markOneTen,
 				markOneFifty,
-				markOneSixtyTwo
+				markOneSixtyTwo,
 			}}
 		>
 			{props.children}

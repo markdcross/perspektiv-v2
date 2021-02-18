@@ -3,20 +3,18 @@ import ProgressContext from "../context/ProgressContext";
 import UserStatusDView from "./UserStatusDView";
 import UserStatusDMView from "./UserStatusDMView";
 import UserStatusMobileView from "./UserStatusMobileView";
-import AuthContext from "../context/auth-v2/authContext";
+// import AuthContext from "../context/auth-v2/authContext";
 
 export default function UserStatus(props) {
-	const authContext = useContext(AuthContext);
-	const { user } = authContext;
+	// const authContext = useContext(AuthContext);
+	// const { user } = authContext;
 
 	const progressContext = useContext(ProgressContext);
-	const {
-		loadUserMurals,
-		userMurals,
-	} = progressContext;
+	const { loadUserMurals, userMurals } = progressContext;
 
 	useEffect(() => {
 		loadUserMurals();
+		// eslint-disable-next-line
 	}, []);
 
 	// let userLevel = 0;

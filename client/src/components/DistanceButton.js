@@ -41,7 +41,7 @@ const DistanceButton = ({ location, id }) => {
       .getDirections(latitude, longitude, muralLatitude, muralLongitude)
       .then(directions => {
         console.log(
-          '🚀 ~ file: DistanceButton.js ~ line 29 ~ muralsAPI.getDirections ~ directions',
+          '🚀 ~ file: DistanceButton.js ~ line 44 ~ muralsAPI.getDirections ~ directions',
           directions.data
         );
 
@@ -50,7 +50,7 @@ const DistanceButton = ({ location, id }) => {
           [points.startPoint.lng,points.startPoint.lat]
           )
           plotCall(plotPoints);
-          console.log(plotPoints);
+          // console.log(plotPoints);
           // setDirectionsState(plotPoints);
           // console.log(directionsState);
         }

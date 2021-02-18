@@ -72,6 +72,7 @@ export default function UserStatusDView(props) {
 			modalPop();
 			markOneSixtyTwo();
 		}
+		// eslint-disable-next-line
 	}, [userVisited]);
 
 	return (

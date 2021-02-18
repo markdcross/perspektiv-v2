@@ -73,6 +73,7 @@ export default function UserStatusDVMiew(props) {
 			modalPop();
 			markOneSixtyTwo();
 		}
+		// eslint-disable-next-line
 	}, [userVisited]);
 
 	return (

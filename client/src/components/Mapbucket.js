@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import ReactMapGL, { Marker } from "react-map-gl";
-import ReactRoundedImage from "react-rounded-image";
 import { AutoSizer } from "react-virtualized";
 import MuralContext from "../context/MuralContext";
 import PolylineOverlay from "./PolyLineOverlay";
@@ -23,7 +22,8 @@ export default function Mapbucket() {
 
 	const { latitude, longitude } = useContext(LocationContext);
 
-	const muralState = useContext(MuralContext);
+	const muralContext = useContext(MuralContext);
+	const { muralState } = muralContext;
 
 	const [viewport, setViewport] = useState({
 		latitude: 37.54129,
@@ -57,7 +57,7 @@ export default function Mapbucket() {
 											longitude={mural.location.coordinates[0]}
 											className='markerZ'
 										>
-											<button roundedCircle
+											<button 
 												className='marker-btn zoom'
 												onClick={(e) => {
 													e.preventDefault();

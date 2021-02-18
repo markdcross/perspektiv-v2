@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 // import NavTabs from "./components/NavTabs";
 import LocationContext from './context/LocationContext';
-import MuralContext from './context/MuralContext';
+// import MuralContext from './context/MuralContext';
 import DirectionsState from './context/DirectionsState';
+import MuralState from './context/MuralState'
 
 // NEW auth context provider
 import AuthState from './context/auth-v2/AuthState';
@@ -15,7 +16,7 @@ import setAuthToken from './utils/setAuthToken';
 import Home from './pages/Home';
 
 // mural API
-import muralsAPI from './utils/murals-API';
+// import muralsAPI from './utils/murals-API';
 
 // import authAPI from './utils/auth-API';
 
@@ -38,7 +39,8 @@ const App = () => {
     setTimeout(() => setLoading(false), 3000);
   }, []);
 
-  const [muralState, setMuralState] = useState([]);
+  // const [muralState, setMuralState] = useState([]);
+
   // // const plotPoints = [2,5];
   // const [directionsState, setDirectionsState] = useState([]);
   // // const [userState, setUserState] = useState();
@@ -48,12 +50,12 @@ const App = () => {
   //   console.log(directionsState);
   // };
 
-  useEffect(() => {
-    // get the murals from the api
-    muralsAPI.getMurals().then((data) => {
-      setMuralState(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   // get the murals from the api
+  //   muralsAPI.getMurals().then((data) => {
+  //     setMuralState(data);
+  //   });
+  // }, []);
 
   const position = usePosition();
 
@@ -62,7 +64,8 @@ const App = () => {
       <AuthState>
         <AlertState>
           {loading === false ? (
-            <MuralContext.Provider value={muralState}>
+            // <MuralContext.Provider value={muralState}>
+            <MuralState>
               <LocationContext.Provider value={position}>
                 <DirectionsState >
                   <Router history={history}>
@@ -72,7 +75,8 @@ const App = () => {
                   </Router>
                 </DirectionsState>
               </LocationContext.Provider>
-            </MuralContext.Provider>
+            {/* </MuralContext.Provider> */}
+            </MuralState>
           ) : (
             <LoadingScreen />
           )}

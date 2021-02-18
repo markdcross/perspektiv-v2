@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-import { Button } from "semantic-ui-react";
 import Mapbucket from "../components/Mapbucket";
 import UserLogin from "../components/UserLogin";
 import UserCreateAcct from "../components/UserCreateAcct";
@@ -12,11 +11,15 @@ import NavMobile from "../components/NavMobile";
 import { useMediaQuery } from "react-responsive";
 import Sheet from "react-modal-sheet";
 import AuthContext from "../context/auth-v2/authContext";
-import ProgressContext from "../context/ProgressContext";
+// import ProgressContext from "../context/ProgressContext";
+import MuralContext from "../context/MuralContext";
 import DistanceResetButton from "../components/DistanceResetButton";
 import ProgressState from "../context/ProgressState";
 
 function Home() {
+	const muralContext = useContext(MuralContext);
+	const { loadMurals } = muralContext;
+
 	const authContext = useContext(AuthContext);
 
 	//Desktop and Mobile are used to control what is rendered at differnt widths
@@ -32,7 +35,7 @@ function Home() {
 	//Route path information
 	let { path } = useRouteMatch();
 
-	const progressContext = useContext(ProgressContext);
+	// const progressContext = useContext(ProgressContext);
 	// const { loadUserMurals } = progressContext;
 
 	// //These states are used to prevent the RankUp modal from re-rendering on resize and to control it's events
@@ -77,9 +80,9 @@ function Home() {
 
 	// // Screensize detection for mobile view
 	// const getWindowDimensions = () => {
-	const { innerWidth: width, innerHeight: height } = window;
-
-	console.log(height);
+	// const { innerWidth: width, innerHeight: height } = window;
+	const { innerHeight: height } = window;
+	// console.log(height);
 	// 	return {
 	// 		width,
 	// 		height,
@@ -95,6 +98,7 @@ function Home() {
 	useEffect(() => {
 		// if there is a current user, load their information in state
 		authContext.loadUser();
+		loadMurals();
 		// loadUserMurals();
 
 		// function handleResize() {

@@ -36,7 +36,6 @@ export default function UserStatusDVMiew(props) {
 		markOneSixtyTwo,
 	} = progressContext;
 
-
 	const userAvatar = props.userAvatar;
 	const userVisited = props.userVisited;
 	const userRank = props.userRank;
@@ -74,6 +73,7 @@ export default function UserStatusDVMiew(props) {
 			modalPop();
 			markOneSixtyTwo();
 		}
+		// eslint-disable-next-line
 	}, [userVisited]);
 
 	return (
