@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const uuidv4 = require('uuid/v4');
+const { randomUUID: uuidv4 } = require('node:crypto');
 const {
   getPosts,
   getPost,

@@ -121,7 +121,7 @@ exports.deletePost = asyncHandler(async (req, res, next) => {
     );
   }
 
-  await post.remove();
+  await post.deleteOne();
 
   res.status(200).json({ success: true, data: {} });
 });

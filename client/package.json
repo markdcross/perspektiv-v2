@@ -2,12 +2,11 @@
   "name": "maperino",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-    "axios": "^0.21.1",
+    "axios": "^1.13.6",
     "bootstrap": "^4.6.0",
     "framer": "^1.2.15",
     "framer-motion": "^3.2.2-rc.1",
@@ -21,8 +20,7 @@
     "react-responsive": "^8.2.0",
     "react-rounded-image": "^2.0.11",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "react-swipeable-views": "^0.13.9",
+    "react-swipeable-views": "^0.14.2",
     "react-virtualized": "^9.22.3",
     "react-virtualized-auto-sizer": "^1.0.4",
     "semantic-ui-css": "^2.4.1",
@@ -30,21 +28,13 @@
     "simple-react-lightbox": "^3.6.1",
     "use-position": "0.0.8",
     "use-supercluster": "^0.2.9",
-    "uuid": "^8.3.2",
-    "web-vitals": "^0.2.4",
-    "worker-loader": "^3.0.7"
+    "uuid": "^14.0.2",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "start": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test": "vitest run"
   },
   "browserslist": {
     "production": [
@@ -57,5 +47,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "vite": "^8.2.2",
+    "@vitejs/plugin-react": "^6.1.1",
+    "vitest": "^4.1.0",
+    "jsdom": "^28.0.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
