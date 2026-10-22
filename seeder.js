@@ -11,12 +11,7 @@ dotenv.config();
 const Restaurant = require('./models/Restaurant');
 
 // Connect to DB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false,
-  useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGODB_URI);
 
 // Read JSON files
 // const murals = JSON.parse(

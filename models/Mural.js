@@ -124,7 +124,7 @@ MuralSchema.pre('save', async function (next) {
 });
 
 // Cascade delete courses when a bootcamp is deleted
-MuralSchema.pre('remove', async function (next) {
+MuralSchema.pre('deleteOne', { document: true, query: false }, async function (next) {
   console.log(`Posts being removed from mural ${this._id}`);
 
   await this.model('MuralPost').deleteMany({ mural: this._id });

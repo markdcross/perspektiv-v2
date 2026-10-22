@@ -101,7 +101,7 @@ exports.deleteMural = asyncHandler(async (req, res, next) => {
     );
   }
 
-  mural.remove();
+  await mural.deleteOne();
 
   res.status(200).json({ success: true, data: {} });
 });
