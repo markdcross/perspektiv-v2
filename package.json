@@ -37,7 +37,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.21.2",
     "express-mongo-sanitize": "^2.0.2",
-    "express-rate-limit": "^5.2.3",
+    "express-rate-limit": "^8.7.1",
     "express-validator": "^6.9.2",
     "gravatar": "^1.8.1",
     "helmet": "^4.4.1",
